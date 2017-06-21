@@ -1,0 +1,313 @@
+@font-face {
+	font-family: "Karbon Regular";
+	src: url("../fonts/karbonregular.otf");
+}
+@font-face {
+	font-family: "Karbon Thin";
+	src: url("../fonts/karbonthin.otf");
+}
+@font-face {
+	font-family: "Karbon Light";
+	src: url("../fonts/karbonlight.otf");
+}
+
+nav {
+	height: 220px !important;
+}
+
+body {
+	background-image: url("../img/background2.png");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-color: #000;
+	font-family: "Karbon Regular";
+	width: 100%;
+}
+
+.nav > li > a {
+	color: #404040;
+}
+
+.nav {
+	margin-top: 40px;
+}
+
+.nav-item {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.nav-link {
+	font-size: 16px;
+	padding-top: 2px;
+}
+
+.disabled-link {
+	pointer-events: none !important;
+}
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.disabled :hover {
+	border-bottom: none !important;
+	cursor: default !important;
+}
+
+.disabled :hover{
+	border-bottom: none !important;
+	cursor: default !important;
+}
+
+.nav-item.active > a {
+	border-bottom: 3px solid #e4001b !important;
+	padding-bottom: 10px;
+	text-decoration: none;
+	background-color: #000;
+	color: #ffffff;
+}
+
+.right-corner-bg {
+	position: sticky;
+	right: 0;
+	top: 0;
+	float: right;
+}
+.left-corner-bg {
+	position: sticky;
+	left: 0;
+	top: 0
+}
+.corners {
+	height: 0;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1576px;
+}
+
+.obelisk-header {
+	color: #e61b25;
+}
+
+.separator {
+	margin-left: 4px;
+	height: 38px;
+	width: 15px;
+	border-bottom: 3px solid #696969;
+}
+
+.red-separator {
+	margin-left: 4px;
+	height: 38px;
+	width: 15px;
+	border-bottom: 3px solid #de0035;
+}
+
+.something-big {
+	font-size: 40px;
+	font-family: "Karbon Thin";
+	margin-top: 40px;
+	margin-bottom: 40px;
+	color: #bfbfbf;
+}
+.newdevelopment {
+	color: #a8b2ba;
+	margin-bottom: 3px;
+}
+.center-block {
+	margin-bottom: 30px;
+}
+.counter-number {
+	display: inline-block;
+}
+.counter-item {
+	display: inline-block;
+	margin-right: 25px;
+	text-align: center;
+}
+.counter-label {
+	margin-bottom: 5px;
+}
+.counter-number {
+	font-family: "Karbon Light";
+	font-size: 48px;
+	color: #fff;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 50px;
+	background-color: #151515;
+	padding-top: 7px;
+	border-radius: 3px;
+}
+.counter {
+	display: inline-block;
+}
+.arrow {
+	margin-right: 40px;
+	margin-bottom: 18px;
+}
+.counter-row {
+	margin-top: 50px;
+}
+.meettheminer {
+	margin-top: 21rem;
+}
+.meettheminer h3 {
+	font-family: "Karbon Thin";
+	font-size: 30px;
+	color: #fff;
+}
+.meettheminer p {
+	font-size: 11px;
+	color: #fff;
+}
+.separator-arrow {
+	width: 15px;
+	height: 20px;
+	border-bottom: 2px solid #fff;
+	margin-left: 4px;
+}
+.separator-muted {
+	width: 15px;
+	height: 25px;
+	border-bottom: 2px solid #666666;
+	margin-left: 4px;
+}
+.separator-arrow img {
+	display: inline-block;
+	margin-left: 70px;
+	width: 25px;
+	margin-top: 10px;
+}
+.techdetails {
+	margin-top: 25px;
+	margin-bottom: 20px;
+}
+.tech-specs {
+	background-image: url("../img/techspecsbg.png");
+	width: 315px;
+	height: 600px;
+	padding-top: 20px;
+	padding-left: 40px;
+}
+.tech-specs h3 {
+	font-family: "Karbon Light";
+	color: #fff;
+	width: 20px;
+}
+.specs {
+	margin-top: 40px;
+	width: 190px;
+}
+.spec {
+	margin-bottom: 10px;
+}
+.spec div {
+	display: inline-block;
+}
+.spec .label {
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
+}
+.spec .amount {
+	font-size: 18px;
+	color: #fff;
+	padding-left: 3px;
+}
+.price {
+	margin-top: 50px;
+}
+.price div {
+	display: inline-block;
+}
+.price .label {
+	font-size: 25px;
+	color: #fff;
+	padding: 0;
+	margin: 0;
+}
+.price .amount {
+	font-size: 25px;
+	color: #fff;
+	font-family: "Karbon Light";
+	margin-left: 10px;
+}
+.tech-specs .footnote {
+	position: absolute;
+	bottom: 30px;
+	width: 210px;
+	color: #be808e;
+}
+.chip-col {
+	background-image: url("../img/chip.png");
+	background-position: -55px 0;
+	height: 600px;
+	padding-top: 420px;
+}
+.chip-col h3 {
+	font-family: "Karbon Light";
+	color: #8e8e8e;
+	font-size: 35px;
+	width: 400px;
+}
+.chip-col p {
+	color: #43474a;
+}
+.row.subscribe {
+	margin-top: 170px;
+}
+.subscribe-header {
+	font-family: "Karbon Light";
+	color: #fff;
+	margin-bottom: 20px;
+}
+.nameinput, .phoneinput, .emailinput {
+	height: 35px;
+}
+
+.nameinput, .phoneinput {
+	width: 150px;
+}
+.emailinput {
+	width: 220px;
+}
+.subscribebtn {
+	background-color: #000;
+	margin-left: 10px;
+	border: 2px solid #fff;
+	border-radius: 1px;
+	display: inline-block;
+	vertical-align: middle;
+	padding-top: 4px;
+	color: #fff;
+	text-align: center;
+	box-sizing: content-box;
+}
+.subscribebtn:hover {
+	background-color: #111 !important;
+	border: 2px solid #eee !important;
+}
+.footer {
+	margin-top: 200px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	border-top: 1px solid #ff0000;
+	background-color: #121212;
+	width: 100%;
+	height: 140px;
+}
+.followus, .poweredby {
+	font-family: "Karbon Light";
+	color: #4f4d4d;
+	font-size: 20px;
+}.
