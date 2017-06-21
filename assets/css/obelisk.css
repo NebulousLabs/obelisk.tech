@@ -29,7 +29,7 @@ body {
 }
 
 .nav {
-	margin-top: 40px;
+	margin-top: 50px;
 }
 
 .nav-item {
@@ -297,7 +297,10 @@ body {
 }
 .footer {
 	margin-top: 200px;
+	max-width: 1576px;
 	display: flex;
+	margin-left: auto;
+	margin-right: auto;
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
