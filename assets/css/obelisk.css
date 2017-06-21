@@ -27,6 +27,9 @@ body {
 .nav > li > a {
 	color: #404040;
 }
+.nav > li > a:focus, .nav > li > a:hover {
+	background-color: initial !important;
+}
 
 .nav {
 	margin-top: 50px;
