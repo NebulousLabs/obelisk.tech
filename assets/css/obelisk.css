@@ -105,6 +105,16 @@ body {
 	top: 0;
 	z-index: -5;
 }
+.framelines {
+	z-index: 2;
+	position: sticky;
+	top: 0;
+	height: 0;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1576px;
+}
 .corners {
 	z-index: 5;
 	position: sticky;
@@ -113,7 +123,6 @@ body {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 1576px;
 }
 
 .obelisk-header {
@@ -338,41 +347,34 @@ body {
 	color: #4f4d4d;
 	font-size: 20px;
 }
-.frameline-left {
+.frameline-left, .frameline-right {
 	background-image: url("../img/frameline-left.png");
 	background-repeat: no-repeat;
+	background-size: 100% 69%;
 	width: 3px;
 	height: 1000px;
-	position: fixed;
-	left: 65px;
-	top: -145px;
+	position: absolute;
+	top: 57px;
+}
+.frameline-left {
+	left: 82px;
 }
 .frameline-right {
-	background-image: url("../img/frameline-left.png");
-	background-repeat: no-repeat;
-	width: 3px;
-	height: 1000px;
-	position: fixed;
-	right: 65px;
-	top: -145px;
-}
-@media (min-width: 1576px) {
-	.frameline-right {
-		position: absolute;
-		right: 65px;
-	}
-	.frameline-left {
-		position: absolute;
-		left: 65px;
-	}
+	right: 82px;
 }
 @media (max-width: 1370px) {
 	.frameline-left, .frameline-right {
 		display: none;
 	}
 }
+@media (max-width: 1000px) {
+	.smoke-effect {
+		display: none;
+	}
+}
 .smoke-effect {
 	position: absolute;
-	left: 600px;
-	top: -140px;
+	left: 595px;
+	top: -80px;
+	width: 80%;
 }
