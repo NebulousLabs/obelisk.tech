@@ -354,6 +354,7 @@ body {
 }
 .frameline-left {
 	left: 82px;
+	z-index: 2;
 }
 .frameline-right {
 	right: 82px;
@@ -365,6 +366,21 @@ body {
 }
 @media (max-width: 1000px) {
 	.smoke-effect {
+		position: absolute;
+		left: 10px;
+		top: 10px;
+	}
+}
+@media (max-width: 768px) {
+	.counter-number {
+		font-size: 35px;
+		width: 30px;
+		background-position: -40px 134px;
+	}
+	.counter-item {
+		margin-right: 10px;
+	}
+	nav {
 		display: none;
 	}
 }

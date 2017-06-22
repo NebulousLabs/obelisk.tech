@@ -3,7 +3,7 @@ const minute = second * 60
 const hour = minute * 60
 const day = hour * 24
 
-const releaseDate = new Date(1498658400*1000)
+const releaseDate = new Date(1498672800000)
 
 function updateTimer() {
 	const timeLeft = releaseDate - new Date()
