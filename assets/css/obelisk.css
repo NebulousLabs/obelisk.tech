@@ -345,7 +345,7 @@ body {
 	height: 1000px;
 	position: fixed;
 	left: 65px;
-	top: -95px;
+	top: -145px;
 }
 .frameline-right {
 	background-image: url("../img/frameline-left.png");
@@ -354,7 +354,7 @@ body {
 	height: 1000px;
 	position: fixed;
 	right: 65px;
-	top: -95px;
+	top: -145px;
 }
 @media (min-width: 1576px) {
 	.frameline-right {
@@ -374,5 +374,5 @@ body {
 .smoke-effect {
 	position: absolute;
 	left: 600px;
-	top: -50px;
+	top: -140px;
 }
