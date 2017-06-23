@@ -27,8 +27,8 @@ function setActiveTab(tabname) {
 }
 
 window.onscroll = function() {
-	const pos = $(window).scrollTop()
-	if (pos >= $('#contact').offset().top-50 || pos + $(window).height() == $(document).height()) {
+	const pos = $(window).scrollTop()*1.5
+	if (pos >= $('#contact').offset().top-50) {
 		setActiveTab('#contact-button')
 	} else
 	if (pos >= $('#info').offset().top-50) {
