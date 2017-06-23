@@ -25,17 +25,17 @@
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">ABOUT</a>
+					<li id="about-button" class="nav-item active">
+						<a class="nav-link" href="#about">ABOUT</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">INFO</a>
+					<li id="info-button" class="nav-item">
+						<a class="nav-link" href="#info">INFO</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">PRE-ORDER</a>
+					<li id="preorder-button" class="nav-item">
+						<a class="nav-link" href="#preorder">PRE-ORDER</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">CONTACT</a>
+					<li id="contact-button" class="nav-item">
+						<a class="nav-link" href="#contact">CONTACT</a>
 					</li>
 				</ul>
 			</div>
@@ -45,7 +45,8 @@
 		<div class="frameline-left"></div>
 		<div class="frameline-right"></div>
 	</div>
-	<div class="container main">
+	<div id="about"></div>
+	<div data-spy="scroll" data-target=".navbar" class="container main">
 		<div class="row">
 			<div class="col-md-7">
 				<img class="obelisk-header" src="assets/img/obelisk-text.png" />
@@ -69,9 +70,7 @@
 						<div class="counter-number">0</div>
 						<div id="daysleft-tens"class="counter-number">0</div>
 						<div id="daysleft" class="counter-number">0</div>
-					</div>
-					<div class="counter-item">
-						<h4 class="counter-label">HOURS</h4>
+					</div> <div class="counter-item"> <h4 class="counter-label">HOURS</h4>
 						<div id="hoursleft-tens" class="counter-number">0</div>
 						<div id="hoursleft-ones" class="counter-number">0</div>
 					</div>
@@ -83,6 +82,7 @@
 				</div>
 			</div>
 		</div>
+		<div id="info"></div>
 		<div class="row meettheminer">
 			<div class="col-md-3">
 				<h3> MEET THE FIRST EVER SIACOIN MINER </h3>
@@ -131,14 +131,16 @@
 				<p> Lorem ipsum dolur sit amet, consectetur ad pisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </p>
 			</div>
 		</div>
-	</div>
-	<div class="subscribe">
-		<div class="subscribe-col">
-			<h3 class="subscribe-header"> SUBSCRIBE </h3>
-			<input class="nameinput" type="text" class="form-control" placeholder="Name"></input>
-			<input class="phoneinput" type="text" class="form-control" placeholder="Contact Phone"></input>
-			<input class="emailinput" type="text" class="form-control" placeholder="Email"></input>
-			<button class="subscribebtn">Sign Up</button>
+		<div id="preorder"></div>
+		<div id="contact"></div>
+		<div class="row subscribe">
+			<div class="subscribe-col">
+				<h3 class="subscribe-header"> SUBSCRIBE </h3>
+				<input class="nameinput" type="text" class="form-control" placeholder="Name"></input>
+				<input class="phoneinput" type="text" class="form-control" placeholder="Contact Phone"></input>
+				<input class="emailinput" type="text" class="form-control" placeholder="Email"></input>
+				<button class="subscribebtn">Sign Up</button>
+			</div>
 		</div>
 	</div>
 	<div class="footer">
@@ -146,7 +148,6 @@
 		<img src="assets/img/footerlogo.png" />
 		<div class="poweredby">powered by Nebulous</div>
 	</div>
-
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
 	<script src="assets/js/bootstrap.min.js"></script>

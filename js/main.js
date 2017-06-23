@@ -19,6 +19,26 @@ function updateTimer() {
 	document.getElementById('minutesleft-ones').innerHTML = minutesLeft % 10
 }
 
+function setActiveTab(tabname) {
+	$(".nav-item").each(function(i, item) {
+		$(item).removeClass('active')
+	})
+	$(tabname).addClass('active')
+}
+
+window.onscroll = function() {
+	const pos = $(window).scrollTop()
+	if (pos >= $('#contact').offset().top-50 || pos + $(window).height() == $(document).height()) {
+		setActiveTab('#contact-button')
+	} else
+	if (pos >= $('#info').offset().top-50) {
+		setActiveTab('#info-button')
+	} else
+	if (pos >= $('#about').offset().top-50) {
+		setActiveTab('#about-button')
+	}
+}
+
 updateTimer()
 setInterval(updateTimer, minute)
 
