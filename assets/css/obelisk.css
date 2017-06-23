@@ -225,13 +225,24 @@ body {
 	width: 25px;
 	margin-top: 10px;
 }
+.tweetthis {
+	margin-top: 11px;
+}
 .strengthinnumbers {
-	margin-top: 100px;
+	margin-top: 80px;
 	background-image: url("../img/gpucomparison.png");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: left 35px;
 	height: 695px;
+}
+.terms {
+	list-style: none;
+	margin-top: 16px;
+}
+.terms a {
+	display: inline-block;
+	color: #444;
 }
 .techdetails {
 	margin-top: 25px;
@@ -240,7 +251,7 @@ body {
 .tech-specs {
 	background-image: url("../img/techspecsbg.png");
 	width: 315px;
-	height: 600px;
+	height: 690px;
 	padding-top: 20px;
 	padding-left: 40px;
 }
@@ -298,6 +309,7 @@ body {
 	background-position: -55px 0;
 	height: 600px;
 	padding-top: 420px;
+	margin-left: -27px;
 }
 .chip-col h3 {
 	font-family: "Karbon Light";
@@ -306,7 +318,7 @@ body {
 	width: 400px;
 }
 .chip-col p {
-	color: #43474a;
+	color: #777777;
 }
 .subscribe {
 	position: relative;
