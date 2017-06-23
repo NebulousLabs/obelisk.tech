@@ -324,20 +324,20 @@ body {
 	position: relative;
 	right: 0;
 	z-index: 0;
-	width: 110%;
 	margin-top: 0px;
+	width: 100%;
 }
 .subscribe-col {
+	text-align: center;
 	position: relative;
 	right: 0;
 	background-position: right;
 	margin-left: 68px;
-	padding-top: 32px;
+	padding-top: 52px;
 	padding-left: 45px;
-	background: url("../img/formbg.png");
-	background-repeat: no-repeat;
-	background-size: 100% 720px;
-	height: 520px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 300px;
 	margin-right: 0;
 }
 .subscribe-header {
@@ -389,6 +389,13 @@ body {
 	width: 100%;
 	height: 140px;
 	z-index: 10;
+}
+.followus {
+	margin-bottom: 10px;
+}
+.followus img {
+	height: 20px;
+	margin-bottom: 2px;
 }
 .followus, .poweredby {
 	font-family: "Karbon Light";
