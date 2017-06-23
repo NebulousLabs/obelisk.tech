@@ -32,7 +32,7 @@ body {
 }
 
 .nav > li > a {
-	color: #404040;
+	color: #fff;
 }
 .nav > li > a:focus, .nav > li > a:hover {
 	background-color: initial !important;
@@ -77,6 +77,10 @@ body {
 .disabled :hover{
 	border-bottom: none !important;
 	cursor: default !important;
+}
+
+#preorder-button > a {
+	color: #404040 !important;
 }
 
 .nav-item.active > a {
