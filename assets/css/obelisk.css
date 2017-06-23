@@ -178,7 +178,6 @@ body {
 	display: inline-block;
 }
 .arrow {
-	filter: grayscale(100%);
 	margin-top: 45px;
 }
 .counter-row {
@@ -290,16 +289,32 @@ body {
 .chip-col p {
 	color: #43474a;
 }
-.row.subscribe {
+.subscribe {
 	margin-top: 170px;
+	background: url("../img/formbg.png");
+	background-repeat: no-repeat;
+	background-size: 100% 720px;
+	height: 520px;
+	margin-left: 55px;
+	position: relative;
+	left: 320px;
+	right: 0;
+	margin-right: 0;
+
+}
+.subscribe-col {
+	padding-top: 32px;
+	margin-left: 45px;
 }
 .subscribe-header {
+	font-size: 28px;
 	font-family: "Karbon Light";
 	color: #fff;
-	margin-bottom: 20px;
+	margin-bottom: 23px;
 }
-.nameinput, .phoneinput, .emailinput {
-	height: 35px;
+.subscribe-col input {
+	margin-right: 3px;
+	height: 45px;
 }
 
 .nameinput, .phoneinput {
@@ -310,23 +325,24 @@ body {
 }
 .subscribebtn {
 	background-color: #000;
-	margin-left: 10px;
+	margin-left: 4px;
+	margin-top: 1px;
 	border: 2px solid #fff;
 	border-radius: 1px;
 	display: inline-block;
 	vertical-align: middle;
-	padding-top: 4px;
 	color: #fff;
 	text-align: center;
 	box-sizing: content-box;
+	width: 115px;
+	padding: 0;
+	height:  41px;
 }
 .subscribebtn:hover {
 	background-color: #111 !important;
 	border: 2px solid #eee !important;
 }
 .footer {
-	margin-top: 200px;
-	max-width: 1576px;
 	display: flex;
 	margin-left: auto;
 	margin-right: auto;
@@ -349,7 +365,7 @@ body {
 	background-size: 100% 69%;
 	width: 3px;
 	height: 1000px;
-	position: absolute;
+	position: fixed;
 	top: 57px;
 }
 .frameline-left {
