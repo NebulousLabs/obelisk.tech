@@ -236,6 +236,13 @@ body {
 	background-position: left 35px;
 	height: 695px;
 }
+@media (max-width: 1000px) {
+	.strengthinnumbers {
+		margin-top: 30px;
+		background-position: center 150px;
+		height: 450px;
+	}
+}
 .terms {
 	list-style: none;
 	margin-top: 16px;
@@ -309,7 +316,25 @@ body {
 	background-position: -55px 0;
 	height: 600px;
 	padding-top: 420px;
-	margin-left: -27px;
+}
+@media (min-width: 1200px) {
+	.chip-col {
+		margin-left: -27px;
+	}
+}
+@media (max-width: 1200px) {
+	.chip-col {
+		margin-left: 5px;
+		background-position: center top;
+		padding-top: 300px;
+		margin-top: 60px;
+		margin-left: 5px;
+		height: 550px;
+	}
+	.specsheet {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 .chip-col h3 {
 	font-family: "Karbon Light";
@@ -349,6 +374,23 @@ body {
 .subscribe-col input {
 	margin-right: 3px;
 	height: 45px;
+}
+@media (max-width: 742px) {
+	.subscribe-col {
+		height: 400px;
+	}
+	.subscribe-col input {
+		width: 100%;
+		margin-top: 5px;
+	}
+	.subscribebtn {
+		margin: 0 !important;
+		padding: 0 !important;
+		width: 80% !important;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 10px !important;
+	}
 }
 
 .nameinput, .phoneinput {
