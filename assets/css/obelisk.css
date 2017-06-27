@@ -722,6 +722,7 @@ body {
 	display: inline-block;
 	width: 49%;
 	text-align: center;
+	cursor: pointer;
 }
 .payment-option > p {
 	color: #fff;

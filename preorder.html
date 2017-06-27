@@ -352,7 +352,7 @@ ga('send', 'pageview');
 				</div>
 				<div class="col-md-4 cost-section">
 					<h3> Estimated sales tax and shipping costs </h3>
-					<div class="estimated-cost"><span class="money">$</span><p class="amount">140</p></div>
+					<div class="estimated-cost"><span class="money">$</span><p id="shippingCost" class="amount">140</p></div>
 					<p class="note">* Shipping costs are $65 for US/Europe/China Customers and $135 for anywhere else</p>
 					<div class="next-button" id="nextbutton"></div>
 				</div>
@@ -397,7 +397,7 @@ ga('send', 'pageview');
 						<p>Check the box to accept the <a href="assets/img/terms.pdf">Terms and Conditions</a></p>
 						<input type="checkbox" name="terms-check" id="termscheckbox" />
 					</div>
-					<div class="next-button" id="nextbutton"></div>
+					<div class="checkout-next-button" id="nextbutton"></div>
 				</div>
 			</div>
 		</div>
@@ -410,7 +410,7 @@ ga('send', 'pageview');
 						<h3> 4. PAYMENT </h3>
 						<p> Select your form of payment: </p>
 						<div class="payment-options">
-							<div class="payment-option">
+							<div id="paywithbitcoin" class="payment-option">
 								<img src="assets/img/bitcoinlogo.png" />
 								<p> Pay with Bitcoin </p>
 							</div>
