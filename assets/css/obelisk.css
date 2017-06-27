@@ -79,10 +79,6 @@ body {
 	cursor: default !important;
 }
 
-#preorder-button > a {
-	color: #404040 !important;
-}
-
 .nav-item.active > a {
 	margin-bottom: -3px;
 	border-bottom: 3px solid #e4001b !important;
@@ -138,7 +134,7 @@ body {
 
 .red-separator {
 	margin-left: 4px;
-	height: 25px;
+	height: 10px;
 	width: 15px;
 	border-bottom: 3px solid #de0035;
 }
@@ -491,4 +487,259 @@ body {
 	left: 595px;
 	top: -80px;
 	width: 80%;
+}
+
+.order-section, .order-main {
+	margin-bottom: 140px;
+}
+.order-main {
+	display: none;
+}
+#order-step1 {
+	display: block;
+}
+.order-form > h3 {
+	color: #fff;
+	font-family: "Karbon Thin";
+	font-size: 35px;
+	margin-top: 43px;
+}
+.order-section > .separator {
+	border-bottom: 2px solid #696969;
+	height: 26px;
+}
+.order-form > p, input, select {
+	margin-left: 23px;
+}
+.order-form > select, .order-form > input, .statezip > input {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #3e3e3e;
+	margin-bottom: 15px;
+	display: inline-block;
+	padding-left: 2px;
+	height: 35px;
+	font-size: 20px;
+	font-family: "Karbon Light";
+	color: #9f9f9f;
+}
+.order-form > select {
+	padding-left: 0;
+	width: 100%;
+}
+.order-form > input:focus, .statezip > input:focus {
+	border-bottom: 1px solid #8e8e8e;
+	box-shadow: none;
+}
+.order-form > .note {
+	margin-top: 20px;
+	font-family: "Karbon Light";
+	color: #7e7e7e;
+}
+.hardware-shot {
+	padding-top: 100px;
+}
+.quantity-section, .cost-section {
+	padding-top: 200px;
+}
+@media (max-width: 992px) {
+	.quantity-section{
+		padding-top: 0;
+	}
+}
+.quantity-section > h3 {
+	font-family: "Karbon Light";
+	color: #9b9ea2;
+	font-size: 22px;
+}
+.quantity-form {
+	margin-top: 35px;
+	margin-left: 35px;
+}
+.quantity-form > input {
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 90px;
+	height: 55px;
+	margin-top: 4px;
+	vertical-align: middle;
+	background: transparent;
+	border: 2px solid  #343434;
+	font-family: "Karbon Thin";
+	font-size: 48px;
+	text-align: center;
+	padding-top: 10px;
+	color: #fff;
+}
+.quantity-form > button {
+	width: 40px;
+	height: 40px;
+	border: none;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+	background-color: transparent;
+	display: inline-block;
+}
+.quantity-form > .minus-button {
+	background-image: url("../img/minus-button.png");
+}
+.quantity-form > .plus-button {
+	background-image: url("../img/plus-button.png");
+}
+.next-button {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	right: -182px;
+	top: 100px;
+	background-image: url("../img/nextbutton.png");
+	background-position: center;
+	background-size: 100% 100%;
+	width: 40px;
+	height: 40px;
+}
+.statezip > input {
+	display: inline-block;
+	width: 49.5%;
+	padding: 0;
+	margin: 0;
+}
+.statezip {
+	width: 100%;
+	margin-left: 25px;
+	margin-bottom: 15px;
+}
+.order-form > select {
+	appearance: none;
+}
+.back-button {
+	cursor: pointer;
+	background-image: url("../img/backbutton.png");
+	background-position: center;
+	background-size: 100% 100%;
+	width: 40px;
+	height: 40px;
+	position: relative;
+	top: 28px;
+	left: 90px;
+}
+.estimated-cost > .amount {
+	color: #fff;
+}
+.estimated-cost > * {
+	font-family: "Karbon Thin";
+	font-size: 62px;
+	display: inline-block;
+}
+.estimated-cost > .money {
+	color: #7b7b7b;
+}
+.cost-section > .note {
+	font-family: "Karbon Light";
+	color: #7e7e7e;
+	font-size: 18px;
+	margin-top: -25px;
+}
+.cost-section > h3 {
+	font-family: "Karbon Light";
+	color: #9b9ea2;
+	margin-bottom: 15px;
+}
+.cost-section > .next-button {
+	top: 68px;
+}
+.checkout > p {
+	color: #a0a3a9;
+	font-family: "Karbon Light";
+	font-size: 18px;
+}
+.checkout > h3 {
+	margin-bottom: 20px;
+}
+.checkout > .note {
+	margin-top: 0px;
+	font-size: 16px;
+}
+.checkout > .estimated-cost {
+	margin-left: 20px;
+	margin-top: -18px;
+}
+.final-cost-section > h3 {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	margin-top: 177px;
+	margin-bottom: 0;
+}
+.estimate {
+	width: 100%;
+	margin-bottom: -33px;
+}
+.estimate > * {
+	font-size: 68px;
+	font-family: "Karbon Thin";
+	display: inline-block;
+}
+.estimate > .amount-label {
+	color: #808080;
+}
+.estimate > .amount {
+	padding-left: 10px;
+	color: #fff;
+}
+.terms-check > * {
+	margin-top: 50px;
+	display: inline-block;
+}
+.terms-check > p {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	font-size: 18px;
+	width: 60%;
+	margin-top: 25px;
+}
+.terms-check > input {
+	position: relative;
+	top: -25px;
+}
+.final-cost-section > .next-button {
+	top: 25px;
+}
+.payment > p {
+	color: #a0a3a9;
+	font-family: "Karbon Light";
+	margin-left: 30px;
+	margin-top: 26px;
+	font-size: 18px;
+}
+.payment-options {
+	width: 100%;
+	margin-left: -15px;
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+.payment-options > .payment-option {
+	display: inline-block;
+	width: 49%;
+	text-align: center;
+}
+.payment-option > p {
+	color: #fff;
+	font-family: "Karbon Light";
+	font-size: 16px;
+	margin-top: 20px;
+}
+.payment-option > img {
+	transform: scale(0.75);
+}
+.payment-selection-section {
+	padding-top: 215px;
+}
+.payment-selection-section > p {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	font-size: 18px;
+}
+.payment-selection-section > .next-button {
+	top: 78px;
 }
