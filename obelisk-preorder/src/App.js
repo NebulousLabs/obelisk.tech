@@ -145,7 +145,7 @@ class ShippingForm extends Component {
 		const handlePostalChange = (e) => this.setState({postal: e.target.value})
 		const handleCountryChange = (e) => this.setState({country: e.target.value})
 		const handleNextClick = () => {
-			if (this.state.addr === '') {
+			if (this.state.addr1 === '') {
 				this.setState({error: 'address must not be empty'})
 				return
 			}
@@ -512,7 +512,7 @@ class Checkout extends Component {
 							</div>
 						</div>
 						<div className="terms-check">
-							<p>By checking this box, you agree to the <a href="assets/img/terms.pdf">Terms and Conditions</a> and acknowledge the <a href="assets/img/privacypolicy.pdf">Privacy Policy</a></p>
+							<p>By checking this box, you agree to the <a href="/assets/img/terms.pdf" target="_blank" rel="noopener noreferrer">Terms and Conditions</a> and acknowledge the <a href="/assets/img/privacypolicy.pdf" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
 							<input checked={this.state.checked} onChange={() => this.setState({checked: !this.state.checked})} type="checkbox" name="terms-check" />
 						</div>
 						<div className="input-error">{this.props.checkoutError}</div>
