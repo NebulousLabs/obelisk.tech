@@ -509,6 +509,10 @@ class Payment extends Component {
 	render() {
 		const handleRefundAddressChange = (e) => this.setState({refundAddress: e.target.value})
 		const handleNextClick = () => {
+			if (this.state.refundAddress === '') {
+				this.setState({error: 'a refund address is required.'})
+				return
+			}
 			const formData = new FormData()
 			formData.append('refundAddr', this.state.refundAddress)
 			fetch(`/user/${this.props.uid}`, {
