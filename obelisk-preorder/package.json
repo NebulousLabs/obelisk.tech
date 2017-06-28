@@ -2,8 +2,9 @@
   "name": "obelisk-preorder",
   "version": "0.1.0",
   "private": true,
-	"homepage": "http://104.236.114.74/",
+  "homepage": "https://obelisk.tech/preorder",
   "dependencies": {
+    "countries-list": "^1.4.1",
     "email-validator": "^1.0.7",
     "fetch": "^1.1.0",
     "gemini-api": "^2.0.2",

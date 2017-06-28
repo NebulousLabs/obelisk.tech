@@ -534,7 +534,7 @@ body {
 	padding-top: 100px;
 }
 .quantity-section, .cost-section {
-	padding-top: 200px;
+	padding-top: 100px;
 }
 @media (max-width: 992px) {
 	.quantity-section{
@@ -661,10 +661,12 @@ body {
 	margin-left: 20px;
 	margin-top: -18px;
 }
+.final-cost-section {
+	padding-top: 100px;
+}
 .final-cost-section > h3 {
 	font-family: "Karbon Light";
 	color: #a0a3a9;
-	margin-top: 177px;
 	margin-bottom: 0;
 }
 .estimate {
@@ -730,7 +732,7 @@ body {
 	transform: scale(0.75);
 }
 .payment-selection-section {
-	padding-top: 235px;
+	padding-top: 170px;
 }
 .payment-selection-section > p {
 	font-family: "Karbon Light";
@@ -744,8 +746,8 @@ body {
 	color: red;
 }
 .qrcode {
+	align-self: center;
 	margin-left: 30px;
-	width: 150px;
 }
 .payaddr > p > .price {
 	margin-top: 0;
@@ -765,7 +767,7 @@ body {
 .payaddr > .addr {
 }
 .contact-links {
-	margin-top: 220px;
+	margin-top: 100px;
 	display: flex;
 	align-items: center;
 	text-decoration: none;
@@ -782,6 +784,9 @@ body {
 	margin-top: 12px;
 	margin-left: 8px;
 }
+.confirmation-number {
+	margin-top: 3px;
+}
 .confirmation-thanks {
 	color: #fff;
 	font-family: "Karbon Light";
@@ -789,7 +794,6 @@ body {
 	margin-top: 20px;
 }
 .confirmation-info {
-	margin-left: 20px;
 }
 .confirmation-info > h2 {
 	font-size: 18px;
@@ -824,4 +828,46 @@ body {
 	color: #770910;
 	margin-left: 95px;
 	margin-top: 10px;
+}
+.promotional-emails {
+	padding-left: 35px;
+	padding-bottom: 25px;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	width: 80%;
+}
+.promotional-emails > input {
+	margin-bottom: 15px;
+}
+.promotional-emails > p {
+	font-size: 18px;
+	font-family: "Karbon Light";
+	color: #a8b2ba;
+}
+.need-help {
+	display: inline-block;
+	float: right;
+	position: relative;
+	z-index: 11;
+	font-size: 20px;
+	color: #9b9ea2;
+	margin-top: 15px;
+}
+.need-help > a, p {
+	display: inline-block;
+}
+.need-help > .separator-muted {
+	height: 8px;
+	margin-left: 160px;
+}
+.need-help > p {
+	margin-right: 8px;
+}
+.need-help > a:hover {
+	text-decoration: none;
+}
+.need-help > a {
+	text-decoration: none;
+	color: red;
 }

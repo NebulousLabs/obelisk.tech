@@ -148,7 +148,7 @@ body {
 }
 .newdevelopment {
 	color: #a8b2ba;
-	margin-bottom: 3px;
+	margin-bottom: 30px;
 }
 .center-block {
 	margin-bottom: 30px;
@@ -270,9 +270,6 @@ body {
 .spec {
 	margin-bottom: 10px;
 }
-.spec div {
-	display: inline-block;
-}
 .spec .label {
 	font-size: 18px;
 	margin: 0;
@@ -281,7 +278,6 @@ body {
 .spec .amount {
 	font-size: 18px;
 	color: #fff;
-	padding-left: 3px;
 }
 .price {
 	margin-top: 50px;
@@ -743,4 +739,22 @@ body {
 }
 .payment-selection-section > .next-button {
 	top: 78px;
+}
+.preorder-button:hover {
+	text-decoration: none;
+	color: red;
+}
+.preorder-button {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	margin-top: 5px;
+	margin-left: -20px;
+	border: 1px solid #eee;
+	border-radius: 12px;
+	text-align: center;
+	padding-top: 3px;
+	text-decoration: none;
+	font-size: 18px;
+	color: red;
 }

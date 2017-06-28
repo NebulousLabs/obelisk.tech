@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { validate } from 'email-validator'
+import { countries } from 'countries-list'
 
 class PageOne extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			name: '',
+			newsletter: false,
 			email: '',
 			backupemail: '',
 			backupphone: '',
@@ -15,6 +17,9 @@ class PageOne extends Component {
 		}
 	}
 	render () {
+		if (!this.props.visible) {
+			return <div></div>
+		}
 		const leftPad = (amount) => {
 			const pad = '000'
 			return pad.substring(0, pad.length - amount.length) + amount
@@ -24,12 +29,12 @@ class PageOne extends Component {
 		const handleBackupPhoneChange = (e) => this.setState({backupphone: e.target.value})
 		const handleBackupEmailChange = (e) => this.setState({backupemail: e.target.value})
 		const handleQuantityChange = (e) => {
-			if (this.state.quantity < 999) {
+			if (parseInt(e.target.value, 10) < 999) {
 				this.setState({quantity: parseInt(e.target.value, 10)})
 			}
 		}
 		const decrementQuantity = () => {
-			if (this.state.quantity > 0) {
+			if (this.state.quantity > 1) {
 				this.setState({quantity: this.state.quantity-1})
 			}
 		}
@@ -55,20 +60,28 @@ class PageOne extends Component {
 		}
 		return (
 			<div className="container main order-main">
+				<div className="need-help">
+					<p>Need Help?</p><a href="mailto:hello@obelisk.tech">Contact us</a>
+					<div className="separator-muted"></div>
+				</div>
 				<div className="row">
 					<div className="col-md-4 order-section">
 						<img className="obelisk-header" alt="logo" src="assets/img/obelisk-text.png" />
 						<div className="separator"></div>
 						<div className="order-form">
 							<h3> 1. YOUR ORDER </h3>
-							<input onChange={handleNameChange} type="text" className="form-control" placeholder="Full Name" />
-							<input onChange={handleEmailChange} type="text" className="form-control" placeholder="Email" />
-							<input onChange={handleBackupEmailChange} type="text" className="form-control" placeholder="Backup Email (optional)" />
-							<input onChange={handleBackupPhoneChange} type="text" className="form-control" placeholder="Backup Phone (optional)" />
+							<input value={this.state.name} onChange={handleNameChange} type="text" className="form-control" placeholder="Full Name" />
+							<input value={this.state.email} onChange={handleEmailChange} type="text" className="form-control" placeholder="Email" />
+							<input value={this.state.backupemail} onChange={handleBackupEmailChange} type="text" className="form-control" placeholder="Backup Email (optional)" />
+							<input value={this.state.backupphone} onChange={handleBackupPhoneChange} type="text" className="form-control" placeholder="Backup Phone (optional)" />
 							<p className="input-error">{this.state.error}</p>
 						</div>
 						<div className="red-separator"></div>
 						<div className="separator"></div>
+						<div className="promotional-emails">
+							<p> Would you like to receive promotional emails from us? </p>
+							<input checked={this.state.newsletter} onChange={() => this.setState({newsletter: !this.state.newsletter})} type="checkbox" />
+						</div>
 					</div>
 					<div className="col-md-1"></div>
 					<div className="col-md-3 visible-md-block visible-lg-block">
@@ -78,7 +91,7 @@ class PageOne extends Component {
 						<h3> How many Obelisk SC1s would you like to purchase? </h3>
 						<div className="quantity-form">
 							<button onClick={decrementQuantity} className="minus-button"></button>
-							<input onChange={handleQuantityChange} value={leftPad(this.state.quantity.toString())} defaultValue="001" ></input>
+							<input onChange={handleQuantityChange} value={leftPad(this.state.quantity.toString())}></input>
 							<button onClick={incrementQuantity} className="plus-button" ></button>
 						</div>
 						<div className="quantity-price">${2499 * this.state.quantity}</div>
@@ -105,13 +118,22 @@ class ShippingForm extends Component {
 		}
 	}
 	render() {
+		if (!this.props.visible) {
+			return <div></div>
+		}
+		const isEurope = (country) => {
+			if (!countries.hasOwnProperty(country)) {
+				return false
+			}
+			return countries[country].continent === 'EU'
+		}
 		const estimatedCost = () => {
 			let baseCost = 70 
-			if (this.state.country === 'US' || this.state.country === 'EU' || this.state.country === 'CN') {
+			if (this.state.country === 'US' || isEurope(this.state.country) || this.state.country === 'CN') {
 				baseCost = 35 
 			}
 			let tax = 0
-			if (this.state.country === 'US' && this.state.region === 'MA') {
+			if (this.state.country === 'US' && this.state.region.toLowerCase() === 'ma') {
 				tax = 2499 * 0.0625
 			}
 			return parseFloat(((baseCost + tax) * this.props.quantity).toFixed(2))
@@ -148,20 +170,24 @@ class ShippingForm extends Component {
 		}
 		return (
 			<div className="container main order-main">
+				<div className="need-help">
+					<p>Need Help?</p><a href="mailto:hello@obelisk.tech">Contact us</a>
+					<div className="separator-muted"></div>
+				</div>
 				<div className="row">
 					<div className="col-md-4 order-section">
 						<img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
 						<div className="separator"></div>
 						<div className="order-form">
 							<h3> 2. SHIPPING </h3>
-							<input type="text" onChange={handleAddr1Change} className="form-control" placeholder="Address Line 1" />
-							<input type="text" onChange={handleAddr2Change} className="form-control" placeholder="Address Line 2" />
-							<input type="text" onChange={handleCityChange} className="form-control" placeholder="City" />
+							<input type="text" value={this.state.addr1} onChange={handleAddr1Change} className="form-control" placeholder="Address Line 1" />
+							<input type="text" value={this.state.addr2} onChange={handleAddr2Change} className="form-control" placeholder="Address Line 2" />
+							<input type="text" value={this.state.city} onChange={handleCityChange} className="form-control" placeholder="City" />
 							<div className="statezip">
-								<input type="text" onChange={handleStateChange} className="form-control" placeholder="State/Region" />
-								<input type="text" onChange={handlePostalChange} className="form-control" placeholder="ZIP/Postal Code" />
+								<input type="text" value={this.state.region} onChange={handleStateChange} className="form-control" placeholder="State/Region" />
+								<input type="text" value={this.state.postal} onChange={handlePostalChange} className="form-control" placeholder="ZIP/Postal Code" />
 							</div>
-							<select onChange={handleCountryChange} name="Country">
+							<select value={this.state.country} onChange={handleCountryChange} name="Country">
 								<option value="">Country...</option>
 								<option value="AF">Afghanistan</option>
 								<option value="AL">Albania</option>
@@ -217,7 +243,6 @@ class ShippingForm extends Component {
 								<option value="CR">Costa Rica</option>
 								<option value="CT">Cote D'Ivoire</option>
 								<option value="HR">Croatia</option>
-								<option value="CU">Cuba</option>
 								<option value="CB">Curacao</option>
 								<option value="CY">Cyprus</option>
 								<option value="CZ">Czech Republic</option>
@@ -264,7 +289,6 @@ class ShippingForm extends Component {
 								<option value="IS">Iceland</option>
 								<option value="IN">India</option>
 								<option value="ID">Indonesia</option>
-								<option value="IA">Iran</option>
 								<option value="IQ">Iraq</option>
 								<option value="IR">Ireland</option>
 								<option value="IM">Isle of Man</option>
@@ -276,7 +300,6 @@ class ShippingForm extends Component {
 								<option value="KZ">Kazakhstan</option>
 								<option value="KE">Kenya</option>
 								<option value="KI">Kiribati</option>
-								<option value="NK">Korea North</option>
 								<option value="KS">Korea South</option>
 								<option value="KW">Kuwait</option>
 								<option value="KG">Kyrgyzstan</option>
@@ -371,12 +394,10 @@ class ShippingForm extends Component {
 								<option value="ZA">South Africa</option>
 								<option value="ES">Spain</option>
 								<option value="LK">Sri Lanka</option>
-								<option value="SD">Sudan</option>
 								<option value="SR">Suriname</option>
 								<option value="SZ">Swaziland</option>
 								<option value="SE">Sweden</option>
 								<option value="CH">Switzerland</option>
-								<option value="SY">Syria</option>
 								<option value="TA">Tahiti</option>
 								<option value="TW">Taiwan</option>
 								<option value="TJ">Tajikistan</option>
@@ -424,7 +445,7 @@ class ShippingForm extends Component {
 					<div className="col-md-4 cost-section">
 						<h3> Estimated sales tax and shipping costs </h3>
 						<div className="estimated-cost"><span className="money">$</span><p className="amount">{estimatedCost()}</p></div>
-						<p className="note">* Shipping costs are $65 for US/Europe/China Customers and $135 for anywhere else</p>
+						<p className="note">* Shipping costs are $35 per unit for US/Europe/China Customers and $70 per unit for anywhere else</p>
 						<div className="next-button" onClick={handleNextClick}></div>
 					</div>
 				</div>
@@ -443,6 +464,9 @@ class Checkout extends Component {
 		}
 	}
 	render() {
+		if (!this.props.visible) {
+			return <div></div>
+		}
 		const handleNextClick = () => {
 			if (!this.state.checked) {
 				this.setState({error: 'you must agree to the terms and conditions before continuing'})
@@ -453,6 +477,10 @@ class Checkout extends Component {
 		}
 		return (
 			<div className="container main order-main">
+				<div className="need-help">
+					<p>Need Help?</p><a href="mailto:hello@obelisk.tech">Contact us</a>
+					<div className="separator-muted"></div>
+				</div>
 				<div className="row">
 					<div className="col-md-4 order-section">
 						<img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
@@ -460,12 +488,12 @@ class Checkout extends Component {
 						<div className="checkout order-form">
 							<h3> 3. CHECKOUT </h3>
 							<p> Payment is accepted in Bitcoin.</p>
-							<p>Final cost:</p>
+							<p>Final cost. Proceed to the next page to get your payment address</p>
 							<div className="estimated-cost">
 								<span className="money">$</span>
 								<p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
 							</div>
-							<p className="note">* if the price fluctuates by more than 5% before we can convert to USD, we will email the customer requesting an additional payment in Bitcoin or Ethereum.</p>
+							<p className="note">* If the Bitcoin exchange rate fluctuates by more than 5% before we can convert to USD, we will email you requesting additional payment in Bitcoin. We are using Gemini to exchange your coins as fast as possible.</p>
 							<div onClick={this.props.back} className="back-button"></div>
 							<div className="red-separator"></div>
 							<div className="separator"></div>
@@ -484,8 +512,8 @@ class Checkout extends Component {
 							</div>
 						</div>
 						<div className="terms-check">
-							<p>Check the box to accept the <a href="assets/img/terms.pdf">Terms and Conditions</a></p>
-							<input onChange={() => this.setState({checked: !this.state.checked})} type="checkbox" name="terms-check" />
+							<p>By checking this box, you agree to the <a href="assets/img/terms.pdf">Terms and Conditions</a> and acknowledge the <a href="assets/img/privacypolicy.pdf">Privacy Policy</a></p>
+							<input checked={this.state.checked} onChange={() => this.setState({checked: !this.state.checked})} type="checkbox" name="terms-check" />
 						</div>
 						<div className="input-error">{this.props.checkoutError}</div>
 						<div className="input-error">{this.state.error}</div>
@@ -507,27 +535,15 @@ class Payment extends Component {
 		}
 	}
 	render() {
-		const handleRefundAddressChange = (e) => this.setState({refundAddress: e.target.value})
-		const handleNextClick = () => {
-			if (this.state.refundAddress === '') {
-				this.setState({error: 'a refund address is required.'})
-				return
-			}
-			const formData = new FormData()
-			formData.append('refundAddr', this.state.refundAddress)
-			fetch(`/user/${this.props.uid}`, {
-				method: 'POST',
-				body: formData,
-			}).then((res) => {
-				if (!res.ok) {
-					this.setState({error: 'Invalid refund address!'})
-				} else {
-					this.props.next()
-				}
-			})
+		if (!this.props.visible) {
+			return <div></div>
 		}
 		return (
 			<div className="container main order-main">
+				<div className="need-help">
+					<p>Need Help?</p><a href="mailto:hello@obelisk.tech">Contact us</a>
+					<div className="separator-muted"></div>
+				</div>
 				<div className="row">
 					<div className="col-md-4 order-section">
 						<img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
@@ -536,7 +552,7 @@ class Payment extends Component {
 							<h3> 4. PAYMENT </h3>
 							<p className="paywith">Pay with Bitcoin</p>
 							<div className="payinfo">
-								<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
+								<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
 								<div className="payaddr">
 									<p>Use the QR code or send <div className="price">{parseFloat(this.props.btcPrice.toFixed(3))} BTC </div>to the address below:</p>
 									<br></br>
@@ -554,45 +570,12 @@ class Payment extends Component {
 						<img alt="hardware-shot" className="hardware-shot" src="assets/img/hardware-shot.png" />
 					</div>
 					<div className="col-md-4 payment-selection-section">
-						<p> Once you have sent the funds to your Payment address, continue to the next step for more information about the Verification and Tracking of your recent purchase.</p>
-						<p className="refund-addr-label">Refund Address: </p>
-						<input onChange={handleRefundAddressChange} className="refund-address" />
-						<div className="input-error">{this.state.error}</div>
-						<div className="next-button" onClick={handleNextClick}></div>
-					</div>
-				</div>
-			</div>
-		)
-	}
-}
-
-class Confirmation extends Component {
-	render() {
-		return (
-			<div className="container main order-main">
-				<div className="row">
-					<div className="col-md-4 order-section">
-						<img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
-						<div className="separator"></div>
-						<div className="confirmation order-form">
-							<h3> 5. CONFIRMATION </h3>
-							<p className="confirmation-thanks">Thank you!</p>
-							<div className="confirmation-info">
-								<p>Your confirmation number is:</p>
-								<h2 className="confirmation-number">{this.props.uid}</h2>
-							</div>
-							<p className="keep-safe"> Keep that reference number safe. We will keep you posted with the developments at Obelisk and the details regarding your order.</p>
+						<p className="confirmation-thanks">Thank you! You will receive a confirmation email shortly.</p>
+						<div className="confirmation-info">
+							<p>Your confirmation number is:</p>
+							<h2 className="confirmation-number">{this.props.uid}</h2>
+							<p className="keep-safe">Keep that reference number safe and treat it as a password!</p>
 						</div>
-					</div>
-					<div className="col-md-1"></div>
-					<div className="col-md-3 visible-md-block visible-lg-block">
-						<img alt="hardware-shot" className="hardware-shot" src="assets/img/hardware-shot.png" />
-					</div>
-					<div className="col-md-4 contact-section">
-						<a className="contact-links" href="mailto:hello@obelisk.tech">
-							<img alt="mailicon" src="assets/img/mailicon.png" />
-							<p>CONTACT US</p>
-						</a>
 					</div>
 				</div>
 			</div>
@@ -611,6 +594,7 @@ class App extends Component {
 			backupphone: '',
 			quantity: 1,
 			shippingCost: 0,
+			newsletter: false,
 			btcUsd: 2400,
 			ethUsd: 280,
 
@@ -648,10 +632,13 @@ class App extends Component {
 		const handleSubmit = () => {
 			const formData = new FormData()
 			formData.append('email', this.state.email)
+			formData.append('newsletter', this.state.newsletter)
 			formData.append('name', this.state.name)
 			formData.append('address', this.state.address)
 			formData.append('backupEmail', this.state.backupemail)
 			formData.append('phone', this.state.backupphone)
+			formData.append('units', this.state.quantity)
+			formData.append('price', btcPrice)
 			fetch(`/adduser`, {
 				method: 'POST',
 				body: formData,
@@ -661,7 +648,7 @@ class App extends Component {
 						if (text.includes('user with that email already exists')) {
 							this.setState({checkoutError: 'a user has already ordered an Obelisk SC1 using that email. If you want to modify your order, contact hello@obelisk.tech.'})
 						} else {
-							this.setState({checkoutError: text})
+							this.setState({checkoutError: 'an unknown error has occurred and has been reported to the developers.'})
 						}
 					})
 				} else {
@@ -674,21 +661,14 @@ class App extends Component {
 				this.setState({checkoutError: 'could not check out. try again in a few minutes.'})
 			})
 		}
-		if (this.state.step === 0) {
-			return <PageOne next={next} />
-		}
-		if (this.state.step === 1) {
-			return <ShippingForm quantity={this.state.quantity} next={next} back={back} />
-		}
-		if (this.state.step === 2) {
-			return <Checkout checkoutError={this.state.checkoutError} shippingCost={this.state.shippingCost} totalPrice={totalPrice} ethPrice={ethPrice} btcPrice={btcPrice}  next={handleSubmit} back={back} />
-		}
-		if (this.state.step === 3) {
-			return <Payment uid={this.state.uid} btcaddr={this.state.paymentAddr} btcPrice={btcPrice} next={next} back={back} />
-		}
-		if (this.state.step === 4) {
-			return <Confirmation uid={this.state.uid} />
-		}
+		return (
+			<div>
+				<PageOne visible={this.state.step === 0} next={next} />
+				<ShippingForm visible={this.state.step === 1} quantity={this.state.quantity} next={next} back={back} />
+				<Checkout visible={this.state.step === 2} checkoutError={this.state.checkoutError} shippingCost={this.state.shippingCost} totalPrice={totalPrice} ethPrice={ethPrice} btcPrice={btcPrice}  next={handleSubmit} back={back} />
+				<Payment visible={this.state.step === 3} uid={this.state.uid}  btcaddr={this.state.paymentAddr} btcPrice={btcPrice} back={back} />
+			</div>
+		)
 	}
 }
 
