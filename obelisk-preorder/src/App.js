@@ -23,13 +23,21 @@ class PageOne extends Component {
 		const handleEmailChange = (e) => this.setState({email: e.target.value})
 		const handleBackupPhoneChange = (e) => this.setState({backupphone: e.target.value})
 		const handleBackupEmailChange = (e) => this.setState({backupemail: e.target.value})
-		const handleQuantityChange = (e) => this.setState({quantity: parseInt(e.target.value, 10)})
+		const handleQuantityChange = (e) => {
+			if (this.state.quantity < 999) {
+				this.setState({quantity: parseInt(e.target.value, 10)})
+			}
+		}
 		const decrementQuantity = () => {
 			if (this.state.quantity > 0) {
 				this.setState({quantity: this.state.quantity-1})
 			}
 		}
-		const incrementQuantity = () => this.setState({quantity: this.state.quantity+1})
+		const incrementQuantity = () => {
+			if (this.state.quantity < 999) {
+				this.setState({quantity: this.state.quantity+1})
+			}
+		}
 		const handleNextClick = () => {
 			if (this.state.name === '' || this.state.email === '') {
 				this.setState({error: 'name and email are required.'})
@@ -53,11 +61,10 @@ class PageOne extends Component {
 						<div className="separator"></div>
 						<div className="order-form">
 							<h3> 1. YOUR ORDER </h3>
-							<input onChange={handleNameChange} type="text" className="form-control" placeholder="Full name" />
+							<input onChange={handleNameChange} type="text" className="form-control" placeholder="Full Name" />
 							<input onChange={handleEmailChange} type="text" className="form-control" placeholder="Email" />
-							<input onChange={handleBackupEmailChange} type="text" className="form-control" placeholder="Backup Email" />
-							<input onChange={handleBackupPhoneChange} type="text" className="form-control" placeholder="Backup Phone" />
-							<p className="note">* in case your order is rejected we will send your money back and notify you</p>
+							<input onChange={handleBackupEmailChange} type="text" className="form-control" placeholder="Backup Email (optional)" />
+							<input onChange={handleBackupPhoneChange} type="text" className="form-control" placeholder="Backup Phone (optional)" />
 							<p className="input-error">{this.state.error}</p>
 						</div>
 						<div className="red-separator"></div>
@@ -68,12 +75,13 @@ class PageOne extends Component {
 						<img alt="hardware" className="hardware-shot" src="assets/img/hardware-shot.png" />
 					</div>
 					<div className="col-md-4 quantity-section">
-						<h3> How many Obelisk want to purchase? </h3>
+						<h3> How many Obelisk SC1s would you like to purchase? </h3>
 						<div className="quantity-form">
 							<button onClick={decrementQuantity} className="minus-button"></button>
 							<input onChange={handleQuantityChange} value={leftPad(this.state.quantity.toString())} defaultValue="001" ></input>
 							<button onClick={incrementQuantity} className="plus-button" ></button>
 						</div>
+						<div className="quantity-price">${2499 * this.state.quantity}</div>
 						<div className="next-button" onClick={handleNextClick}></div>
 					</div>
 				</div>
@@ -98,15 +106,15 @@ class ShippingForm extends Component {
 	}
 	render() {
 		const estimatedCost = () => {
-			let baseCost = 135
+			let baseCost = 70 
 			if (this.state.country === 'US' || this.state.country === 'EU' || this.state.country === 'CN') {
-				baseCost = 65
+				baseCost = 35 
 			}
 			let tax = 0
 			if (this.state.country === 'US' && this.state.region === 'MA') {
-				tax = 2500 * 0.0625
+				tax = 2499 * 0.0625
 			}
-			return baseCost + tax
+			return (baseCost + tax) * this.props.quantity
 		}
 		const handleAddr1Change = (e) => this.setState({addr1: e.target.value})
 		const handleAddr2Change = (e) => this.setState({addr2: e.target.value})
@@ -440,6 +448,7 @@ class Checkout extends Component {
 				this.setState({error: 'you must agree to the terms and conditions before continuing'})
 				return
 			}
+			this.setState({error: ''})
 			this.props.next()
 		}
 		return (
@@ -478,8 +487,8 @@ class Checkout extends Component {
 							<p>Check the box to accept the <a href="assets/img/terms.pdf">Terms and Conditions</a></p>
 							<input onChange={() => this.setState({checked: !this.state.checked})} type="checkbox" name="terms-check" />
 						</div>
-						<div className="input-error">{this.state.error}</div>
 						<div className="input-error">{this.props.checkoutError}</div>
+						<div className="input-error">{this.state.error}</div>
 						<div className="next-button" onClick={handleNextClick}></div>
 					</div>
 				</div>
@@ -489,7 +498,30 @@ class Checkout extends Component {
 }
 
 class Payment extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			refundAddress: '',
+
+			error: '',
+		}
+	}
 	render() {
+		const handleRefundAddressChange = (e) => this.setState({refundAddress: e.target.value})
+		const handleNextClick = () => {
+			const formData = new FormData()
+			formData.append('refundAddr', this.state.refundAddress)
+			fetch(`/user/${this.props.uid}`, {
+				method: 'POST',
+				body: formData,
+			}).then((res) => {
+				if (!res.ok) {
+					this.setState({error: 'Invalid refund address!'})
+				} else {
+					this.props.next()
+				}
+			})
+		}
 		return (
 			<div className="container main order-main">
 				<div className="row">
@@ -500,9 +532,9 @@ class Payment extends Component {
 							<h3> 4. PAYMENT </h3>
 							<p className="paywith">Pay with Bitcoin</p>
 							<div className="payinfo">
-								<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=120x120&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
+								<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
 								<div className="payaddr">
-									<p>Use the QR code or send {this.props.btcPrice} BTC to the address below:</p>
+									<p>Use the QR code or send <div className="price">{this.props.btcPrice.toFixed(3)} BTC </div>to the address below:</p>
 									<br></br>
 									<p>Deposit Address</p>
 									<p className="addr">{this.props.btcaddr}</p>
@@ -519,7 +551,10 @@ class Payment extends Component {
 					</div>
 					<div className="col-md-4 payment-selection-section">
 						<p> Once you have sent the funds to your Payment address, continue to the next step for more information about the Verification and Tracking of your recent purchase.</p>
-						<div className="next-button" onClick={this.props.next}></div>
+						<p className="refund-addr-label">Refund Address: </p>
+						<input onChange={handleRefundAddressChange} className="refund-address" />
+						<div className="input-error">{this.state.error}</div>
+						<div className="next-button" onClick={handleNextClick}></div>
 					</div>
 				</div>
 			</div>
@@ -550,7 +585,7 @@ class Confirmation extends Component {
 						<img alt="hardware-shot" className="hardware-shot" src="assets/img/hardware-shot.png" />
 					</div>
 					<div className="col-md-4 contact-section">
-						<a className="contact-links" href="mailto:orders@obelisk.tech">
+						<a className="contact-links" href="mailto:hello@obelisk.tech">
 							<img alt="mailicon" src="assets/img/mailicon.png" />
 							<p>CONTACT US</p>
 						</a>
@@ -578,7 +613,7 @@ class App extends Component {
 			uid: '',
 			paymentAddr: '',
 
-			step: 2,
+			step: 0,
 			checkoutError: '',
 		}
 		fetch('https://api.gdax.com/products/BTC-USD/ticker').then((res) => {
@@ -593,7 +628,7 @@ class App extends Component {
 		})
 	}
 	render() {
-		const totalPrice = 2500 + this.state.shippingCost
+		const totalPrice = (2499*this.state.quantity) + this.state.shippingCost
 		const btcPrice = totalPrice / this.state.btcUsd
 		const ethPrice = totalPrice / this.state.ethUsd
 		const next = (result) => {
@@ -611,13 +646,20 @@ class App extends Component {
 			formData.append('email', this.state.email)
 			formData.append('name', this.state.name)
 			formData.append('address', this.state.address)
+			formData.append('backupEmail', this.state.backupemail)
 			formData.append('phone', this.state.backupphone)
 			fetch(`/adduser`, {
 				method: 'POST',
 				body: formData,
 			}).then((res) => {
 				if (!res.ok) {
-					res.text().then((errText) => this.setState({checkoutError: 'an internal error has occured and has been reported to the developers.' }))
+					res.text().then((text) => {
+						if (text.includes('user with that email already exists')) {
+							this.setState({checkoutError: 'a user has already ordered an Obelisk SC1 using that email. If you want to modify your order, contact hello@obelisk.tech.'})
+						} else {
+							this.setState({checkoutError: text})
+						}
+					})
 				} else {
 					res.json().then((data) => {
 						this.setState({uid: data.uniqueID, paymentAddr: data.paymentAddr})
@@ -632,13 +674,13 @@ class App extends Component {
 			return <PageOne next={next} />
 		}
 		if (this.state.step === 1) {
-			return <ShippingForm next={next} back={back} />
+			return <ShippingForm quantity={this.state.quantity} next={next} back={back} />
 		}
 		if (this.state.step === 2) {
 			return <Checkout checkoutError={this.state.checkoutError} shippingCost={this.state.shippingCost} totalPrice={totalPrice} ethPrice={ethPrice} btcPrice={btcPrice}  next={handleSubmit} back={back} />
 		}
 		if (this.state.step === 3) {
-			return <Payment btcaddr={this.state.paymentAddr} btcPrice={btcPrice} back={back} />
+			return <Payment uid={this.state.uid} btcaddr={this.state.paymentAddr} btcPrice={btcPrice} next={next} back={back} />
 		}
 		if (this.state.step === 4) {
 			return <Confirmation uid={this.state.uid} />
@@ -647,3 +689,4 @@ class App extends Component {
 }
 
 export default App;
+
