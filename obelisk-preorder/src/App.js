@@ -114,7 +114,7 @@ class ShippingForm extends Component {
 			if (this.state.country === 'US' && this.state.region === 'MA') {
 				tax = 2499 * 0.0625
 			}
-			return (baseCost + tax) * this.props.quantity
+			return parseFloat(((baseCost + tax) * this.props.quantity).toFixed(2))
 		}
 		const handleAddr1Change = (e) => this.setState({addr1: e.target.value})
 		const handleAddr2Change = (e) => this.setState({addr2: e.target.value})
@@ -463,7 +463,7 @@ class Checkout extends Component {
 							<p>Final cost:</p>
 							<div className="estimated-cost">
 								<span className="money">$</span>
-								<p className="amount">{this.props.totalPrice}</p>
+								<p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
 							</div>
 							<p className="note">* if the price fluctuates by more than 5% before we can convert to USD, we will email the customer requesting an additional payment in Bitcoin or Ethereum.</p>
 							<div onClick={this.props.back} className="back-button"></div>
@@ -480,7 +480,7 @@ class Checkout extends Component {
 						<div className="cost-estimate">
 							<div className="estimate">
 								<div className="amount-label">BTC</div>
-								<div className="amount">{Math.round(this.props.btcPrice * 100000) / 100000}</div>
+								<div className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</div>
 							</div>
 						</div>
 						<div className="terms-check">
@@ -534,7 +534,7 @@ class Payment extends Component {
 							<div className="payinfo">
 								<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
 								<div className="payaddr">
-									<p>Use the QR code or send <div className="price">{this.props.btcPrice.toFixed(3)} BTC </div>to the address below:</p>
+									<p>Use the QR code or send <div className="price">{parseFloat(this.props.btcPrice.toFixed(3))} BTC </div>to the address below:</p>
 									<br></br>
 									<p>Deposit Address</p>
 									<p className="addr">{this.props.btcaddr}</p>
