@@ -638,7 +638,7 @@ class App extends Component {
 			formData.append('backupEmail', this.state.backupemail)
 			formData.append('phone', this.state.backupphone)
 			formData.append('units', this.state.quantity)
-			formData.append('price', btcPrice)
+			formData.append('price', parseFloat(btcPrice.toFixed(3)))
 			fetch(`/adduser`, {
 				method: 'POST',
 				body: formData,
