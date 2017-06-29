@@ -750,11 +750,11 @@ body {
 	height: 30px;
 	margin-top: 5px;
 	margin-left: -20px;
-	border: 1px solid #eee;
-	border-radius: 12px;
+	border: 1px solid #666666;
+	border-radius: 15px;
 	text-align: center;
-	padding-top: 3px;
+	padding-top: 4px;
 	text-decoration: none;
-	font-size: 18px;
+	font-size: 16px;
 	color: red;
 }

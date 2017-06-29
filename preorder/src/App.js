@@ -445,7 +445,7 @@ class ShippingForm extends Component {
 					<div className="col-md-4 cost-section">
 						<h3> Estimated sales tax and shipping costs </h3>
 						<div className="estimated-cost"><span className="money">$</span><p className="amount">{estimatedCost()}</p></div>
-						<p className="note">* Shipping costs are $35 per unit for US/Europe/China Customers and $70 per unit for anywhere else</p>
+						<p className="note">* Shipping costs are $35 per unit for US/Europe/China Customers and $70 per unit for anywhere else. Orders will ship on or before June 30, 2018.</p>
 						<div className="next-button" onClick={handleNextClick}></div>
 					</div>
 				</div>
