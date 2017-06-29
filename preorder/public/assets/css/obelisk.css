@@ -709,7 +709,7 @@ body {
 	font-family: "Karbon Light";
 	margin-left: 30px;
 	margin-top: 26px;
-	font-size: 18px;
+	font-size: 20px;
 }
 .payment-options {
 	width: 100%;
@@ -931,7 +931,7 @@ body {
 }
 .transfer-instructions {
 	margin-left: 30px;
-	font-size: 16px;
+	font-size: 18px;
 	color: #a0a3a9;
 }
 .transfer-instructions > a {

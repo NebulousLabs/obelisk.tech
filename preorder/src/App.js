@@ -588,7 +588,6 @@ class Payment extends Component {
 								</div>
 							</div>
 						)}
-						<div onClick={this.props.back} className="back-button"></div>
 						<div className="red-separator"></div>
 						<div className="separator"></div>
 					</div>
@@ -655,7 +654,8 @@ class App extends Component {
 				this.setState({ step: this.state.step-1})
 			}
 		}
-		const handleSubmit = () => {
+		const handleSubmit = (result) => {
+			this.setState(result)
 			const formData = new FormData()
 			formData.append('email', this.state.email)
 			formData.append('newsletter', this.state.newsletter)
@@ -664,8 +664,13 @@ class App extends Component {
 			formData.append('backupEmail', this.state.backupemail)
 			formData.append('phone', this.state.backupphone)
 			formData.append('units', this.state.quantity)
-			formData.append('price', parseFloat(btcPrice.toFixed(3)))
-			formData.append('wire', this.state.paymenthMethod === 'transfer')
+			formData.append('price', (() => {
+				if (result.paymentMethod === 'transfer') {
+					return totalPrice
+				}
+				return parseFloat(btcPrice.toFixed(3))
+			})())
+			formData.append('wire', result.paymentMethod === 'transfer')
 			fetch(`/adduser`, {
 				method: 'POST',
 				body: formData,
