@@ -662,7 +662,7 @@ body {
 	margin-top: -18px;
 }
 .final-cost-section {
-	padding-top: 100px;
+	padding-top: 60px;
 }
 .final-cost-section > h3 {
 	font-family: "Karbon Light";
@@ -686,7 +686,7 @@ body {
 	color: #fff;
 }
 .terms-check > * {
-	margin-top: 50px;
+	margin-top: 20px;
 	display: inline-block;
 }
 .terms-check > p {
@@ -695,14 +695,14 @@ body {
 	margin-right: 15px;
 	font-size: 18px;
 	width: 60%;
-	margin-top: 25px;
+	margin-top: 0px;
 }
 .terms-check > input {
 	position: relative;
 	top: -25px;
 }
 .final-cost-section > .next-button {
-	top: 78px;
+	top: 0px;
 }
 .payment > p {
 	color: #a0a3a9;
@@ -733,7 +733,7 @@ body {
 	transform: scale(0.75);
 }
 .payment-selection-section {
-	padding-top: 170px;
+	padding-top: 100px;
 }
 .payment-selection-section > p {
 	font-family: "Karbon Light";
@@ -870,5 +870,70 @@ body {
 }
 .need-help > a {
 	text-decoration: none;
+	color: red;
+}
+.estimated-costs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	margin-left: 19px;
+}
+.estimated-costs > p {
+	font-size: 18px;
+}
+.money > img {
+	padding-bottom: 10px;
+}
+.money {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.payment-forms {
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+.payment-form > img {
+	align-self: center;
+	padding-bottom: 15px;
+	margin: 0;
+	padding: 0;
+	width: 31px;
+	height: 41px;
+}
+.payment-form {
+	cursor: pointer;
+	height: 120px;
+	width: 90px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.payment-form.selected {
+	background-color: #111111;
+	border: 1px solid red;
+	border-radius: 5px;
+}
+.terms-check > p > a {
+	color: red;
+}
+.payment-form > p {
+	margin-top: 18px;
+	padding-top: 12px;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-top: 1px solid #fff;
+	font-size: 18px;
+	font-family: "Karbon Light";
+	color: #fff;
+}
+.transfer-instructions {
+	margin-left: 30px;
+	font-size: 16px;
+	color: #a0a3a9;
+}
+.transfer-instructions > a {
 	color: red;
 }

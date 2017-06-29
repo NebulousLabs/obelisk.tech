@@ -166,7 +166,7 @@ class ShippingForm extends Component {
 				return
 			}
 			this.props.next({address: `${this.state.addr1}\n${this.state.addr2}\n${this.state.city}\n${this.state.region}\n${this.state.postal}\n${this.state.country}`, shippingCost: estimatedCost()})
-			
+
 		}
 		return (
 			<div className="container main order-main">
@@ -458,6 +458,7 @@ class Checkout extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			paymentMethod: '',
 			checked: false,
 
 			error: '',
@@ -472,9 +473,15 @@ class Checkout extends Component {
 				this.setState({error: 'you must agree to the terms and conditions before continuing'})
 				return
 			}
+			if (this.state.paymentMethod === '') {
+				this.setState({error: 'you must select a payment method'})
+				return
+			}
 			this.setState({error: ''})
-			this.props.next()
+			this.props.next(this.state)
 		}
+		const handleBitcoinClick = () => this.setState({paymentMethod: 'bitcoin'})
+		const handleTransferClick = () => this.setState({paymentMethod: 'transfer'})
 		return (
 			<div className="container main order-main">
 				<div className="need-help">
@@ -487,11 +494,17 @@ class Checkout extends Component {
 						<div className="separator"></div>
 						<div className="checkout order-form">
 							<h3> 3. CHECKOUT </h3>
-							<p> Payment is accepted in Bitcoin.</p>
-							<p>Final cost. Proceed to the next page to get your payment address</p>
-							<div className="estimated-cost">
-								<span className="money">$</span>
-								<p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
+							<p> Payment is accepted in both Bitcoin or USD.</p>
+							<div className="estimated-costs">
+								<div className="estimated-cost">
+									<span className="money">$</span>
+									<p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
+								</div>
+								<p> or </p>
+								<div className="estimated-cost">
+									<span className="money"><img src="assets/img/bitcoin-logo.png" /></span>
+									<p className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</p>
+								</div>
 							</div>
 							<p className="note">* If the Bitcoin exchange rate fluctuates by more than 5% before we can convert to USD, we will email you requesting additional payment in Bitcoin. We are using Gemini to exchange your coins as fast as possible.</p>
 							<div onClick={this.props.back} className="back-button"></div>
@@ -504,11 +517,15 @@ class Checkout extends Component {
 						<img alt="logo" className="hardware-shot" src="assets/img/hardware-shot.png" />
 					</div>
 					<div className="col-md-4 final-cost-section">
-						<h3> Estimated final cost. Proceed to the next page to get the payment address</h3>
-						<div className="cost-estimate">
-							<div className="estimate">
-								<div className="amount-label">BTC</div>
-								<div className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</div>
+						<h3> Select a form of payment before proceeding to the next step. </h3>
+						<div className="payment-forms">
+							<div onClick={handleBitcoinClick} className={this.state.paymentMethod === 'bitcoin' ? 'payment-form selected' : 'payment-form'}>
+								<img src="assets/img/bitcoin-logo.png" />
+								<p> Bitcoin </p>
+							</div>
+							<div onClick={handleTransferClick} className={this.state.paymentMethod === 'transfer' ? 'payment-form selected' : 'payment-form'}>
+								<img src="assets/img/dollar-logo.png" />
+								<p> Bank Wire </p>
 							</div>
 						</div>
 						<div className="terms-check">
@@ -548,22 +565,32 @@ class Payment extends Component {
 					<div className="col-md-4 order-section">
 						<img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
 						<div className="separator"></div>
-						<div className="payment order-form">
-							<h3> 4. PAYMENT </h3>
-							<p className="paywith">Pay with Bitcoin</p>
-							<div className="payinfo">
-								<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
-								<div className="payaddr">
-									<p>Use the QR code or send <div className="price">{parseFloat(this.props.btcPrice.toFixed(3))} BTC </div>to the address below:</p>
-									<br></br>
-									<p>Deposit Address</p>
-									<p className="addr">{this.props.btcaddr}</p>
+						{ this.props.paymentMethod === 'bitcoin' ? (
+							<div className="payment order-form">
+								<h3> 4. PAYMENT </h3>
+								<p className="paywith">Pay with Bitcoin</p>
+								<div className="payinfo">
+									<img alt="qrcode" className="qrcode" src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=bitcoin:${this.props.btcaddr}?amount=${this.props.btcPrice}`} />
+									<div className="payaddr">
+										<p>Use the QR code or send <div className="price">{parseFloat(this.props.btcPrice.toFixed(3))} BTC </div>to the address below:</p>
+										<br></br>
+										<p>Deposit Address</p>
+										<p className="addr">{this.props.btcaddr}</p>
+									</div>
 								</div>
 							</div>
-							<div onClick={this.props.back} className="back-button"></div>
-							<div className="red-separator"></div>
-							<div className="separator"></div>
-						</div>
+						) : (
+							<div className="payment order-form">
+								<h3> 4. PAYMENT </h3>
+								<p className="paywith">Pay with Wire Transfer</p>
+								<div className="payinfo">
+									<p className="transfer-instructions"> Please download the <a href="assets/img/wiretransfer.pdf" target="_blank" rel="noopener noreferrer">instructions</a> to complete your payment.</p>
+								</div>
+							</div>
+						)}
+						<div onClick={this.props.back} className="back-button"></div>
+						<div className="red-separator"></div>
+						<div className="separator"></div>
 					</div>
 					<div className="col-md-1"></div>
 					<div className="col-md-3 visible-md-block visible-lg-block">
@@ -596,7 +623,7 @@ class App extends Component {
 			shippingCost: 0,
 			newsletter: false,
 			btcUsd: 2400,
-			ethUsd: 280,
+			paymentMethod: '',
 
 			uid: '',
 			paymentAddr: '',
@@ -618,7 +645,6 @@ class App extends Component {
 	render() {
 		const totalPrice = (2499*this.state.quantity) + this.state.shippingCost
 		const btcPrice = totalPrice / this.state.btcUsd
-		const ethPrice = totalPrice / this.state.ethUsd
 		const next = (result) => {
 			this.setState(result)
 			this.setState({ step: this.state.step+1})
@@ -639,6 +665,7 @@ class App extends Component {
 			formData.append('phone', this.state.backupphone)
 			formData.append('units', this.state.quantity)
 			formData.append('price', parseFloat(btcPrice.toFixed(3)))
+			formData.append('wire', this.state.paymenthMethod === 'transfer')
 			fetch(`/adduser`, {
 				method: 'POST',
 				body: formData,
@@ -665,8 +692,8 @@ class App extends Component {
 			<div>
 				<PageOne visible={this.state.step === 0} next={next} />
 				<ShippingForm visible={this.state.step === 1} quantity={this.state.quantity} next={next} back={back} />
-				<Checkout visible={this.state.step === 2} checkoutError={this.state.checkoutError} shippingCost={this.state.shippingCost} totalPrice={totalPrice} ethPrice={ethPrice} btcPrice={btcPrice}  next={handleSubmit} back={back} />
-				<Payment visible={this.state.step === 3} uid={this.state.uid}  btcaddr={this.state.paymentAddr} btcPrice={btcPrice} back={back} />
+				<Checkout visible={this.state.step === 2} checkoutError={this.state.checkoutError} shippingCost={this.state.shippingCost} totalPrice={totalPrice} btcPrice={btcPrice}  next={handleSubmit} back={back} />
+				<Payment visible={this.state.step === 3} paymentMethod={this.state.paymentMethod} uid={this.state.uid}  btcaddr={this.state.paymentAddr} btcPrice={btcPrice} back={back} />
 			</div>
 		)
 	}
