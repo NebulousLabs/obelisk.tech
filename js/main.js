@@ -5,7 +5,7 @@ const blockReward = 20000000 // SC per day on end of june 2018
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
 // obelisks and the number of obelisks sold
-const monthlyRevenue = (obelisks, sold) => (obelisks / sold) * blockReward * 30
+const monthlyRevenue = (obelisks, sold) => obelisks / sold * blockReward * 30
 
 // monthlyElectricityCost returns the estimated monthly electricty cost given
 // the cost of electricity per KW/H

@@ -3,6 +3,10 @@
 	src: url("../fonts/karbonregular.otf");
 }
 @font-face {
+	font-family: "Karbon Bold";
+	src: url("../fonts/karbonbold.otf");
+}
+@font-face {
 	font-family: "Karbon Medium";
 	src: url("../fonts/karbonmedium.otf");
 }
@@ -802,6 +806,24 @@ body {
 	text-decoration: none;
 	font-size: 16px;
 	color: red;
+}
+.ordercount-label {
+	font-family: "Karbon Bold";
+	font-size: 20px;
+	color: #666;
+	margin-bottom: 3px;
+}
+.ordercount-count {
+	font-family: "Karbon Bold";
+	color: red;
+	font-size: 26px;
+	margin-left: 5px;
+}
+.ordercount {
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+	vertical-align: middle;
 }
 .profit-calculator > * > h3 {
 	font-family: "Karbon Medium";
