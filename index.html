@@ -82,39 +82,38 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-4 specsheet">
 				<div class="tech-specs">
-					<h3 style="margin-bottom: 4px">OBELISK SC1 MINER</h3>
-					<h3 style="padding-top: 0; margin-top: 0">TECH DETAILS</h3>
-					<div class="specs">
-						<div class="spec">
-							<div class="label">CHIP:</div>
-							<div class="amount">FULL-CUSTOM 28NM ASIC</div>
+					<h3>MONTHLY PROFITS CALCULATOR</h3>
+					<div class="profit-calculator">
+						<div class="profit-input">
+							<h3> HOW MANY OBELISKS? </h3>
+							<input value="1" id="quantity-input"></input>
 						</div>
-						<div class="spec">
-							<div class="label">HASHRATE:</div>
-							<div class="amount">100GH/s OR HIGHER</div>
+						<div class="profit-input">
+							<h3> OBELISKS SOLD </h3>
+							<input value="10000" id="nsold-input"></input>
 						</div>
-						<div class="spec">
-							<div class="label">POWER CONSUMPTION:</div>
-							<div class="amount">500 W OR UNDER</div>
+						<div class="profit-input">
+							<h3> ELECTRICITY COST IN KW/H </h3>
+							<input value="0.10" id="electricity-cost"></input>
 						</div>
-						<div class="spec">
-							<div class="label">NOISE:</div>
-							<div class="amount">65 DBA OR UNDER</div>
+						<div class="profit-results">
+							<div class="profit-result">
+								<h3> MONTHLY RELECTRICTY COST </h3>
+								<div class="result">
+									<p class="amount" id="electricity-cost-result">36</p>
+									<p style="margin-right: 8px" class="unit">$</p>
+								</div>
+							</div>
+							<div class="profit-result">
+								<h3> MONTHLY MINING REWARD </h3>
+								<div class="result">
+									<p class="amount" id="mining-reward-result">60,000</p>
+									<p class="unit">SC</p>
+							</div>
 						</div>
-						<div class="spec">
-							<div class="label">WEIGHT:</div>
-							<div class="amount">20 POUNDS OR UNDER</div>
-						</div>
-						<div class="spec">
-							<div class="label">POWER SUPPLY:</div>
-							<div class="amount">INCLUDED</div>
-						</div>
-					</div>
-					<div class="price">
-						<div class="label">PRICE:</div>
-						<div class="amount">$2499</div>
 					</div>
 				</div>
+			</div>
 			</div>
 			<div class="col-md-6 chip-col">
 				<h3>28NM FULL CUSTOM SIA MINING ASIC CHIP</h3>
