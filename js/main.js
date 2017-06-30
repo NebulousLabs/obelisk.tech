@@ -14,9 +14,8 @@ let obelisks = 1
 let sold = 10000
 let electricityprice = 0.10
 const updateCosts = () => {
-	console.log(monthlyElectricityCost(obelisks, electricityprice))
-	$('#electricity-cost-result').text(Math.floor(monthlyElectricityCost(obelisks, electricityprice)))
-	$('#mining-reward-result').text(Math.floor(monthlyRevenue(obelisks, sold)).toLocaleString())
+	$('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityprice)))
+	$('#mining-reward-result').text(Math.round(monthlyRevenue(obelisks, sold)).toLocaleString())
 }
 
 $('#quantity-input').on('input', (e) => {
@@ -51,7 +50,6 @@ function setActiveTab(tabname) {
 function updateNav() {
 	const pos = $(window).scrollTop()
 	if (pos >= $('#contact').offset().top) {
-		console.log('aaa')
 		setActiveTab('#contact-button')
 	} else
 	if (pos >= $('#info').offset().top){
