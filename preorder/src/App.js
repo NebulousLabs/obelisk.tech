@@ -497,13 +497,13 @@ class Checkout extends Component {
 							<p> Payment is accepted in both Bitcoin or USD.</p>
 							<div className="estimated-costs">
 								<div className="estimated-cost">
-									<span className="money">$</span>
-									<p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
+									<span className="money"><img src="assets/img/bitcoin-logo.png" /></span>
+									<p className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</p>
 								</div>
 								<p> or </p>
 								<div className="estimated-cost">
-									<span className="money"><img src="assets/img/bitcoin-logo.png" /></span>
-									<p className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</p>
+									<span className="money">$</span>
+									<p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
 								</div>
 							</div>
 							<p className="note">* If the Bitcoin exchange rate fluctuates by more than 5% before we can convert to USD, we will email you requesting additional payment in Bitcoin. We are using Gemini to exchange your coins as fast as possible.</p>
@@ -584,7 +584,7 @@ class Payment extends Component {
 								<h3> 4. PAYMENT </h3>
 								<p className="paywith">Pay with Wire Transfer</p>
 								<div className="payinfo">
-									<p className="transfer-instructions"> Please download the <a href="assets/img/wiretransfer.pdf" target="_blank" rel="noopener noreferrer">instructions</a> to complete your payment.</p>
+									<p className="transfer-instructions"> Please download the <a href="/assets/img/wiretransfer.pdf" target="_blank" rel="noopener noreferrer">instructions</a> to complete your payment.</p>
 								</div>
 							</div>
 						)}

@@ -625,7 +625,7 @@ body {
 }
 .estimated-cost > * {
 	font-family: "Karbon Thin";
-	font-size: 62px;
+	font-size: 50px;
 	display: inline-block;
 }
 .estimated-cost > .money {
@@ -875,9 +875,10 @@ body {
 .estimated-costs {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	width: 90%;
 	margin-left: 19px;
+	flex-direction: column;
 }
 .estimated-costs > p {
 	font-size: 18px;
