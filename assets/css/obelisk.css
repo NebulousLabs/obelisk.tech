@@ -256,17 +256,19 @@ body {
 	margin-bottom: 20px;
 }
 .tech-specs {
-	background-image: url("../img/techspecsbg.png");
+	background-image: url("../img/calculator-background.png");
+	background-position: -10px 0;
 	width: 315px;
 	height: 620px;
 	padding-top: 20px;
-	padding-left: 40px;
+	padding-left: 60px;
 }
 .tech-specs > h3 {
 	font-family: "Karbon Light";
 	color: #fff;
 	width: 40%;
 	margin-bottom: 40px;
+	margin-top: 6px;
 }
 .specs {
 	margin-top: 40px;
@@ -308,22 +310,17 @@ body {
 	width: 210px;
 	color: #be808e;
 }
-.chip-col {
-	background-image: url("../img/chip.png");
-	background-position: -55px 0;
+.tech-col {
 	height: 600px;
-	padding-top: 420px;
 }
 @media (min-width: 1200px) {
-	.chip-col {
+	.tech-col {
 		margin-left: -27px;
 	}
 }
 @media (max-width: 1200px) {
-	.chip-col {
+	.tech-col {
 		margin-left: 5px;
-		background-position: center top;
-		padding-top: 300px;
 		margin-top: 60px;
 		margin-left: 5px;
 		height: 550px;
@@ -333,13 +330,56 @@ body {
 		margin-right: auto;
 	}
 }
-.chip-col h3 {
+.tech-col h3 {
 	font-family: "Karbon Light";
-	color: #8e8e8e;
+	color: #fff;
 	font-size: 35px;
-	width: 400px;
+	width: 80px;
 }
-.chip-col p {
+.tech-col h4 {
+	font-family: "Karbon Thin";
+	color: #fff;
+	width: 350px;
+	font-size: 36px;
+	margin-bottom: 15px;
+	margin-top: 50px;
+}
+
+.price-preorder-section > .price {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	font-size: 38px;
+	color: #fff;
+	font-family: "Karbon Light";
+	margin-top: 14px;
+}
+.price-dollar {
+	color: #878181;
+}
+.price-preorder-section > .preorder-button {
+	display: inline-block;
+	margin-left: 40px;
+}
+.price-preorder-section {
+	display: flex;
+	align-items: center;
+}
+.tech-specs-side > .spec > .name {
+	font-family: "Karbon Medium";
+	font-size: 18px;
+	color: #fff;
+}
+.tech-specs-side > .spec > span {
+	font-family: "Karbon Light";
+	font-size: 18px;
+	color: #fff;
+	margin-left: 4px;
+}
+.spec {
+	margin-bottom: 1px;
+}
+.tech-col p {
 	color: #777777;
 }
 .subscribe {
