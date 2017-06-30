@@ -259,11 +259,15 @@ body {
 	margin-top: 25px;
 	margin-bottom: 20px;
 }
+.tech-specs > .note {
+	color: #b4b4b4;
+	width: 90%;
+}
 .tech-specs {
 	background-image: url("../img/calculator-background.png");
-	background-position: -10px 0;
+	background-size: 100%;
 	width: 315px;
-	height: 620px;
+	height: 630px;
 	padding-top: 20px;
 	padding-left: 60px;
 }
@@ -811,19 +815,17 @@ body {
 	font-family: "Karbon Bold";
 	font-size: 20px;
 	color: #666;
-	margin-bottom: 3px;
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
 	color: red;
-	font-size: 26px;
+	font-size: 20px;
 	margin-left: 5px;
 }
 .ordercount {
 	display: flex;
 	align-items: center;
-	margin-top: 2px;
-	margin-left: 30px;
+	margin-top: 8px;
 	vertical-align: middle;
 }
 .profit-calculator > * > h3 {
@@ -842,7 +844,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 70%;
+	width: 80%;
 }
 .profit-result > h3 {
 	margin-top: 2px;
@@ -861,7 +863,7 @@ body {
 	font-size: 24px;
 }
 .profit-result > h3 {
-	width: 78%;
+	width: 82%;
 	padding-bottom: 5px;
 	font-family: "Karbon Light";
 	color: #fff;
