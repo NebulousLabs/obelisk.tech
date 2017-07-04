@@ -95,6 +95,7 @@ class PageOne extends Component {
 							<button onClick={incrementQuantity} className="plus-button" ></button>
 						</div>
 						<div className="quantity-price">${2499 * this.state.quantity}</div>
+						<div className="shipping-note">*orders are estimated to ship by June, 2018.</div>
 						<div className="next-button" onClick={handleNextClick}></div>
 					</div>
 				</div>

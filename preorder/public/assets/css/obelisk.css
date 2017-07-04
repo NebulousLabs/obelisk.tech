@@ -938,3 +938,8 @@ body {
 .transfer-instructions > a {
 	color: red;
 }
+.shipping-note {
+	color: grey;
+	margin-top: 25px;
+	margin-left: 10px;
+}
