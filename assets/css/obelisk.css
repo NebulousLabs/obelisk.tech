@@ -267,7 +267,7 @@ body {
 	background-image: url("../img/calculator-background.png");
 	background-size: 100%;
 	width: 315px;
-	height: 630px;
+	height: 580px;
 	padding-top: 20px;
 	padding-left: 60px;
 }
@@ -825,6 +825,7 @@ body {
 .ordercount {
 	display: flex;
 	align-items: center;
+	flex-direction: column;
 	margin-top: 8px;
 	vertical-align: middle;
 }
@@ -880,4 +881,18 @@ body {
 	padding: 4px 2px 2px 10px;
 	width: 85%;
 	height: 35px;
+}
+.order-bar {
+	width: 350px;
+	height: 2px;
+	background-color: #eee;
+}
+.order-bar-inner {
+	height: 2px;
+	background-color: red;
+	width: 0;
+}
+.order-bar {
+	margin-top: 6px;
+	margin-bottom: 6px;
 }

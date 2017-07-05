@@ -11,7 +11,7 @@ const monthlyRevenue = (obelisks, sold) => obelisks / sold * blockReward * 30
 // the cost of electricity per KW/H
 const monthlyElectricityCost = (obelisks, electricityprice) => (obelisks*electricityprice) * (500 / 1000) * 24 * 30
 let obelisks = 1
-let sold = 10000
+let sold = 4000 
 let electricityprice = 0.10
 const updateCosts = () => {
 	$('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityprice)))
@@ -62,4 +62,10 @@ function updateNav() {
 
 window.onscroll = updateNav
 updateNav()
+
+const nSold = 800
+const sellCap = 4000
+$('.order-bar-inner').css('width', (nSold/sellCap) * 100 + '%')
+$('#sold').text(nSold)
+$('#sellcap').text(sellCap)
 
