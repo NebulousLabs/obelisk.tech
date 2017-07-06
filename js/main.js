@@ -63,7 +63,7 @@ function updateNav() {
 window.onscroll = updateNav
 updateNav()
 
-const nSold = 1030
+const nSold = 1105
 const sellCap = 4000
 $('.order-bar-inner').css('width', (nSold/sellCap) * 100 + '%')
 $('#sold').text(nSold)
