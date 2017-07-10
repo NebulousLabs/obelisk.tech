@@ -1,6 +1,9 @@
 const expectedHashrate = 100 // GH/s
 const expectedPowerConsumption = 500 // W
 const blockReward = 20000000 // SC per day on end of june 2018
+let obelisks = 1
+let sold = 4000
+let electricityprice = 0.10
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
 // obelisks and the number of obelisks sold
@@ -9,9 +12,6 @@ const monthlyRevenue = (obelisks, sold) => obelisks / sold * blockReward * 30
 // monthlyElectricityCost returns the estimated monthly electricty cost given
 // the cost of electricity per KW/H
 const monthlyElectricityCost = (obelisks, electricityprice) => (obelisks*electricityprice) * (500 / 1000) * 24 * 30
-let obelisks = 1
-let sold = 4000 
-let electricityprice = 0.10
 const updateCosts = () => {
 	$('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityprice)))
 	$('#mining-reward-result').text(Math.round(monthlyRevenue(obelisks, sold)).toLocaleString())
