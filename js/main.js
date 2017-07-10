@@ -1,4 +1,3 @@
-
 const expectedHashrate = 100 // GH/s
 const expectedPowerConsumption = 500 // W
 const blockReward = 20000000 // SC per day on end of june 2018
@@ -63,7 +62,7 @@ function updateNav() {
 window.onscroll = updateNav
 updateNav()
 
-const nSold = 1105
+const nSold = 1240
 const sellCap = 4000
 $('.order-bar-inner').css('width', (nSold/sellCap) * 100 + '%')
 $('#sold').text(nSold)
