@@ -250,7 +250,9 @@ body {
 }
 .terms {
 	list-style: none;
-	margin-top: 16px;
+	font-family: "Karbon Light";
+	color: #4f4d4d;
+	font-size: 18px;
 }
 .terms a {
 	display: inline-block;
@@ -404,16 +406,16 @@ body {
 	position: relative;
 	right: 0;
 	background-position: right;
-	margin-left: 68px;
+	margin-left: auto;
 	padding-top: 52px;
-	padding-left: 45px;
+	padding-left: 0;
 	margin-left: auto;
 	margin-right: auto;
 	height: 300px;
-	margin-right: 0;
+	margin-right: 10px;
 }
 .subscribe-header {
-	font-size: 28px;
+	font-size: 35px;
 	font-family: "Karbon Light";
 	color: #fff;
 	margin-bottom: 23px;
