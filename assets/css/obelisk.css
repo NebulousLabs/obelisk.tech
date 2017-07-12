@@ -198,11 +198,11 @@ body {
 }
 .section-header {
 	font-family: "Karbon Thin";
-	font-size: 35px;
+	font-size: 30px;
 	color: #fff;
 }
 .section-description {
-	font-size: 16px;
+	font-size: 15px;
 	color: #a8b2ba;
 }
 .separator-arrow {
@@ -344,14 +344,14 @@ body {
 .tech-col h3 {
 	font-family: "Karbon Light";
 	color: #fff;
-	font-size: 35px;
+	font-size: 30px;
 
 }
 .tech-col h4 {
 	font-family: "Karbon Thin";
 	color: #fff;
 	width: 350px;
-	font-size: 35px;
+	font-size: 30px;
 	margin-bottom: 15px;
 	margin-top: 50px;
 }
@@ -391,7 +391,7 @@ body {
 	margin-bottom: 1px;
 }
 .tech-col p {
-	font-size: 16px;
+	font-size: 15px;
 	color: #a8b2ba;
 }
 .subscribe {
@@ -415,7 +415,7 @@ body {
 	margin-right: 10px;
 }
 .subscribe-header {
-	font-size: 35px;
+	font-size: 30px;
 	font-family: "Karbon Light";
 	color: #fff;
 	margin-bottom: 23px;
@@ -539,7 +539,7 @@ body {
 	position: absolute;
 	left: 595px;
 	top: -80px;
-	width: 80%;
+	width: 94%;
 	z-index: -1;
 }
 
