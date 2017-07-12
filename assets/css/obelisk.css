@@ -152,9 +152,10 @@ body {
 	font-family: "Karbon Thin";
 	margin-top: 30px;
 	margin-bottom: 10px;
-	color: #bfbfbf;
+	color: #fff;
 }
 .newdevelopment {
+	font-size: 18px;
 	color: #a8b2ba;
 	margin-bottom: 30px;
 }
@@ -193,7 +194,7 @@ body {
 	vertical-align: middle;
 }
 .meettheminer {
-	margin-top: 21rem;
+	margin-top: 10rem;
 }
 .section-header {
 	font-family: "Karbon Thin";
@@ -201,8 +202,8 @@ body {
 	color: #fff;
 }
 .section-description {
-	font-size: 11px;
-	color: #fff;
+	font-size: 15px;
+	color: #a8b2ba;
 }
 .separator-arrow {
 	width: 15px;
@@ -536,6 +537,7 @@ body {
 	left: 595px;
 	top: -80px;
 	width: 80%;
+	z-index: -1;
 }
 
 .order-section, .order-main {
@@ -799,22 +801,23 @@ body {
 }
 .preorder-button {
 	display: inline-block;
-	width: 100px;
-	height: 30px;
+	width: 125px;
+	height: 40px;
 	margin-top: 5px;
 	margin-left: -20px;
-	border: 1px solid #666666;
+	border: 2px solid #666666;
 	border-radius: 15px;
 	text-align: center;
-	padding-top: 4px;
+	padding-top: 6px;
 	text-decoration: none;
-	font-size: 16px;
+	font-size: 20px;
 	color: red;
 }
 .ordercount-label {
-	font-family: "Karbon Bold";
+	font-family: "Karbon Medium";
 	font-size: 20px;
 	color: #666;
+	text-align: center;
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
@@ -824,10 +827,11 @@ body {
 }
 .ordercount {
 	display: flex;
-	align-items: center;
 	flex-direction: column;
 	margin-top: 8px;
 	vertical-align: middle;
+	width: 300px;
+
 }
 .profit-calculator > * > h3 {
 	font-family: "Karbon Medium";
@@ -883,12 +887,12 @@ body {
 	height: 35px;
 }
 .order-bar {
-	width: 350px;
-	height: 2px;
-	background-color: #eee;
+	width: 300px;
+	height: 3px;
+	background-color: #666;
 }
 .order-bar-inner {
-	height: 2px;
+	height: 3px;
 	background-color: red;
 	width: 0;
 }
