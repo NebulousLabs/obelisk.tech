@@ -824,6 +824,7 @@ body {
 	font-size: 20px;
 	color: #666;
 	text-align: center;
+	margin-top: 5px
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
@@ -834,7 +835,7 @@ body {
 .ordercount {
 	display: flex;
 	flex-direction: column;
-	margin-top: 12px;
+	margin-top: 7px;
 	vertical-align: middle;
 	width: 300px;
 
