@@ -485,6 +485,9 @@ body {
 	height: 175px;
 	z-index: 10;
 }
+.footer > *:not(img) {
+	width: 180px;
+}
 .followus {
 	margin-bottom: 10px;
 }
