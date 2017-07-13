@@ -187,14 +187,14 @@ body {
 	display: inline-block;
 }
 .arrow {
-	margin-top: 45px;
+	margin-top: 50px;
 }
 .counter-row {
 	margin-top: 0px;
 	vertical-align: middle;
 }
 .meettheminer {
-	margin-top: 7rem;
+	margin-top: 10rem;
 }
 .section-header {
 	font-family: "Karbon Thin";
@@ -202,7 +202,8 @@ body {
 	color: #fff;
 }
 .section-description {
-	font-size: 15px;
+	font-family: "Karbon Thin";
+	font-size: 17px;
 	color: #a8b2ba;
 }
 .separator-arrow {
@@ -252,7 +253,7 @@ body {
 	list-style: none;
 	font-family: "Karbon Light";
 	color: #4f4d4d;
-	font-size: 18px;
+	font-size: 20px;
 }
 .terms a {
 	display: inline-block;
@@ -391,7 +392,8 @@ body {
 	margin-bottom: 1px;
 }
 .tech-col p {
-	font-size: 15px;
+	font-family: "Karbon Thin";
+	font-size: 17px;
 	color: #a8b2ba;
 }
 .subscribe {
@@ -478,7 +480,7 @@ body {
 	background-color: #121212;
 	position: absolute;
 	width: 100%;
-	height: 200px;
+	height: 175px;
 	z-index: 10;
 }
 .followus {
