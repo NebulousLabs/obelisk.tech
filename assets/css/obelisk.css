@@ -275,9 +275,10 @@ body {
 	padding-left: 60px;
 }
 .tech-specs > h3 {
-	font-family: "Karbon Light";
+	font-family: "Karbon Thin";
 	color: #fff;
 	width: 40%;
+	font-size: 30px;
 	margin-bottom: 40px;
 	margin-top: 6px;
 }
@@ -342,7 +343,7 @@ body {
 	}
 }
 .tech-col h3 {
-	font-family: "Karbon Light";
+	font-family: "Karbon Thin";
 	color: #fff;
 	font-size: 30px;
 
@@ -399,10 +400,11 @@ body {
 	right: 0;
 	z-index: 0;
 	margin-top: 0px;
+	margin-left: 5px;
 	width: 100%;
 }
 .subscribe-col {
-	text-align: center;
+	text-align: left;
 	position: relative;
 	right: 0;
 	background-position: right;
@@ -415,6 +417,7 @@ body {
 	margin-right: 10px;
 }
 .subscribe-header {
+	text-align: left;
 	font-size: 30px;
 	font-family: "Karbon Light";
 	color: #fff;
@@ -563,7 +566,7 @@ body {
 	height: 26px;
 }
 .order-form > p, input, select {
-	margin-left: 23px;
+	margin-left: 0px;
 }
 .order-form > select, .order-form > input, .statezip > input {
 	background: transparent;
