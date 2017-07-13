@@ -156,7 +156,7 @@ body {
 }
 .newdevelopment {
 	font-size: 18px;
-	color: #a8b2ba;
+	color: #8f989f;
 	margin-bottom: 30px;
 }
 .center-block {
@@ -203,7 +203,7 @@ body {
 }
 .section-description {
 	font-size: 16px;
-	color: #a8b2ba;
+	color: #8f989f;
 }
 .separator-arrow {
 	width: 15px;
@@ -378,14 +378,14 @@ body {
 	align-items: center;
 }
 .tech-specs-side > .spec > .name {
-	font-family: "Karbon Medium";
+	font-family: "Karbon Regular";
 	font-size: 18px;
 	color: #fff;
 }
 .tech-specs-side > .spec > span {
 	font-family: "Karbon Light";
 	font-size: 18px;
-	color: #fff;
+	color: #a8b2ba;
 	margin-left: 4px;
 }
 .spec {
@@ -393,7 +393,8 @@ body {
 }
 .tech-col p {
 	font-size: 16px;
-	color: #a8b2ba;
+	color: #8f989f;
+	max-width: 400px;
 }
 .subscribe {
 	position: relative;
@@ -904,6 +905,6 @@ body {
 	width: 0;
 }
 .order-bar {
-	margin-top: 6px;
+	margin-top: 15px;
 	margin-bottom: 6px;
 }
