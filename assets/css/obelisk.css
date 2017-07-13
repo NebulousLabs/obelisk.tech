@@ -152,10 +152,11 @@ body {
 	font-family: "Karbon Thin";
 	margin-top: 30px;
 	margin-bottom: 10px;
-	color: #bfbfbf;
+	color: #fff;
 }
 .newdevelopment {
-	color: #a8b2ba;
+	font-size: 18px;
+	color: #8f989f;
 	margin-bottom: 30px;
 }
 .center-block {
@@ -186,23 +187,23 @@ body {
 	display: inline-block;
 }
 .arrow {
-	margin-top: 45px;
+	margin-top: 50px;
 }
 .counter-row {
 	margin-top: 0px;
 	vertical-align: middle;
 }
 .meettheminer {
-	margin-top: 21rem;
+	margin-top: 10rem;
 }
 .section-header {
 	font-family: "Karbon Thin";
-	font-size: 30px;
+	font-size: 35px;
 	color: #fff;
 }
 .section-description {
-	font-size: 11px;
-	color: #fff;
+	font-size: 16px;
+	color: #8f989f;
 }
 .separator-arrow {
 	width: 15px;
@@ -249,7 +250,9 @@ body {
 }
 .terms {
 	list-style: none;
-	margin-top: 16px;
+	font-family: "Karbon Light";
+	color: #4f4d4d;
+	font-size: 20px;
 }
 .terms a {
 	display: inline-block;
@@ -272,9 +275,10 @@ body {
 	padding-left: 60px;
 }
 .tech-specs > h3 {
-	font-family: "Karbon Light";
+	font-family: "Karbon Thin";
 	color: #fff;
 	width: 40%;
+	font-size: 30px;
 	margin-bottom: 40px;
 	margin-top: 6px;
 }
@@ -339,16 +343,16 @@ body {
 	}
 }
 .tech-col h3 {
-	font-family: "Karbon Light";
+	font-family: "Karbon Thin";
 	color: #fff;
-	font-size: 35px;
-	width: 80px;
+	font-size: 30px;
+
 }
 .tech-col h4 {
 	font-family: "Karbon Thin";
 	color: #fff;
 	width: 350px;
-	font-size: 36px;
+	font-size: 30px;
 	margin-bottom: 15px;
 	margin-top: 50px;
 }
@@ -374,44 +378,48 @@ body {
 	align-items: center;
 }
 .tech-specs-side > .spec > .name {
-	font-family: "Karbon Medium";
+	font-family: "Karbon Regular";
 	font-size: 18px;
 	color: #fff;
 }
 .tech-specs-side > .spec > span {
 	font-family: "Karbon Light";
 	font-size: 18px;
-	color: #fff;
+	color: #a8b2ba;
 	margin-left: 4px;
 }
 .spec {
 	margin-bottom: 1px;
 }
 .tech-col p {
-	color: #777777;
+	font-size: 16px;
+	color: #8f989f;
+	max-width: 400px;
 }
 .subscribe {
 	position: relative;
 	right: 0;
 	z-index: 0;
 	margin-top: 0px;
+	margin-left: 5px;
 	width: 100%;
 }
 .subscribe-col {
-	text-align: center;
+	text-align: left;
 	position: relative;
 	right: 0;
 	background-position: right;
-	margin-left: 68px;
+	margin-left: auto;
 	padding-top: 52px;
-	padding-left: 45px;
+	padding-left: 0;
 	margin-left: auto;
 	margin-right: auto;
 	height: 300px;
-	margin-right: 0;
+	margin-right: 10px;
 }
 .subscribe-header {
-	font-size: 28px;
+	text-align: left;
+	font-size: 30px;
 	font-family: "Karbon Light";
 	color: #fff;
 	margin-bottom: 23px;
@@ -474,8 +482,11 @@ body {
 	background-color: #121212;
 	position: absolute;
 	width: 100%;
-	height: 140px;
+	height: 175px;
 	z-index: 10;
+}
+.footer > *:not(img) {
+	width: 180px;
 }
 .followus {
 	margin-bottom: 10px;
@@ -535,7 +546,8 @@ body {
 	position: absolute;
 	left: 595px;
 	top: -80px;
-	width: 80%;
+	width: 94%;
+	z-index: -1;
 }
 
 .order-section, .order-main {
@@ -558,7 +570,7 @@ body {
 	height: 26px;
 }
 .order-form > p, input, select {
-	margin-left: 23px;
+	margin-left: 0px;
 }
 .order-form > select, .order-form > input, .statezip > input {
 	background: transparent;
@@ -799,22 +811,24 @@ body {
 }
 .preorder-button {
 	display: inline-block;
-	width: 100px;
-	height: 30px;
+	width: 125px;
+	height: 40px;
 	margin-top: 5px;
 	margin-left: -20px;
-	border: 1px solid #666666;
-	border-radius: 15px;
+	border: 2px solid #666666;
+	border-radius: 100px;
 	text-align: center;
-	padding-top: 4px;
+	padding-top: 6px;
 	text-decoration: none;
-	font-size: 16px;
+	font-size: 20px;
 	color: red;
 }
 .ordercount-label {
-	font-family: "Karbon Bold";
+	font-family: "Karbon Medium";
 	font-size: 20px;
 	color: #666;
+	text-align: center;
+	margin-top: 5px
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
@@ -824,10 +838,11 @@ body {
 }
 .ordercount {
 	display: flex;
-	align-items: center;
 	flex-direction: column;
-	margin-top: 8px;
+	margin-top: 7px;
 	vertical-align: middle;
+	width: 300px;
+
 }
 .profit-calculator > * > h3 {
 	font-family: "Karbon Medium";
@@ -883,16 +898,16 @@ body {
 	height: 35px;
 }
 .order-bar {
-	width: 350px;
-	height: 2px;
-	background-color: #eee;
+	width: 300px;
+	height: 3px;
+	background-color: #666;
 }
 .order-bar-inner {
-	height: 2px;
+	height: 3px;
 	background-color: red;
 	width: 0;
 }
 .order-bar {
-	margin-top: 6px;
+	margin-top: 15px;
 	margin-bottom: 6px;
 }

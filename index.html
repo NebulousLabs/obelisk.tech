@@ -27,18 +27,23 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
 					<li id="about-button" class="nav-item active">
-						<a class="nav-link" href="#about">ABOUT</a>
-					</li>
-					<li id="info-button" class="nav-item">
-						<a class="nav-link" href="#info">INFO</a>
+						<a class="nav-link" href="#">ABOUT</a>
 					</li>
 					<li id="preorder-button" class="nav-item">
-						<a class="nav-link" href="/preorder">PRE-ORDER</a>
-					</li>
-					<li id="contact-button" class="nav-item">
-						<a class="nav-link" href="#contact">CONTACT</a>
+						<a class="nav-link" href="/preorder">PREORDER</a>
 					</li>
 				</ul>
+				<noscript><ul class="nav navbar-nav">
+					<li id="faqs-button" class="nav-item">
+						<a class="nav-link" href="http://support.obelisk.tech" target="_blank">FAQS</a>
+					</li>
+				</ul></noscript>
+				<ul class="nav navbar-nav">
+					<li id="faqs-button-javascript" class="nav-item">
+						<a class="nav-link" href="javascript:groove.widget('open')"><script>document.write("FAQS")</script></a>
+					</li>
+				</ul>
+
 			</div>
 		</div>
 	</nav>
@@ -49,34 +54,37 @@
 	<div id="about"></div>
 	<div class="container main">
 		<div class="row">
-			<div class="col-md-7">
+			<div class="col-md-6">
 				<img class="obelisk-header" src="assets/img/obelisk-text.png" />
 				<div class="separator"></div>
-				<h3 class="something-big"> INTRODUCING A 28NM FULL-CUSTOM ASIC MINER FOR THE SIA NETWORK </h3>
-				<p class="newdevelopment"> Pre-sale open for a limited time </p>
+				<h3 class="something-big"> INTRODUCING THE FIRST EVER ASIC MINER FOR THE SIA NETWORK </h3>
+				<p class="newdevelopment"> 100x more powerful than GPUs. The future of mining on Sia. Presale is open for a limited time with a cap of 4000 miners.</p>
 				<img class="smoke-effect" src="assets/img/hardware.gif" />
 			</div>
 		</div>
 		<div class="row counter-row">
-			<div class="col-md-1 col-xs-12">
+			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
 				<div class="red-separator"></div>
 				<div class="separator"></div>
 			</div>
-			<div class="col-md-1 col-xs-12">
-				<a href="/preorder" class="preorder-button">PRE-ORDER</a>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				<a href="/preorder" class="preorder-button">PREORDER</a>
 			</div>
-			<div class="col-md-4 col-xs-12">
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
 				<div class="ordercount">
-					<div class="order-bar"><div class="order-bar-inner"></div></div>
+					<div class="order-bar hidden-xs"><div class="order-bar-inner hidden-xs"></div></div>
 					<span class="ordercount-label"><span id="sold">1240</span> / <span id="sellcap">4000</span> sold</span>
 				</div>
 			</div>
 		</div>
+		<div class="arrow">
+			<img src="assets/img/arrow.png" width="40px"/>
+		</div>
 		<div id="info"></div>
 		<div class="row meettheminer">
 			<div class="col-md-4">
-				<h3 class="section-header"> MEET THE FIRST EVER DEDICATED SIACOIN MINER </h3>
-				<p class="section-description"> We are building a standalone Siacoin miner that uses superior ASIC chips. </p>
+				<h3 class="section-header"> EXCLUSIVE BENEFTS FOR PRESALE BUYERS  </h3>
+				<p class="section-description"> Each miner comes with a 6 week exclusive mining period and a $250 per-unit coupon for future Obelisk purchases. </p>
 				<div class="separator-arrow">
 					<img src="assets/img/sidearrow.png" />
 				</div>
@@ -87,15 +95,15 @@
 		<div class="row techdetails">
 			<div class="col-md-2"></div>
 			<div class="col-md-4 specsheet">
-				<div class="tech-specs">
-					<h3>MONTHLY PROFITS CALCULATOR</h3>
+					<div class="tech-specs">
+					<h3>PROFITS CALCULATOR</h3>
 					<div class="profit-calculator">
 						<div class="profit-input">
 							<h3> HOW MANY OBELISKS? </h3>
 							<input value="1" autocomplete="off" id="quantity-input"></input>
 						</div>
 						<div class="profit-input">
-							<h3> ELECTRICITY COST IN KWH </h3>
+							<h3> ELECTRICITY COST IN $/KWH </h3>
 							<input value="0.10" autocomplete="off" id="electricity-cost"></input>
 						</div>
 						<div class="profit-results">
@@ -124,7 +132,7 @@
 				<h3> TECH DETAILS </h3>
 				<div class="tech-specs-side">
 					<div class="spec">
-						<span class="name">CHIP:</span><span>FULL-CUSTOM 28NM ASIC</span>
+						<span class="name">CHIP:</span><span>FULL CUSTOM 28NM ASIC</span>
 					</div>
 					<div class="spec">
 						<span class="name">HASHRATE:</span><span>100+GH/S</span>
@@ -146,27 +154,27 @@
 					<div class="price">
 						<span class="price-dollar">$</span>2499
 					</div>
-					<a href="/preorder" class="preorder-button">PRE-ORDER</a>
+					<a href="/preorder" class="preorder-button">PREORDER</a>
 				</div>
-				<h4> 28NM FULL CUSTOM SIA MINING ASIC CHIP </h4>
-				<p> We've hired a US-based semiconductor company with a 20-year track record in ASIC design to develop the first ASIC for Siacoin mining. </p>
-				<a href="https://twitter.com/intent/tweet?text=Check out the first ever ASIC miner for Sia! Presale starting this Wednesday. Learn more at https://obelisk.tech."><img src="assets/img/tweetthis.png" /></a>
+			</br>
+				<h4> 28NM FULL CUSTOM ASIC </h4>
+				<p> We've hired a US-based semiconductor company with a 20-year track record in ASIC design to develop the first ASIC for Siacoin mining. The project is already underway. </p>
 			</div>
 		</div>
 		<div class="row strengthinnumbers">
 			<div class="col-md-5">
 				<div class="separator-verymuted"></div>
-				<h3 class="section-header"> THE FUTURE OF MINING ON SIA </h3>
-				<p class="section-description">ASICs are the future of Siacoin mining. Each ASIC chip is equal to 100 GPUs.</p>
+				<h3 class="section-header"> MORE POWER. MORE SECURITY. </h3>
+				<p class="section-description">ASICs mean increased Sia mining power and a far more secure Sia network. Read more on our <a href="https://blog.sia.tech/choosing-asics-for-sia-b318505b5b51" target="_blank" style= "color:red">blog</a>.</p>
 				<div class="separator-arrow">
 					<img src="assets/img/sidearrow.png" />
 				</div>
 				<div class="separator-muted"></div>
 			</div>
 		</div>
-		<div id="preorder"></div>
 		<div id="contact"></div>
 		<div class="row subscribe">
+			<div class="col-md-offset-3 col-sm-offset-2">
 			<form action="https://tech.us16.list-manage.com/subscribe/post?u=393b2698d17bdfe48ac0422ac&amp;id=87ef82fd96" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"  target="_blank" class="subscribe-col" novalidate>
 				<h3 class="subscribe-header"> SUBSCRIBE FOR UPDATES </h3>
 				<input name="FNAME" class="nameinput" type="text" class="form-control" placeholder="First Name"></input>
@@ -175,13 +183,13 @@
 				<input type="submit" value="Sign Up" name="subscribe" class="subscribebtn"></input>
 			</div>
 		</div>
+		</div>
 	</div>
 	<div class="footer">
 		<ul class="terms">
-			<li class="followus"><a href="https://twitter.com/ObeliskTechHQ">Follow us on Twitter</a></li>
-			<li><a href="assets/img/terms.pdf">Terms and Conditions</a></li>
-			<li><a href="assets/img/privacypolicy.pdf">Privacy</a></li>
-			<li><a href="http://support.obelisk.tech">FAQ</a></li>
+			<li><a href="https://twitter.com/ObeliskTechHQ" target="_blank">Twitter</a></li>
+			<li><a href="assets/img/terms.pdf" target="_blank">Terms</a></li>
+			<li><a href="assets/img/privacypolicy.pdf" target="_blank">Privacy</a></li>
 		</ul>
 		<img src="assets/img/footerlogo.png" />
 		<div class="poweredby">powered by Nebulous</div>
