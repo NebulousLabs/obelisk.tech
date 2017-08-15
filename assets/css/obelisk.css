@@ -911,3 +911,45 @@ body {
 	margin-top: 15px;
 	margin-bottom: 6px;
 }
+.aboutus-header {
+	font-family: "Karbon Thin";
+	color: #fff;
+	font-size: 44px;
+}
+.about-main {
+	margin-top: 40px;
+}
+.about-infocol {
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 30px;
+}
+.about-infocol > p {
+	color: #a7a7a7;
+	font-size: 22px;
+	line-height: 24px;
+	margin-bottom: 25px;
+	font-family: "Karbon Light";
+}
+.about-section > .separators {
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+.about-infocol > .contact-info {
+	margin-top: 55px;
+}
+.about-infocol > .contact-info > p {
+	padding: 0;
+	margin: 0;
+	color: #a7a7a7;
+	font-size: 22px;
+	line-height: 24px;
+	font-family: "Karbon Light";
+}
+.contact-info > .contact-link {
+	display: inline-block;
+	padding-top: 25px;
+	color: red;
+	text-decoration: none;
+	font-size: 22px;
+}
