@@ -129,9 +129,9 @@ class ShippingForm extends Component {
 			return countries[country].continent === 'EU'
 		}
 		const estimatedCost = () => {
-			let baseCost = 70 
+			let baseCost = 70
 			if (this.state.country === 'US' || isEurope(this.state.country) || this.state.country === 'CN') {
-				baseCost = 35 
+				baseCost = 35
 			}
 			let tax = 0
 			if (this.state.country === 'US' && this.state.region.toLowerCase() === 'ma') {
@@ -302,6 +302,7 @@ class ShippingForm extends Component {
 								<option value="KE">Kenya</option>
 								<option value="KI">Kiribati</option>
 								<option value="KS">Korea South</option>
+								<option value="KS">Kosovo, Republic Of</option>
 								<option value="KW">Kuwait</option>
 								<option value="KG">Kyrgyzstan</option>
 								<option value="LA">Laos</option>
@@ -706,4 +707,3 @@ class App extends Component {
 }
 
 export default App;
-
