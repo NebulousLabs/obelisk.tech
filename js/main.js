@@ -3,7 +3,7 @@ const expectedPowerConsumption = 500 // W
 const blockReward = 20000000 // SC per day on end of june 2018
 let obelisks = 1
 const sellCap = 4000
-const nSold = 1580
+const nSold = 1630
 let electricityprice = 0.10
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
