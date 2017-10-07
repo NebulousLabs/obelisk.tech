@@ -499,7 +499,7 @@ class Checkout extends Component {
 							<p> Payment is accepted in both Bitcoin or USD.</p>
 							<div className="estimated-costs">
 								<div className="estimated-cost">
-									<span className="money"><img src="assets/img/bitcoin-logo.png" /></span>
+									<span className="money"><img src="assets/img/bitcoin-logo.png" alt="bitcoin logo"/></span>
 									<p className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</p>
 								</div>
 								<p> or </p>
@@ -522,11 +522,11 @@ class Checkout extends Component {
 						<h3> Select a form of payment before proceeding to the next step. </h3>
 						<div className="payment-forms">
 							<div onClick={handleBitcoinClick} className={this.state.paymentMethod === 'bitcoin' ? 'payment-form selected' : 'payment-form'}>
-								<img src="assets/img/bitcoin-logo.png" />
+								<img src="assets/img/bitcoin-logo.png" alt="bitcoin logo" />
 								<p> Bitcoin </p>
 							</div>
 							<div onClick={handleTransferClick} className={this.state.paymentMethod === 'transfer' ? 'payment-form selected' : 'payment-form'}>
-								<img src="assets/img/dollar-logo.png" />
+								<img src="assets/img/dollar-logo.png" alt="dollar symbol"/>
 								<p> Bank Wire </p>
 							</div>
 						</div>
