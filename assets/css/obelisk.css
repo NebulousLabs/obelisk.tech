@@ -972,12 +972,12 @@ h4 {
 	color: #a7a7a7;
 	font-size: 18px;
 	font-family: "Karbon Light";
-	border: 1px solid #404040;
+	border: 1px solid #ba0f1a;
 	margin-bottom: 20px;
 }
 .colo-table th {
 	padding: 10px;
-	background: #404040;	
+	background: #ba0f1a;	
 }
 .colo-table td {
 	padding: 10px;
@@ -989,7 +989,7 @@ h4 {
 }
 
 .colo-table tr {
-	border-bottom: 1px solid #404040;
+	border-bottom: 1px solid #ba0f1a;
 }
 
 .colo-table-contact-link,
