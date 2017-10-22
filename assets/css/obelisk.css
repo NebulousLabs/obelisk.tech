@@ -976,11 +976,19 @@ h4 {
 	margin-bottom: 20px;
 }
 .colo-table th {
-	padding: 10px;
+  padding: 10px 10px 4px 10px;
 	background: #ba0f1a;	
 }
 .colo-table td {
 	padding: 10px;
+}
+
+.colo-table tr:last-child td {
+  padding: 10px 10px 4px 10px;
+}
+
+.colo-table tr:first-child th:last-child {
+  padding: 10px 10px 4px 30px;
 }
 
 .colo-table-header {
