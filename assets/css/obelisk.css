@@ -996,3 +996,21 @@ h4 {
 .colo-table-contact-link:hover  {
 	color: red;
 }
+
+.colo-table-contact-link:hover {
+  color: red;
+}
+
+.colo-table-last-row {
+  color: white;
+  background: #ba0f1a;
+}
+
+a.colo-table-link,
+a.colo-table-link:hover {
+  color: white;
+}
+
+a.colo-table-link:hover {
+  text-decoration-style: underline;
+}
