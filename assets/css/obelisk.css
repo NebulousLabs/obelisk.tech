@@ -1022,3 +1022,18 @@ a.colo-table-link:hover {
 a.colo-table-link:hover {
   text-decoration-style: underline;
 }
+
+.colo-features-list {
+  color: #a7a7a7;
+  font-size: 22px;
+  font-family: 'Karbon Light';
+}
+
+.colo-features-list li:last-child {
+  margin-bottom: 30px;
+}
+
+.pay-in-siacoin {
+  color: #00cba0;
+  font-family: 'Karbon Regular';
+}
