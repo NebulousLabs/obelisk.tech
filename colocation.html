@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="Viewport" content="width=device-width, initial-scale=1">
+    <title>Obelisk</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-101534159-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <link href="assets/css/obelisk.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="corners">
+        <img class="visible-md-block visible-lg-block right-corner-bg" src="assets/img/rightcorner.png" />
+        <img class="visible-md-block visible-lg-block left-corner-bg" src="assets/img/leftcornerbg.png" />
+    </div>
+    <nav class="navbar bg-faded">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li id="home-button" class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li id="about-button" class="nav-item">
+                        <a class="nav-link" href="about.html">ABOUT</a>
+                    </li>
+                    <li id="colocation-button" class="nav-item active">
+                        <a class="nav-link" href="#">COLOCATION</a>
+                    </li>
+                    <li id="preorder-button" class="nav-item">
+                        <a class="nav-link" href="/preorder">PREORDER</a>
+                    </li>
+                </ul>
+                <noscript>
+                    <ul class="nav navbar-nav">
+                        <li id="faqs-button" class="nav-item">
+                            <a class="nav-link" href="http://support.obelisk.tech" target="_blank">FAQS</a>
+                        </li>
+                    </ul>
+                </noscript>
+                <ul class="nav navbar-nav">
+                    <li id="faqs-button-javascript" class="nav-item">
+                        <a class="nav-link" href="javascript:groove.widget('open')">
+                            <script>
+                                document.write("FAQS")
+                            </script>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="framelines">
+        <div class="frameline-left"></div>
+        <div class="frameline-right"></div>
+    </div>
+    <div id="about"></div>
+    <div class="container about-main">
+        <div class="about-section row">
+            <div class="col-md-12">
+                <h3 class="aboutus-header">COLOCATION (COMING SOON)</h3>
+                <div class="separator"></div>
+            </div>
+            <div class="about-infocol col-lg-11 col-md-12" style="position: relative;">
+                <p>Obelisk represents a unique opportunity for those interested in the benefits that come from securing the
+                    Sia network through the power of ASICs. We realize though, that not everyone has a suitable space that
+                    can handle the electrical and cooling requirements of mining hardware, especially when operating more
+                    than one or two units.</p>
+
+                <h4>DATA CENTERS / COLOCATION</h4>
+                <p>The main alternative to home operation is to find a data center (also sometimes called a colocation facility
+                    or "colo") where your Obelisks can operate. It can be quite time consuming to find a good facility that
+                    understands the needs of miners, provides "remote hands" services if your Obelisks need attention, and
+                    offers the service at a good price.</p>
+
+                <h4>OBELISK RECOMMENDED COLOCATION</h4>
+                <p>We want owning and operating your Obelisks to be an easy, fun and rewarding experience, so we've done the
+                    work for you! Below you will find a list of recommended colocation packages at companies with facilities
+                    across North America and Europe.</p>
+
+                <p>One major benefit of selecting a recommended colocation package is that your Obelisks will be shipped directly
+                    to your chosen provider. They will receive your Obelisks, unpack them, connect them to power &amp; internet,
+                    then send you an email with information on how to login remotely so you can configure your mining pool
+                    and other settings and start mining.</p>
+
+                <h4>AVAILABLE PACKAGES</h4>
+                <p>The following colocation options have been negotiated for you by Obelisk. Soon, you will be able to login
+                    to the Obelisk website and choose a provider just by checking a box. Please note that this list is preliminary.
+                    We're actively working on adding more options worldwide.</p>
+                <p>If you know of a good facility to add to this list, please email us at
+                    <a class="colo-table-contact-link" href="mailto:hello@obelisk.tech">ken@obelisk.tech</a>.</p>
+
+                <p>Unless otherwise stated, the monthly fee for each colocation package includes the following:</p>
+                <ul class="colo-features-list">
+                    <li>All charges for space, power and network connection</li>
+                    <li>Basic "remote hands" service for reboots/resets</li>
+                    <li>Receiving, unpacking and connecting your Obelisk to power and internet</li>
+                    <li>For facilities with backup power, that is also included in the price</li>
+                </ul>
+                <table class="colo-table" width=100%>
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 15%;">
+                        <col style="width: 20%;">
+                        <col style="width: 35%;">
+                    </colgroup>
+                    <thead>
+                        <tr class="colo-table-header" style="width:120px;">
+                            <th>PROVIDER NAME</th>
+                            <th>LOCATION</th>
+                            <th>MONTHLY PRICE (USD)</th>
+                            <th>PACKAGE DETAILS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="colo-table-link" href="http://www.minery.tech" target="_blank">Minery.tech</a>
+                            </td>
+                            <td>Kearney, Missouri</td>
+                            <td>USD$??/Obelisk
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>No backup power</li>
+                                    <li>Highly secure facility</li>
+                                    <li>??? 24x7 staff</li>
+                                    <li>??? insurance</li>
+                                    <li>Accepts
+                                        <span class="pay-in-siacoin">Siacoin</span>, Bitcoin, Ether, USD</li>
+                                    <li>Remote access by ???</li>
+                                    <li>Taxes: ???%</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="colo-table-link" href="http://www.theminersunion.com" target="_blank">The Miners' Union</a>
+                            </td>
+                            <td>Hollywood, Florida</td>
+                            <td>USD$99.00/Obelisk</td>
+                            <td>
+                                <ul>
+                                    <li>Setup Fee: $75/Obelisk</li>
+                                    <li>No backup power</li>
+                                    <li>??? 24x7 staff</li>
+                                    <li>??? insurance</li>
+                                    <li>Accepts
+                                        <span class="pay-in-siacoin">Siacoin</span>, USD</li>
+                                    <li>Remote access by ??? IP, port forward, VPN</li>
+                                    <li>Taxes: ???%</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="colo-table-link" href="http://www.miningcolocation.com" target="_blank">Mining Colocation</a>
+                            </td>
+                            <td>Toronto, Canada</td>
+                            <td>USD$44.50/Obelisk
+                                <br>USD$40.00/Obelisk
+                                <br/>(30+ units)
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Up to 4 hours of backup power</li>
+                                    <li>Toronto, Quebec and Labrador locations</li>
+                                    <li>24x7 staff</li>
+                                    <li>Equipment insurance</li>
+                                    <li>Accepts Bitcoin, Ether, USD, CAD</li>
+                                    <li>Remote access by VPN</li>
+                                    <li>Terms: 12 month commitment with 3 months paid up-front, then billed every 3 months</li>
+                                    <li>Taxes: 7% GST</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="colo-table-link" href="http://www.syptec.com" target="_blank">Syptec Krypto</a>
+                            </td>
+                            <td>Salt Lake City, Utah</td>
+                            <td>USD$399/rack - 208V 30A
+                                <br/>(up to 12 Obelisks)
+                                <br/>$33.35/Obelisk
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>No backup power</li>
+                                    <li>Highly secure facility</li>
+                                    <li>24x7 staff</li>
+                                    <li>Customer responsible for insurance</li>
+                                    <li>Accepts Bitcoin, Ether, Litecoin and USD</li>
+                                    <li>Remote access by IP (VPN option for $29/month)</li>
+                                    <li>Taxes: 10.03%</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="colo-table-link" href="http://www.netcetera.co.uk" target="_blank">Netcetera</a>
+                            </td>
+                            <td>Isle of Man</td>
+                            <td>£49.99/Obelisk
+                                <br>£48.99/Obelisk (10-49 units)
+                                <br>£47.49/Obelisk (50+ units)
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Up to 14 days of backup power</li>
+                                    <li>Highly secure facility</li>
+                                    <li>24x7 staff</li>
+                                    <li>Up to £25 million insurance</li>
+                                    <li>7% discount for 1 year pre-payment</li>
+                                    <li>10% discount for 2 year pre-payment</li>
+                                    <li>Accepts Bitcoin, USD, GBP</li>
+                                    <li>Secure remote access by VPN</li>
+                                    <li>Taxes: VAT if applicable
+                                        <sup>1</sup>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="colo-table-link" href="http://www.hydro66.com" target="_blank">Hydro 66</a>
+                            </td>
+                            <td>Sweden</td>
+                            <td>USD$30.00/Obelisk
+                                <br/>(40+ units)</td>
+                            <td>
+                                <ul>
+                                    <li>For customers with at least 40 Obelisks</li>
+                                    <li>No backup power</li>
+                                    <li>Additional details coming soon</li>
+                                    <li>Accepts Bitcoin, USD, SEK</li>
+                                    <li>Taxes: VAT if applicable
+                                        <sup>1</sup>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td colspan=4 class="colo-table-last-row">
+                                <sup>1</sup> VAT is payable for EU customers at the customer's local rate - no tax for customers
+                                living outside the EU
+                            </td>
+                        </tr>
+                        <td colspan=4 class="colo-table-last-row">
+                            <b>NOTE:</b> The above information is believed to be correct, however, Obelisk Inc. is not responsible
+                            for any errors or omissions.
+                        </td>
+                    </tbody>
+                </table>
+
+                <h4>BUSINESS RELATIONSHIP</h4>
+                <p>It is important to note that, although we have negotiated colocation packages with the listed providers,
+                    the actual colocation agreement will be between you and the provider directly, not through Obelisk. Our
+                    role is simply to facilitate the connection between you and them.</p>
+            </div>
+            <div class="separators col-md-12">
+                <div class="red-separator"></div>
+                <div class="separator"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <ul class="terms">
+            <li>
+                <a href="https://twitter.com/ObeliskTechHQ" target="_blank">Twitter</a>
+            </li>
+            <li>
+                <a href="assets/img/terms.pdf" target="_blank">Terms</a>
+            </li>
+            <li>
+                <a href="assets/img/privacypolicy.pdf" target="_blank">Privacy</a>
+            </li>
+        </ul>
+        <img src="assets/img/footerlogo.png" />
+        <div class="poweredby">powered by Nebulous</div>
+    </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- BEGIN GROOVE WIDGET CODE -->
+
+    <script id="grv-widget">
+        /*<![CDATA[*/
+
+        window.groove = window.groove || {};
+        groove.widget = function () {
+            groove._widgetQueue.push(Array.prototype.slice.call(arguments));
+        };
+        groove._widgetQueue = [];
+
+        groove.widget('setWidgetId', '2fdbab7b-2ac2-1647-c992-13f31c156222');
+
+        ! function (g, r, v) {
+            var a, n, c = r.createElement("iframe");
+            (c.frameElement || c).style.cssText = "width: 0; height: 0; border: 0", c.title = "", c.role =
+                "presentation", c.src = "javascript:false", r.body.appendChild(c);
+            try {
+                a = c.contentWindow.document
+            } catch (i) {
+                n = r.domain;
+                var b = ["javascript:document.write('<he", "ad><scri", "pt>document.domain=", "\"", n, "\";</scri",
+                    "pt></he", "ad><bo", "dy></bo", "dy>')"
+                ];
+                c.src = b.join(""), a = c.contentWindow.document
+            }
+            var d = "https:" == r.location.protocol ? "https://" : "http://",
+                s = "http://groove-widget-production.s3.amazonaws.com".replace("http://", d);
+            c.className = "grv-widget-tag", a.open()._l = function () {
+                n && (this.domain = n);
+                var t = this.createElement("script");
+                t.type = "text/javascript", t.charset = "utf-8", t.async = !0, t.src = s + "/loader.js", this.body.appendChild(
+                    t)
+            };
+            var p = ["<bo", 'dy onload="document._l();">'];
+            a.write(p.join("")), a.close()
+        }(window, document)
+
+        /*]]>*/
+    </script>
+    <!-- END GROOVE WIDGET CODE -->
+</body>
+
+</html>
