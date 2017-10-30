@@ -19,15 +19,9 @@ const monthlyDCR1Revenue = obelisks => obelisks / sellCap * dcr1BlockReward * 30
 const monthlyElectricityCost = (obelisks, electricityPrice) =>
   obelisks * electricityPrice * (500 / 1000) * 24 * 30
 
-const updateElectricityCosts = () => {
+const updateProfitFields = () => {
   $('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityPrice)))
-}
-
-const updateSC1Rewards = () => {
   $('#sc1-mining-reward-result').text(Math.round(monthlySC1Revenue(obelisks)).toLocaleString())
-}
-
-const updateDCR1Rewards = () => {
   $('#dcr1-mining-reward-result').text(Math.round(monthlyDCR1Revenue(obelisks)).toLocaleString())
 }
 
@@ -36,9 +30,7 @@ $('#quantity-input').on('input', e => {
     return
   }
   obelisks = parseInt(e.target.value, 10)
-  updateElectricityCosts()
-  updateSC1Rewards()
-  updateDCR1Rewards()
+  updateProfitFields()
 })
 
 $('#electricity-cost').on('input', e => {
@@ -46,14 +38,10 @@ $('#electricity-cost').on('input', e => {
     return
   }
   electricityPrice = parseFloat(e.target.value)
-  updateElectricityCosts()
-  updateSC1Rewards()
-  updateDCR1Rewards()
+  updateProfitFields()
 })
 
-updateElectricityCosts()
-updateSC1Rewards()
-updateDCR1Rewards()
+updateProfitFields()
 
 $('.order-bar-sia-inner').css('width', nSiaSold / sellCap * 100 + '%')
 $('#siasold').text(nSiaSold)
