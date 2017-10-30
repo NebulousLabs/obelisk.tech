@@ -1,7 +1,7 @@
 const expectedHashrate = 100 // GH/s
 const expectedPowerConsumption = 500 // W
 const sc1BlockReward = 20000000 // SC per day on end of june 2018
-const dcr1BlockReward = 250 // SC per day on end of june 2018
+const dcr1BlockReward = 4000 // SC per day on end of june 2018
 let obelisks = 1
 let electricityPrice = 0.1
 
@@ -23,11 +23,11 @@ const updateElectricityCosts = () => {
   $('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityPrice)))
 }
 
-const updateSC1Costs = () => {
+const updateSC1Rewards = () => {
   $('#sc1-mining-reward-result').text(Math.round(monthlySC1Revenue(obelisks)).toLocaleString())
 }
 
-const updateDCR1Costs = () => {
+const updateDCR1Rewards = () => {
   $('#dcr1-mining-reward-result').text(Math.round(monthlyDCR1Revenue(obelisks)).toLocaleString())
 }
 
@@ -36,8 +36,8 @@ $('#quantity-input').on('input', e => {
     return
   }
   obelisks = parseInt(e.target.value, 10)
-  updateSC1Costs()
-  updateDCR1Costs()
+  updateSC1Rewards()
+  updateDCR1Rewards()
 })
 
 $('#electricity-cost').on('input', e => {
@@ -46,13 +46,13 @@ $('#electricity-cost').on('input', e => {
   }
   electricityPrice = parseFloat(e.target.value)
   updateElectricityCosts()
-  updateSC1Costs()
-  updateDCR1Costs()
+  updateSC1Rewards()
+  updateDCR1Rewards()
 })
 
 updateElectricityCosts()
-updateSC1Costs()
-updateDCR1Costs()
+updateSC1Rewards()
+updateDCR1Rewards()
 
 $('.order-bar-sia-inner').css('width', nSiaSold / sellCap * 100 + '%')
 $('#siasold').text(nSiaSold)
