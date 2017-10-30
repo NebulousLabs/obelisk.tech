@@ -1,23 +1,34 @@
 const expectedHashrate = 100 // GH/s
 const expectedPowerConsumption = 500 // W
-const blockReward = 20000000 // SC per day on end of june 2018
+const sc1BlockReward = 20000000 // SC per day on end of june 2018
+const dcr1BlockReward = 250 // SC per day on end of june 2018
 let obelisks = 1
+let electricityPrice = 0.1
+
 const sellCap = 4000
 const nSiaSold = 2010
 const nDecredSold = 200
-let electricityprice = 0.1
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
 // obelisks and the number of obelisks sold
-const monthlyRevenue = obelisks => obelisks / sellCap * blockReward * 30
+const monthlySC1Revenue = obelisks => obelisks / sellCap * sc1BlockReward * 30
+const monthlyDCR1Revenue = obelisks => obelisks / sellCap * dcr1BlockReward * 30
 
-// monthlyElectricityCost returns the estimated monthly electricty cost given
+// monthlyElectricityCost returns the estimated monthly electricity cost given
 // the cost of electricity per KW/H
-const monthlyElectricityCost = (obelisks, electricityprice) =>
-  obelisks * electricityprice * (500 / 1000) * 24 * 30
-const updateCosts = () => {
-  $('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityprice)))
-  $('#mining-reward-result').text(Math.round(monthlyRevenue(obelisks)).toLocaleString())
+const monthlyElectricityCost = (obelisks, electricityPrice) =>
+  obelisks * electricityPrice * (500 / 1000) * 24 * 30
+
+const updateElectricityCosts = () => {
+  $('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityPrice)))
+}
+
+const updateSC1Costs = () => {
+  $('#sc1-mining-reward-result').text(Math.round(monthlySC1Revenue(obelisks)).toLocaleString())
+}
+
+const updateDCR1Costs = () => {
+  $('#dcr1-mining-reward-result').text(Math.round(monthlyDCR1Revenue(obelisks)).toLocaleString())
 }
 
 $('#quantity-input').on('input', e => {
@@ -25,15 +36,23 @@ $('#quantity-input').on('input', e => {
     return
   }
   obelisks = parseInt(e.target.value, 10)
-  updateCosts()
+  updateSC1Costs()
+  updateDCR1Costs()
 })
+
 $('#electricity-cost').on('input', e => {
   if (isNaN(parseFloat(e.target.value))) {
     return
   }
-  electricityprice = parseFloat(e.target.value)
-  updateCosts()
+  electricityPrice = parseFloat(e.target.value)
+  updateElectricityCosts()
+  updateSC1Costs()
+  updateDCR1Costs()
 })
+
+updateElectricityCosts()
+updateSC1Costs()
+updateDCR1Costs()
 
 $('.order-bar-sia-inner').css('width', nSiaSold / sellCap * 100 + '%')
 $('#siasold').text(nSiaSold)
