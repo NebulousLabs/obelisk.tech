@@ -904,12 +904,12 @@ body {
 }
 .order-bar-sia-inner {
 	height: 3px;
-	background-color: #00CBA0;
+	background-color: red;
 	width: 0;
 }
 .order-bar-decred-inner {
 	height: 3px;
-	background-color: #2971FF;
+	background-color: red;
 	width: 0;
 }
 .order-bar {
