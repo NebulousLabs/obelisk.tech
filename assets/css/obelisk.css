@@ -1038,9 +1038,13 @@ a.colo-table-link:hover {
 }
 
 .sia-color {
-  color: #00cba0;
+  color: #00CBA0;
 }
 
 .decred-color {
   color: #2971FF;
+}
+
+.red-color {
+  color: red;
 }
