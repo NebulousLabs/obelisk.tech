@@ -2,7 +2,7 @@
   "name": "obelisk-preorder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://obelisk.tech/preorder",
+  "homepage": "https://obelisk.tech/preorder-sc1",
   "dependencies": {
     "countries-list": "^1.4.1",
     "email-validator": "^1.0.7",

@@ -1,0 +1,946 @@
+@font-face {
+	font-family: "Karbon Regular";
+	src: url("../fonts/karbonregular.otf");
+}
+@font-face {
+	font-family: "Karbon Thin";
+	src: url("../fonts/karbonthin.otf");
+}
+@font-face {
+	font-family: "Karbon Light";
+	src: url("../fonts/karbonlight.otf");
+}
+
+nav {
+	position: sticky !important;
+	top: 0;
+	height: 106px !important;
+	z-index: 1;
+	background-color: #000;
+	box-shadow: 0 5px 40px 10px #000;
+}
+
+body {
+	background-image: url("../img/landingbg.png");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-color: #000;
+	font-family: "Karbon Regular";
+	overflow-x: hidden;
+	position: relative;
+	width: 100%;
+}
+
+.nav > li > a {
+	color: #fff;
+}
+.nav > li > a:focus, .nav > li > a:hover {
+	background-color: initial !important;
+}
+
+.nav {
+	margin-top: 42px;
+}
+
+.main {
+	margin-top: 140px;
+}
+
+.nav-item {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.nav-link {
+	font-size: 16px;
+	padding-top: 2px;
+}
+
+.disabled-link {
+	pointer-events: none !important;
+}
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.disabled :hover {
+	border-bottom: none !important;
+	cursor: default !important;
+}
+
+.disabled :hover{
+	border-bottom: none !important;
+	cursor: default !important;
+}
+
+.nav-item.active > a {
+	margin-bottom: -3px;
+	border-bottom: 3px solid #e4001b !important;
+	padding-bottom: 10px;
+	text-decoration: none;
+	background-color: #000;
+	color: #ffffff;
+}
+
+.right-corner-bg {
+	position: absolute;
+	right: 0;
+	top: 0;
+	float: right;
+	z-index: 10;
+}
+.left-corner-bg {
+	position:  absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+.fade-bg {
+	position: absolute;
+	top: 0;
+	z-index: -5;
+}
+.framelines {
+	width: 1576px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.corners {
+	z-index: 5;
+	position: sticky;
+	top: 0;
+	height: 0;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	pointer-events: none;
+}
+
+.obelisk-header {
+	color: #e61b25;
+}
+
+.separator {
+	margin-left: 4px;
+	height: 28px;
+	width: 15px;
+	border-bottom: 3px solid #696969;
+}
+
+.red-separator {
+	margin-left: 4px;
+	height: 10px;
+	width: 15px;
+	border-bottom: 3px solid #de0035;
+}
+
+.something-big {
+	font-size: 40px;
+	font-family: "Karbon Thin";
+	margin-top: 30px;
+	margin-bottom: 10px;
+	color: #bfbfbf;
+}
+.newdevelopment {
+	color: #a8b2ba;
+	margin-bottom: 3px;
+}
+.center-block {
+	margin-bottom: 30px;
+}
+.counter-item {
+	display: inline-block;
+	margin-right: 25px;
+	text-align: center;
+}
+.counter-label {
+	margin-bottom: 5px;
+}
+.counter-number {
+	display: inline-block;
+	font-family: "Karbon Light";
+	font-size: 48px;
+	color: #fff;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 50px;
+	padding-top: 7px;
+	border-radius: 3px;
+	background-image: url("../img/counterbg.png");
+	background-position: -40px 143px;
+}
+.counter {
+	display: inline-block;
+}
+.arrow {
+	margin-top: 45px;
+}
+.counter-row {
+	margin-top: 0px;
+	vertical-align: middle;
+}
+.meettheminer {
+	margin-top: 21rem;
+}
+.section-header {
+	font-family: "Karbon Thin";
+	font-size: 30px;
+	color: #fff;
+}
+.section-description {
+	font-size: 11px;
+	color: #fff;
+}
+.separator-arrow {
+	width: 15px;
+	height: 20px;
+	border-bottom: 2px solid #fff;
+	margin-left: 4px;
+}
+.separator-muted {
+	width: 15px;
+	height: 25px;
+	border-bottom: 2px solid #666666;
+	margin-left: 4px;
+}
+.separator-verymuted {
+	width: 15px;
+	height: 15px;
+	margin-bottom: 35px;
+	border-bottom: 2px solid #333333;
+	margin-left: 4px;
+}
+.separator-arrow img {
+	display: inline-block;
+	margin-left: 70px;
+	width: 25px;
+	margin-top: 10px;
+}
+.tweetthis {
+	margin-top: 11px;
+}
+.strengthinnumbers {
+	margin-top: 80px;
+	background-image: url("../img/gpucomparison.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: left 35px;
+	height: 695px;
+}
+@media (max-width: 1000px) {
+	.strengthinnumbers {
+		margin-top: 30px;
+		background-position: center 150px;
+		height: 450px;
+	}
+}
+.terms {
+	list-style: none;
+	margin-top: 16px;
+}
+.terms a {
+	display: inline-block;
+	color: #444;
+}
+.techdetails {
+	margin-top: 25px;
+	margin-bottom: 20px;
+}
+.tech-specs {
+	background-image: url("../img/techspecsbg.png");
+	width: 315px;
+	height: 690px;
+	padding-top: 20px;
+	padding-left: 40px;
+}
+.tech-specs h3 {
+	font-family: "Karbon Light";
+	color: #fff;
+	width: 80%;
+}
+.specs {
+	margin-top: 40px;
+	width: 190px;
+}
+.spec {
+	margin-bottom: 10px;
+}
+.spec div {
+	display: inline-block;
+}
+.spec .label {
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
+}
+.spec .amount {
+	font-size: 18px;
+	color: #fff;
+	padding-left: 3px;
+}
+.price {
+	margin-top: 50px;
+}
+.price div {
+	display: inline-block;
+}
+.price .label {
+	font-size: 25px;
+	color: #fff;
+	padding: 0;
+	margin: 0;
+}
+.price .amount {
+	font-size: 25px;
+	color: #fff;
+	font-family: "Karbon Light";
+	margin-left: 10px;
+}
+.tech-specs .footnote {
+	position: absolute;
+	bottom: 30px;
+	width: 210px;
+	color: #be808e;
+}
+.chip-col {
+	background-image: url("../img/chip.png");
+	background-position: -55px 0;
+	height: 600px;
+	padding-top: 420px;
+}
+@media (min-width: 1200px) {
+	.chip-col {
+		margin-left: -27px;
+	}
+}
+@media (max-width: 1200px) {
+	.chip-col {
+		margin-left: 5px;
+		background-position: center top;
+		padding-top: 300px;
+		margin-top: 60px;
+		margin-left: 5px;
+		height: 550px;
+	}
+	.specsheet {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+.chip-col h3 {
+	font-family: "Karbon Light";
+	color: #8e8e8e;
+	font-size: 35px;
+	width: 400px;
+}
+.chip-col p {
+	color: #777777;
+}
+.subscribe {
+	position: relative;
+	right: 0;
+	z-index: 0;
+	margin-top: 0px;
+	width: 100%;
+}
+.subscribe-col {
+	text-align: center;
+	position: relative;
+	right: 0;
+	background-position: right;
+	margin-left: 68px;
+	padding-top: 52px;
+	padding-left: 45px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 300px;
+	margin-right: 0;
+}
+.subscribe-header {
+	font-size: 28px;
+	font-family: "Karbon Light";
+	color: #fff;
+	margin-bottom: 23px;
+}
+.subscribe-col input {
+	margin-right: 3px;
+	height: 45px;
+}
+@media (max-width: 742px) {
+	.subscribe-col {
+		height: 400px;
+	}
+	.subscribe-col input {
+		width: 100%;
+		margin-top: 5px;
+	}
+	.subscribebtn {
+		margin: 0 !important;
+		padding: 0 !important;
+		width: 80% !important;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 10px !important;
+	}
+}
+
+.nameinput, .phoneinput {
+	width: 150px;
+}
+.emailinput {
+	width: 220px;
+}
+.subscribebtn {
+	background-color: #000;
+	margin-left: 4px;
+	margin-top: 1px;
+	border: 2px solid #fff;
+	border-radius: 1px;
+	display: inline-block;
+	vertical-align: middle;
+	color: #fff;
+	text-align: center;
+	box-sizing: content-box;
+	width: 115px;
+	padding: 0;
+	height:  41px;
+}
+.subscribebtn:hover {
+	background-color: #111 !important;
+	border: 2px solid #eee !important;
+}
+.footer {
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	border-top: 1px solid #ff0000;
+	background-color: #121212;
+	position: absolute;
+	width: 100%;
+	height: 140px;
+	z-index: 10;
+}
+.followus {
+	margin-bottom: 10px;
+}
+.followus img {
+	height: 20px;
+	margin-bottom: 2px;
+}
+.followus, .poweredby {
+	font-family: "Karbon Light";
+	color: #4f4d4d;
+	font-size: 20px;
+}
+.frameline-left, .frameline-right {
+	background-image: url("../img/frameline-left.png");
+	z-index: 2;
+	background-repeat: no-repeat;
+	background-size: 100% 69%;
+	width: 3px;
+	height: 1000px;
+	position: fixed;
+	top: 57px;
+}
+.frameline-left {
+	left: 82px;
+	z-index: 2;
+}
+.frameline-right {
+	right: 82px;
+}
+@media (max-width: 1370px) {
+	.frameline-left, .frameline-right {
+		display: none;
+	}
+}
+@media (max-width: 1000px) {
+	.smoke-effect {
+		position: absolute;
+		left: 10px;
+		top: 10px;
+	}
+}
+@media (max-width: 768px) {
+	.counter-number {
+		font-size: 35px;
+		width: 30px;
+		background-position: -40px 134px;
+	}
+	.counter-item {
+		margin-right: 10px;
+	}
+	nav {
+		display: none;
+	}
+}
+.smoke-effect {
+	position: absolute;
+	left: 595px;
+	top: -80px;
+	width: 80%;
+}
+
+.order-section, .order-main {
+	margin-bottom: 140px;
+}
+.order-form > h3 {
+	color: #fff;
+	font-family: "Karbon Thin";
+	font-size: 35px;
+	margin-top: 43px;
+}
+.order-section > .separator {
+	border-bottom: 2px solid #696969;
+	height: 26px;
+}
+.order-form > p, input, select {
+	margin-left: 23px;
+}
+.order-form > select, .order-form > input, .statezip > input {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #3e3e3e;
+	margin-bottom: 15px;
+	display: inline-block;
+	padding-left: 2px;
+	height: 35px;
+	font-size: 20px;
+	font-family: "Karbon Light";
+	color: #9f9f9f;
+}
+.order-form > select {
+	padding-left: 0;
+	width: 100%;
+}
+.order-form > input:focus, .statezip > input:focus {
+	border-bottom: 1px solid #8e8e8e;
+	box-shadow: none;
+}
+.order-form > .note {
+	margin-top: 20px;
+	font-family: "Karbon Light";
+	color: #7e7e7e;
+}
+.hardware-shot {
+	padding-top: 100px;
+}
+.quantity-section, .cost-section {
+	padding-top: 100px;
+}
+@media (max-width: 992px) {
+	.quantity-section{
+		padding-top: 0;
+	}
+}
+.quantity-section > h3 {
+	font-family: "Karbon Light";
+	color: #9b9ea2;
+	font-size: 22px;
+}
+.quantity-form {
+	display: flex;
+	align-items: center;
+	margin-top: 35px;
+	margin-left: 35px;
+}
+.quantity-form > input {
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 90px;
+	height: 55px;
+	margin-top: 4px;
+	vertical-align: middle;
+	background: transparent;
+	border: 2px solid  #343434;
+	font-family: "Karbon Thin";
+	font-size: 48px;
+	text-align: center;
+	padding-top: 10px;
+	color: #fff;
+}
+.quantity-form > button {
+	width: 40px;
+	height: 40px;
+	border: none;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+	background-color: transparent;
+	display: inline-block;
+}
+.quantity-form > .minus-button {
+	background-image: url("../img/minus-button.png");
+}
+.quantity-form > .plus-button {
+	background-image: url("../img/plus-button.png");
+}
+.next-button {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	right: -182px;
+	top: 40px;
+	background-image: url("../img/nextbutton.png");
+	background-position: center;
+	background-size: 100% 100%;
+	width: 40px;
+	height: 40px;
+}
+.statezip > input {
+	display: inline-block;
+	width: 49.5%;
+	padding: 0;
+	margin: 0;
+}
+.statezip {
+	width: 100%;
+	margin-left: 25px;
+	margin-bottom: 15px;
+}
+.order-form > select {
+	appearance: none;
+}
+.back-button {
+	cursor: pointer;
+	background-image: url("../img/backbutton.png");
+	background-position: center;
+	background-size: 100% 100%;
+	width: 40px;
+	height: 40px;
+	position: relative;
+	top: 28px;
+	left: 90px;
+}
+.estimated-cost > .amount {
+	color: #fff;
+}
+.estimated-cost > * {
+	font-family: "Karbon Thin";
+	font-size: 50px;
+	display: inline-block;
+}
+.estimated-cost > .money {
+	color: #7b7b7b;
+}
+.cost-section > .note {
+	font-family: "Karbon Light";
+	color: #7e7e7e;
+	font-size: 18px;
+	margin-top: -25px;
+}
+.cost-section > h3 {
+	font-family: "Karbon Light";
+	color: #9b9ea2;
+	margin-bottom: 15px;
+}
+.cost-section > .next-button {
+	top: 68px;
+}
+.checkout > p {
+	color: #a0a3a9;
+	font-family: "Karbon Light";
+	font-size: 18px;
+}
+.checkout > h3 {
+	margin-bottom: 20px;
+}
+.checkout > .note {
+	margin-top: 0px;
+	font-size: 16px;
+}
+.checkout > .estimated-cost {
+	margin-left: 20px;
+	margin-top: -18px;
+}
+.final-cost-section {
+	padding-top: 60px;
+}
+.final-cost-section > h3 {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	margin-bottom: 0;
+}
+.estimate {
+	width: 100%;
+	margin-bottom: -33px;
+}
+.estimate > * {
+	font-size: 68px;
+	font-family: "Karbon Thin";
+	display: inline-block;
+}
+.estimate > .amount-label {
+	color: #808080;
+}
+.estimate > .amount {
+	padding-left: 10px;
+	color: #fff;
+}
+.terms-check > * {
+	margin-top: 20px;
+	display: inline-block;
+}
+.terms-check > p {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	margin-right: 15px;
+	font-size: 18px;
+	width: 60%;
+	margin-top: 0px;
+}
+.terms-check > input {
+	position: relative;
+	top: -25px;
+}
+.final-cost-section > .next-button {
+	top: 0px;
+}
+.payment > p {
+	color: #a0a3a9;
+	font-family: "Karbon Light";
+	margin-left: 30px;
+	margin-top: 26px;
+	font-size: 20px;
+}
+.payment-options {
+	width: 100%;
+	margin-left: -15px;
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+.payment-options > .payment-option {
+	display: inline-block;
+	width: 49%;
+	text-align: center;
+	cursor: pointer;
+}
+.payment-option > p {
+	color: #fff;
+	font-family: "Karbon Light";
+	font-size: 16px;
+	margin-top: 20px;
+}
+.payment-option > img {
+	transform: scale(0.75);
+}
+.payment-selection-section {
+	padding-top: 100px;
+}
+.payment-selection-section > p {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	font-size: 18px;
+}
+.payment-selection-section > .next-button {
+	top: 30px;
+}
+.input-error {
+	color: red;
+}
+.qrcode {
+	align-self: center;
+	margin-left: 30px;
+}
+.payaddr > p > .price {
+	margin-top: 0;
+	font-size: 18px;
+}
+.payinfo {
+	display: flex;
+	margin-bottom: 25px;
+}
+.payaddr {
+	margin-left: 28px;
+}
+.payaddr > p {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+}
+.payaddr > .addr {
+}
+.contact-links {
+	margin-top: 100px;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+}
+.contact-links:hover {
+	text-decoration: none;
+}
+.contact-links > img {
+	width: 40px;
+}
+.contact-links > p {
+	color: #b30000;
+	font-size: 18px;
+	margin-top: 12px;
+	margin-left: 8px;
+}
+.confirmation-number {
+	margin-top: 3px;
+}
+.confirmation-thanks {
+	color: #fff;
+	font-family: "Karbon Light";
+	font-size: 20px;
+	margin-top: 20px;
+}
+.confirmation-info {
+}
+.confirmation-info > h2 {
+	font-size: 18px;
+	color: #fff;
+}
+.confirmation-info > p {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	font-size: 18px;
+}
+.keep-safe {
+	font-family: "Karbon Light";
+	color: #a0a3a9;
+	font-size: 16px;
+}
+.refund-addr-label {
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+.refund-address {
+	margin-top: 6px;
+	display: block;
+	border: 2px solid #4d4d4d;
+	background: transparent;
+	height: 35px;
+	width: 300px;
+	margin-left: 2px;
+	color: #fff;
+}
+.quantity-price {
+	font-size: 30px;
+	color: #770910;
+	margin-left: 95px;
+	margin-top: 10px;
+}
+.promotional-emails {
+	padding-left: 35px;
+	padding-bottom: 25px;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	width: 80%;
+}
+.promotional-emails > input {
+	margin-bottom: 15px;
+}
+.promotional-emails > p {
+	font-size: 18px;
+	font-family: "Karbon Light";
+	color: #a8b2ba;
+}
+.need-help {
+	display: inline-block;
+	float: right;
+	position: relative;
+	z-index: 11;
+	font-size: 20px;
+	color: #9b9ea2;
+	margin-top: 15px;
+}
+.need-help > a, p {
+	display: inline-block;
+}
+.need-help > .separator-muted {
+	height: 8px;
+	margin-left: 160px;
+}
+.need-help > p {
+	margin-right: 8px;
+}
+.need-help > a:hover {
+	text-decoration: none;
+}
+.need-help > a {
+	text-decoration: none;
+	color: red;
+}
+.estimated-costs {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 90%;
+	margin-left: 19px;
+	flex-direction: column;
+}
+.estimated-costs > p {
+	font-size: 18px;
+}
+.money > img {
+	padding-bottom: 10px;
+}
+.money {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.payment-forms {
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+.payment-form > img {
+	align-self: center;
+	padding-bottom: 15px;
+	margin: 0;
+	padding: 0;
+	width: 31px;
+	height: 41px;
+}
+.payment-form {
+	cursor: pointer;
+	height: 120px;
+	width: 90px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.payment-form.selected {
+	background-color: #111111;
+	border: 1px solid red;
+	border-radius: 5px;
+}
+.terms-check > p > a {
+	color: red;
+}
+.payment-form > p {
+	margin-top: 18px;
+	padding-top: 12px;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-top: 1px solid #fff;
+	font-size: 18px;
+	font-family: "Karbon Light";
+	color: #fff;
+}
+.transfer-instructions {
+	margin-left: 30px;
+	font-size: 18px;
+	color: #a0a3a9;
+}
+.transfer-instructions > a {
+	color: red;
+}
+.shipping-note {
+	color: grey;
+	margin-top: 25px;
+	margin-left: 10px;
+}

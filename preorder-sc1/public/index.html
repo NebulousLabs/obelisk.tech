@@ -5,8 +5,12 @@
 	<meta charset="utf-8">
 	<meta name="Viewport" content="width=device-width, initial-scale=1">
 	<title>Obelisk</title>
-	<link rel="icon" type="image/png" href="assets/img/favicon.png" />
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+	<link rel="icon" type="image/png" href="%PUBLIC_URL%/assets/img/favicon.png" />
+	<link href="%PUBLIC_URL%/assets/css/bootstrap.min.css" rel="stylesheet">
 	<script>
 		(function (i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;
@@ -23,7 +27,7 @@
 		ga('create', 'UA-101534159-1', 'auto');
 		ga('send', 'pageview');
 	</script>
-	<link href="assets/css/obelisk.css" rel="stylesheet">
+	<link href="%PUBLIC_URL%/assets/css/obelisk.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,13 +40,13 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
 					<li id="home-button" class="nav-item">
-						<a class="nav-link" href="index.html">HOME</a>
+						<a class="nav-link" href="/index.html">HOME</a>
 					</li>
 					<li id="about-button" class="nav-item">
-						<a class="nav-link" href="about.html">ABOUT</a>
+						<a class="nav-link" href="/about.html">ABOUT</a>
 					</li>
 					<li id="colocation-button" class="nav-item">
-						<a class="nav-link" href="colocation.html">COLOCATION</a>
+						<a class="nav-link" href="/colocation.html">COLOCATION</a>
 					</li>
 					<li id="preorder-button" class="nav-item active">
 						<a class="nav-link" href="#">PREORDER</a>
@@ -64,7 +68,6 @@
 						</a>
 					</li>
 				</ul>
-
 			</div>
 		</div>
 	</nav>
@@ -72,39 +75,10 @@
 		<div class="frameline-left"></div>
 		<div class="frameline-right"></div>
 	</div>
-	<div class="container main">
-		<div class="row">
-			<div class="col-md-6">
-				<img class="obelisk-header" src="assets/img/obelisk-text.png" />
-				<div class="separator"></div>
-				<h3 class="something-big">CHOOSE YOUR OBELISK</h3>
-				<a href="preorder-sc1" class="newdevelopment" style="text-decoration:underline;">Preorder Obelisk SC1 for Siacoin</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="preorder-dcr1" class="newdevelopment" style="text-decoration:underline;">Preorder Obelisk DCR1 for Decred</a>
-				<div style="height:400px"></div>
-				<img class="smoke-effect" src="assets/img/hardware2.png" />
-			</div>
-		</div>
-	</div>
-
-	<div class="footer">
-		<ul class="terms">
-			<li>
-				<a href="https://twitter.com/ObeliskTechHQ" target="_blank">Twitter</a>
-			</li>
-			<li>
-				<a href="assets/img/terms.pdf" target="_blank">Terms</a>
-			</li>
-			<li>
-				<a href="assets/img/privacypolicy.pdf" target="_blank">Privacy</a>
-			</li>
-		</ul>
-		<img src="assets/img/footerlogo.png" />
-		<div class="poweredby">powered by Nebulous</div>
-	</div>
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
+	<noscript>
+		You need to enable JavaScript to run this app.
+	</noscript>
+	<div id="root"></div>
 	<!-- BEGIN GROOVE WIDGET CODE -->
 
 	<script id="grv-widget">

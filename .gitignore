@@ -1,2 +1,4 @@
-preorder/node_modules
 node_modules
+release
+preorder-sc1/build
+preorder-dcr1/build

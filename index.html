@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="Viewport" content="width=device-width, initial-scale=1">
-		<title>Obelisk</title>
-		<link rel="icon" type="image/png" href="assets/img/favicon.png" />
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="Viewport" content="width=device-width, initial-scale=1">
+	<title>Obelisk</title>
+	<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-101534159-1', 'auto');
-  ga('send', 'pageview');
+		ga('create', 'UA-101534159-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<link href="assets/css/obelisk.css" rel="stylesheet">
+</head>
 
-</script>	<link href="assets/css/obelisk.css" rel="stylesheet">
-	</head>
-	<body>
+<body>
 	<div class="corners">
 		<img class="visible-md-block visible-lg-block right-corner-bg" src="assets/img/rightcorner.png" />
 		<img class="visible-md-block visible-lg-block left-corner-bg" src="assets/img/leftcornerbg.png" />
@@ -27,7 +36,7 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
 					<li id="home-button" class="nav-item active">
-						<a class="nav-link" href="#">HOME</a>
+						<a class="nav-link" href="index.html">HOME</a>
 					</li>
 					<li id="about-button" class="nav-item">
 						<a class="nav-link" href="about.html">ABOUT</a>
@@ -36,17 +45,23 @@
 						<a class="nav-link" href="colocation.html">COLOCATION</a>
 					</li>
 					<li id="preorder-button" class="nav-item">
-						<a class="nav-link" href="/preorder">PREORDER</a>
+						<a class="nav-link" href="preorder-sc1">PREORDER</a>
 					</li>
 				</ul>
-				<noscript><ul class="nav navbar-nav">
-					<li id="faqs-button" class="nav-item">
-						<a class="nav-link" href="http://support.obelisk.tech" target="_blank">FAQS</a>
-					</li>
-				</ul></noscript>
+				<noscript>
+					<ul class="nav navbar-nav">
+						<li id="faqs-button" class="nav-item">
+							<a class="nav-link" href="http://support.obelisk.tech" target="_blank">FAQS</a>
+						</li>
+					</ul>
+				</noscript>
 				<ul class="nav navbar-nav">
 					<li id="faqs-button-javascript" class="nav-item">
-						<a class="nav-link" href="javascript:groove.widget('open')"><script>document.write("FAQS")</script></a>
+						<a class="nav-link" href="javascript:groove.widget('open')">
+							<script>
+								document.write("FAQS")
+							</script>
+						</a>
 					</li>
 				</ul>
 
@@ -60,10 +75,18 @@
 	<div class="container main">
 		<div class="row">
 			<div class="col-md-6">
+				<a href="preorder-sc1" class="newdevelopment" style="text-decoration:underline;">Obelisk SC1</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="preorder-dcr1" class="newdevelopment" style="text-decoration:underline;">Obelisk DCR1</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
 				<img class="obelisk-header" src="assets/img/obelisk-text.png" />
 				<div class="separator"></div>
 				<h3 class="something-big"> MEET THE FIRST ASIC MINER FOR SIA'S DECENTRALIZED CLOUD</h3>
-				<p class="newdevelopment"> Mine Siacoin with the Obelisk SC1. Presale is open until late November with a cap of 4000 units. Delivery by June 2018. Made by the Sia team.</p>
+				<p class="newdevelopment"> Mine Siacoin with the Obelisk SC1. Presale is open until late November with a cap of 4000 units. Delivery by June 2018.
+					Made by the Sia team.</p>
 				<img class="smoke-effect" src="assets/img/hardware2.png" />
 			</div>
 		</div>
@@ -73,22 +96,26 @@
 				<div class="separator"></div>
 			</div>
 			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-				<a href="/preorder" class="preorder-button">PREORDER</a>
+				<a href="preorder-sc1" class="preorder-button">PREORDER</a>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
 				<div class="ordercount">
-					<div class="order-bar hidden-xs"><div class="order-bar-inner hidden-xs"></div></div>
-					<span class="ordercount-label"><span id="sold">2010</span> sold / <span id="sellcap">4000</span> cap</span>
+					<div class="order-bar hidden-xs">
+						<div class="order-bar-inner hidden-xs"></div>
+					</div>
+					<span class="ordercount-label">
+						<span id="sold">2010</span> sold /
+						<span id="sellcap">4000</span> cap</span>
 				</div>
 			</div>
 		</div>
 		<div class="arrow">
-			<img src="assets/img/arrow.png" width="40px"/>
+			<img src="assets/img/arrow.png" width="40px" />
 		</div>
 		<div id="info"></div>
 		<div class="row meettheminer">
 			<div class="col-md-4">
-				<h3 class="section-header"> EXCLUSIVE BENEFITS FOR PRESALE BUYERS  </h3>
+				<h3 class="section-header"> EXCLUSIVE BENEFITS FOR PRESALE BUYERS </h3>
 				<p class="section-description"> Each miner comes with a 6 week exclusive mining period and a $250 per-unit coupon for future Obelisk purchases. </p>
 				<div class="separator-arrow">
 					<img src="assets/img/sidearrow.png" />
@@ -100,7 +127,7 @@
 		<div class="row techdetails">
 			<div class="col-md-2"></div>
 			<div class="col-md-4 specsheet">
-					<div class="tech-specs">
+				<div class="tech-specs">
 					<h3>PROFITS CALCULATOR</h3>
 					<div class="profit-calculator">
 						<div class="profit-input">
@@ -124,53 +151,61 @@
 								<div class="result">
 									<p class="amount" id="mining-reward-result">150,000</p>
 									<p class="unit">SC</p>
+								</div>
 							</div>
 						</div>
 					</div>
+					<div class="note">
+						*estimated reward in June 2018 with daily block reward of 20 million SC and 4000 Obelisk miners sold
+					</div>
 				</div>
-			<div class="note">
-				*estimated reward in June 2018 with daily block reward of 20 million SC and 4000 Obelisk miners sold
-			</div>
-			</div>
 			</div>
 			<div class="col-md-6 tech-col">
 				<h3> TECH DETAILS </h3>
 				<div class="tech-specs-side">
 					<div class="spec">
-						<span class="name">CHIP:</span><span>FULL CUSTOM 28NM ASIC</span>
+						<span class="name">CHIP:</span>
+						<span>FULL CUSTOM 28NM ASIC</span>
 					</div>
 					<div class="spec">
-						<span class="name">HASHRATE:</span><span>100+GH/S</span>
+						<span class="name">HASHRATE:</span>
+						<span>100+GH/S</span>
 					</div>
 					<div class="spec">
-						<span class="name">POWER CONSUMPTION:</span><span>500 W OR UNDER</span>
+						<span class="name">POWER CONSUMPTION:</span>
+						<span>500 W OR UNDER</span>
 					</div>
 					<div class="spec">
-						<span class="name">NOISE:</span><span>65 DBA OR UNDER</span>
+						<span class="name">NOISE:</span>
+						<span>65 DBA OR UNDER</span>
 					</div>
 					<div class="spec">
-						<span class="name">WEIGHT:</span><span>20 POUNDS OR UNDER</span>
+						<span class="name">WEIGHT:</span>
+						<span>20 POUNDS OR UNDER</span>
 					</div>
 					<div class="spec">
-						<span class="name">POWER SUPPLY:</span><span>INCLUDED</span>
+						<span class="name">POWER SUPPLY:</span>
+						<span>INCLUDED</span>
 					</div>
 				</div>
 				<div class="price-preorder-section">
 					<div class="price">
 						<span class="price-dollar">$</span>2499
 					</div>
-					<a href="/preorder" class="preorder-button">PREORDER</a>
+					<a href="preorder-sc1" class="preorder-button">PREORDER</a>
 				</div>
-			</br>
+				</br>
 				<h4> 28NM FULL CUSTOM ASIC </h4>
-				<p> We've hired a US-based semiconductor company with a 20-year track record in ASIC design to develop the first ASIC for Siacoin mining. The project is already underway. </p>
+				<p> We've hired a US-based semiconductor company with a 20-year track record in ASIC design to develop the first ASIC for
+					Siacoin mining. The project is already underway. </p>
 			</div>
 		</div>
 		<div class="row strengthinnumbers">
 			<div class="col-md-5">
 				<div class="separator-verymuted"></div>
 				<h3 class="section-header"> MORE POWER. MORE SECURITY. </h3>
-				<p class="section-description">ASICs mean increased Sia mining power and a far more secure Sia network. Read more on our <a href="https://blog.sia.tech/choosing-asics-for-sia-b318505b5b51" target="_blank" style= "color:red">blog</a>.</p>
+				<p class="section-description">ASICs mean increased Sia mining power and a far more secure Sia network. Read more on our
+					<a href="https://blog.sia.tech/choosing-asics-for-sia-b318505b5b51" target="_blank" style="color:red">blog</a>.</p>
 				<div class="separator-arrow">
 					<img src="assets/img/sidearrow.png" />
 				</div>
@@ -180,21 +215,28 @@
 		<div id="contact"></div>
 		<div class="row subscribe">
 			<div class="col-md-offset-3 col-sm-offset-2">
-			<form action="https://tech.us16.list-manage.com/subscribe/post?u=393b2698d17bdfe48ac0422ac&amp;id=87ef82fd96" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"  target="_blank" class="subscribe-col" novalidate>
-				<h3 class="subscribe-header"> SUBSCRIBE FOR UPDATES </h3>
-				<input name="FNAME" class="nameinput" type="text" class="form-control" placeholder="First Name"></input>
-				<input name="LNAME" class="phoneinput" type="text" class="form-control" placeholder="Last Name"></input>
-				<input name="EMAIL" class="emailinput" type="text" class="form-control" placeholder="Email"></input>
-				<input type="submit" value="Sign Up" name="subscribe" class="subscribebtn"></input>
+				<form action="https://tech.us16.list-manage.com/subscribe/post?u=393b2698d17bdfe48ac0422ac&amp;id=87ef82fd96" method="post"
+				  id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="subscribe-col" novalidate>
+					<h3 class="subscribe-header"> SUBSCRIBE FOR UPDATES </h3>
+					<input name="FNAME" class="nameinput" type="text" class="form-control" placeholder="First Name"></input>
+					<input name="LNAME" class="phoneinput" type="text" class="form-control" placeholder="Last Name"></input>
+					<input name="EMAIL" class="emailinput" type="text" class="form-control" placeholder="Email"></input>
+					<input type="submit" value="Sign Up" name="subscribe" class="subscribebtn"></input>
 			</div>
 		</div>
-		</div>
+	</div>
 	</div>
 	<div class="footer">
 		<ul class="terms">
-			<li><a href="https://twitter.com/ObeliskTechHQ" target="_blank">Twitter</a></li>
-			<li><a href="assets/img/terms.pdf" target="_blank">Terms</a></li>
-			<li><a href="assets/img/privacypolicy.pdf" target="_blank">Privacy</a></li>
+			<li>
+				<a href="https://twitter.com/ObeliskTechHQ" target="_blank">Twitter</a>
+			</li>
+			<li>
+				<a href="assets/img/terms.pdf" target="_blank">Terms</a>
+			</li>
+			<li>
+				<a href="assets/img/privacypolicy.pdf" target="_blank">Privacy</a>
+			</li>
 		</ul>
 		<img src="assets/img/footerlogo.png" />
 		<div class="poweredby">powered by Nebulous</div>
@@ -202,22 +244,47 @@
 	</div>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-<!-- BEGIN GROOVE WIDGET CODE -->
+	<script src="js/main-sc1.js"></script>
+	<!-- BEGIN GROOVE WIDGET CODE -->
 
-<script id="grv-widget">
+	<script id="grv-widget">
+		/*<![CDATA[*/
 
-  /*<![CDATA[*/
+		window.groove = window.groove || {};
+		groove.widget = function () {
+			groove._widgetQueue.push(Array.prototype.slice.call(arguments));
+		};
+		groove._widgetQueue = [];
 
-  window.groove = window.groove || {}; groove.widget = function(){ groove._widgetQueue.push(Array.prototype.slice.call(arguments)); }; groove._widgetQueue = [];
+		groove.widget('setWidgetId', '2fdbab7b-2ac2-1647-c992-13f31c156222');
 
-  groove.widget('setWidgetId', '2fdbab7b-2ac2-1647-c992-13f31c156222');
+		! function (g, r, v) {
+			var a, n, c = r.createElement("iframe");
+			(c.frameElement || c).style.cssText = "width: 0; height: 0; border: 0", c.title = "", c.role = "presentation", c.src =
+				"javascript:false", r.body.appendChild(c);
+			try {
+				a = c.contentWindow.document
+			} catch (i) {
+				n = r.domain;
+				var b = ["javascript:document.write('<he", "ad><scri", "pt>document.domain=", "\"", n, "\";</scri", "pt></he",
+					"ad><bo", "dy></bo", "dy>')"
+				];
+				c.src = b.join(""), a = c.contentWindow.document
+			}
+			var d = "https:" == r.location.protocol ? "https://" : "http://",
+				s = "http://groove-widget-production.s3.amazonaws.com".replace("http://", d);
+			c.className = "grv-widget-tag", a.open()._l = function () {
+				n && (this.domain = n);
+				var t = this.createElement("script");
+				t.type = "text/javascript", t.charset = "utf-8", t.async = !0, t.src = s + "/loader.js", this.body.appendChild(t)
+			};
+			var p = ["<bo", 'dy onload="document._l();">'];
+			a.write(p.join("")), a.close()
+		}(window, document)
 
-  !function(g,r,v){var a,n,c=r.createElement("iframe");(c.frameElement||c).style.cssText="width: 0; height: 0; border: 0",c.title="",c.role="presentation",c.src="javascript:false",r.body.appendChild(c);try{a=c.contentWindow.document}catch(i){n=r.domain;var b=["javascript:document.write('<he","ad><scri","pt>document.domain=","\"",n,"\";</scri","pt></he","ad><bo","dy></bo","dy>')"];c.src=b.join(""),a=c.contentWindow.document}var d="https:"==r.location.protocol?"https://":"http://",s="http://groove-widget-production.s3.amazonaws.com".replace("http://",d);c.className="grv-widget-tag",a.open()._l=function(){n&&(this.domain=n);var t=this.createElement("script");t.type="text/javascript",t.charset="utf-8",t.async=!0,t.src=s+"/loader.js",this.body.appendChild(t)};var p=["<bo",'dy onload="document._l();">'];a.write(p.join("")),a.close()}(window,document)
-
-  /*]]>*/
-
+		/*]]>*/
 	</script>
 	<!-- END GROOVE WIDGET CODE -->
-	</body>
+</body>
+
 </html>
