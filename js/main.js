@@ -36,6 +36,7 @@ $('#quantity-input').on('input', e => {
     return
   }
   obelisks = parseInt(e.target.value, 10)
+  updateElectricityCosts()
   updateSC1Rewards()
   updateDCR1Rewards()
 })
