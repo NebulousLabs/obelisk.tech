@@ -874,9 +874,9 @@ body {
 	color: #fff;
 }
 .profit-result > .result > .unit {
-	font-family: "Karbon Light";
+	font-family: "Karbon Medium";
 	color: #c39b9b;
-	font-size: 24px;
+	font-size: 30px;
 }
 .profit-result > h3 {
 	width: 82%;
@@ -1037,7 +1037,10 @@ a.colo-table-link:hover {
   margin-bottom: 30px;
 }
 
-.pay-in-siacoin {
+.sia-color {
   color: #00cba0;
-  font-family: 'Karbon Regular';
+}
+
+.decred-color {
+  color: #2971FF;
 }
