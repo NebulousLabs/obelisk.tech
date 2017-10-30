@@ -3,7 +3,8 @@ const expectedPowerConsumption = 500 // W
 const blockReward = 20000000 // SC per day on end of june 2018
 let obelisks = 1
 const sellCap = 4000
-const nSold = 2010
+const nSiaSold = 2010
+const nDecredSold = 200
 let electricityprice = 0.1
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
@@ -34,6 +35,10 @@ $('#electricity-cost').on('input', e => {
   updateCosts()
 })
 
-$('.order-bar-inner').css('width', nSold / sellCap * 100 + '%')
-$('#sold').text(nSold)
+$('.order-bar-sia-inner').css('width', nSiaSold / sellCap * 100 + '%')
+$('#siasold').text(nSiaSold)
+$('#sellcap').text(sellCap)
+
+$('.order-bar-decred-inner').css('width', nDecredSold / sellCap * 100 + '%')
+$('#decredsold').text(nDecredSold)
 $('#sellcap').text(sellCap)

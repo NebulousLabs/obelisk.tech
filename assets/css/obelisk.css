@@ -903,9 +903,14 @@ body {
 	height: 3px;
 	background-color: #666;
 }
-.order-bar-inner {
+.order-bar-sia-inner {
 	height: 3px;
-	background-color: red;
+	background-color: #00CBA0;
+	width: 0;
+}
+.order-bar-decred-inner {
+	height: 3px;
+	background-color: #2971FF;
 	width: 0;
 }
 .order-bar {
