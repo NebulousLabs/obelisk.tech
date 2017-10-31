@@ -545,9 +545,9 @@ body {
 }
 .smoke-effect {
 	position: absolute;
-	left: 595px;
-	top: -80px;
-	width: 94%;
+	left: 600px;
+    top: -50px;
+	width: 80%;
 	z-index: -1;
 }
 
@@ -824,26 +824,7 @@ body {
 	font-size: 20px;
 	color: red;
 }
-.ordercount-label {
-	font-size: 16px;
-	color: #8f989f;
-	text-align: left;
-	margin-top: 5px
-}
-.ordercount-count {
-	font-family: "Karbon Bold";
-	color: red;
-	font-size: 20px;
-	margin-left: 5px;
-}
-.ordercount {
-	display: flex;
-	flex-direction: column;
-	margin-top: 7px;
-	vertical-align: middle;
-	width: 300px;
 
-}
 .profit-calculator > * > h3 {
 	font-family: "Karbon Medium";
 	color: #fff;
@@ -897,24 +878,60 @@ body {
 	width: 85%;
 	height: 35px;
 }
+.ordercounts-container {
+	display: flex;
+	width: 560px;
+	margin-left: 18px;
+	margin-bottom: 40px;
+}
+.ordercount {
+	display: flex;
+	flex-direction: column;
+	margin-top: 7px;
+	margin-right: 40px;
+	vertical-align: middle;
+	flex: 1
+}
+.ordercount-product-label {
+	font-size: 42px;
+}
+.red-gradient-text {
+	background-image: -webkit-linear-gradient(top, #ff0000, #230000); /* For Chrome and Safari */
+    background-image:    -moz-linear-gradient(top, #ff0000, #230000); /* For old Fx (3.6 to 15) */
+    background-image:     -ms-linear-gradient(top, #ff0000, #230000); /* For pre-releases of IE 10*/
+    background-image:      -o-linear-gradient(top, #ff0000, #230000); /* For old Opera (11.1 to 12.0) */
+    background-image:         linear-gradient(to bottom, #ff0000, #230000); /* Standard syntax; must be last */
+    color:transparent;
+	-webkit-background-clip: text;
+	font-family: 'Karbon Light';
+	background-clip: text;
+}
+.ordercount-label {
+	font-size: 16px;
+	color: #666;
+	text-align: left;
+	margin-top: 5px;
+}
+.ordercount-coin-logo {
+	margin-right: 10px;
+}
+.ordercount-count {
+	font-family: "Karbon Bold";
+	color: red;
+	font-size: 20px;
+	margin-left: 5px;
+}
 .order-bar {
-	width: 300px;
+	flex: 1;
 	height: 3px;
 	background-color: #666;
+	margin: 0;
 }
-.order-bar-sia-inner {
-	height: 3px;
+.order-bar-sc1-inner,
+.order-bar-dcr1-inner {
+		height: 3px;
 	background-color: red;
 	width: 0;
-}
-.order-bar-decred-inner {
-	height: 3px;
-	background-color: red;
-	width: 0;
-}
-.order-bar {
-	margin-top: 15px;
-	margin-bottom: 6px;
 }
 .aboutus-header {
 	font-family: "Karbon Thin";
@@ -1043,8 +1060,4 @@ a.colo-table-link:hover {
 
 .decred-color {
   color: #2971FF;
-}
-
-.red-color {
-  color: red;
 }

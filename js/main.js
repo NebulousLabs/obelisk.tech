@@ -5,14 +5,16 @@ const dcr1BlockReward = 4000 // SC per day on end of june 2018
 let obelisks = 1
 let electricityPrice = 0.1
 
-const sellCap = 4000
-const nSiaSold = 2010
-const nDecredSold = 200
+const sc1Sold = 2010
+const sc1SellCap = 4000
+
+const dcr1Sold = 200
+const dcr1SellCap = 4000
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
 // obelisks and the number of obelisks sold
-const monthlySC1Revenue = obelisks => obelisks / sellCap * sc1BlockReward * 30
-const monthlyDCR1Revenue = obelisks => obelisks / sellCap * dcr1BlockReward * 30
+const monthlySC1Revenue = obelisks => obelisks / sc1SellCap * sc1BlockReward * 30
+const monthlyDCR1Revenue = obelisks => obelisks / dcr1SellCap * dcr1BlockReward * 30
 
 // monthlyElectricityCost returns the estimated monthly electricity cost given
 // the cost of electricity per KW/H
@@ -43,10 +45,12 @@ $('#electricity-cost').on('input', e => {
 
 updateProfitFields()
 
-$('.order-bar-sia-inner').css('width', nSiaSold / sellCap * 100 + '%')
-$('#siasold').text(nSiaSold)
-$('#sellcap').text(sellCap)
+const formatNumber = n => n.toLocaleString(n)
 
-$('.order-bar-decred-inner').css('width', nDecredSold / sellCap * 100 + '%')
-$('#decredsold').text(nDecredSold)
-$('#sellcap').text(sellCap)
+$('.order-bar-sc1-inner').css('width', sc1Sold / sc1SellCap * 100 + '%')
+$('#sc1-sold').text(formatNumber(sc1Sold))
+$('#sc1-sell-cap').text(formatNumber(sc1SellCap))
+
+$('.order-bar-dcr1-inner').css('width', dcr1Sold / dcr1SellCap * 100 + '%')
+$('#dcr1-sold').text(formatNumber(dcr1Sold))
+$('#dcr1-sell-cap').text(formatNumber(dcr1SellCap))
