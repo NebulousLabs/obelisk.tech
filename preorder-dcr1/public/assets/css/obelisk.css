@@ -944,3 +944,128 @@ body {
 	margin-top: 25px;
 	margin-left: 10px;
 }
+.add-coupon-button:hover {
+	text-decoration: none;
+	color: red;
+	background: #202020;
+}
+.add-coupon-button {
+	cursor: pointer;
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 2px solid #666666;
+	border-radius: 100px;
+	text-align: center;
+	padding-top: 6px;
+	text-decoration: none;
+	font-size: 20px;
+	color: red;
+}
+
+.coupons-container {
+	width: 450px;
+}
+
+.coupons-container > h3 {
+	color: #fff;
+	font-family: "Karbon Thin";
+	font-size: 35px;
+	margin-top: 43px;
+}
+
+.coupon-subheading {
+	font-family: "Karbon Regular";
+    font-size: 18px;
+	color: #9b9ea2;
+	margin-bottom: 10px;
+}
+
+.coupon-list {
+	font-family: "Karbon Thin";
+	font-size: 20px;
+	color: white;
+	width: 450px;
+}
+
+.coupon-entry {
+	color: #7e7e7e;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.coupon-entry-container {
+	display: flex;
+	align-items: center;
+}
+
+.coupon-input {
+	background: transparent;
+	margin-right: 8px;
+	border: none;
+	border-bottom: 1px solid #3e3e3e;
+	margin-bottom: 20px;
+	outline: none;
+	color: #ffffff;
+}
+
+.coupon-input:selected {
+	border-bottom: 1px solid white;
+}
+
+.coupon-icon {
+	width: 20px;
+}
+
+.coupon-spinner {
+	position: relative;
+	width: 26px;
+	top: -4px;
+}
+
+.coupon-label {
+	min-width: 76px;
+    display: flex;
+	flex-direction: row-reverse;
+}
+
+.coupon-value {
+	margin-left: 10px;
+	min-width: 70px;
+    flex-direction: row-reverse;
+	display: flex;
+}
+
+.coupon-subtotal {
+	display: flex;
+	flex-direction: row-reverse;
+	font-family: "Karbon Light";
+	font-size: 20px;
+	color: #7e7e7e;
+}
+
+.coupon-subtotal-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.coupon-total-container {
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid #3e3e3e;
+	padding-top: 10px;
+}
+
+.coupon-error {
+	color: red;
+	font-family: "Karbon Light";
+	font-size: 14px;
+	margin-left: 20px;
+}
+
+.coupon-delete-button {
+	width: 14px;
+}

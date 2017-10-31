@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { validate } from 'email-validator'
 import { countries } from 'countries-list'
 
+import { formatBTC, formatDollars, formatNumber } from './utils'
+
 class PageOne extends Component {
   constructor(props) {
     super(props)
@@ -579,12 +581,12 @@ class Checkout extends Component {
                   <span className="money">
                     <img src="assets/img/bitcoin-logo.png" alt="bitcoin logo" />
                   </span>
-                  <p className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</p>
+                  <p className="amount">{formatBTC(this.props.btcPrice)}</p>
                 </div>
                 <p> or </p>
                 <div className="estimated-cost">
                   <span className="money">$</span>
-                  <p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
+                  <p className="amount">{formatNumber(this.props.totalPrice)}</p>
                 </div>
               </div>
               <p className="note">
@@ -689,9 +691,8 @@ class Payment extends Component {
                   <div className="payaddr">
                     <p>
                       Use the QR code or send{' '}
-                      <div className="price">
-                        {parseFloat(this.props.btcPrice.toFixed(3))} BTC{' '}
-                      </div>to the address below:
+                      <div className="price">{formatBTC(this.props.btcPrice)} BTC </div>to the
+                      address below:
                     </p>
                     <br />
                     <p>Deposit Address</p>

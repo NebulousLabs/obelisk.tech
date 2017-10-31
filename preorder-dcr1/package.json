@@ -8,6 +8,7 @@
     "email-validator": "^1.0.7",
     "fetch": "^1.1.0",
     "gemini-api": "^2.0.2",
+    "lodash": "^4.17.4",
     "qrcode": "^0.8.2",
     "qrcode-generator": "^1.2.0",
     "react": "^15.6.1",

@@ -1,6 +1,9 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { validate } from 'email-validator'
 import { countries } from 'countries-list'
+
+import { formatBTC, formatDollars, formatNumber } from './utils'
 
 class PageOne extends Component {
   constructor(props) {
@@ -67,7 +70,7 @@ class PageOne extends Component {
         </div>
         <div className="row">
           <div className="col-md-4 order-section">
-            <img className="obelisk-header" alt="logo" src="assets/img/obelisk-text.png" />
+            <img className="obelisk-header" src="assets/img/obelisk-text.png" alt="obelisk logo" />
             <div className="separator" />
             <div className="order-form">
               <h3> 1. YOUR ORDER </h3>
@@ -114,7 +117,11 @@ class PageOne extends Component {
           </div>
           <div className="col-md-1" />
           <div className="col-md-3 visible-md-block visible-lg-block">
-            <img alt="hardware" className="hardware-shot" src="assets/img/hardware-shot.png" />
+            <img
+              className="hardware-shot"
+              src="assets/img/hardware-shot.png"
+              alt="obelisk hardware"
+            />
           </div>
           <div className="col-md-4 quantity-section">
             <h3> How many Obelisk DCR1s would you like to purchase? </h3>
@@ -217,7 +224,7 @@ class ShippingForm extends Component {
         </div>
         <div className="row">
           <div className="col-md-4 order-section">
-            <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
+            <img className="obelisk-header" src="assets/img/obelisk-text.png" alt="obelisk logo" />
             <div className="separator" />
             <div className="order-form">
               <h3> 2. SHIPPING </h3>
@@ -512,7 +519,11 @@ class ShippingForm extends Component {
           </div>
           <div className="col-md-1" />
           <div className="col-md-3 visible-md-block visible-lg-block">
-            <img alt="hardware" className="hardware-shot" src="assets/img/hardware-shot.png" />
+            <img
+              className="hardware-shot"
+              src="assets/img/hardware-shot.png"
+              alt="obelisk hardware"
+            />
           </div>
           <div className="col-md-4 cost-section">
             <h3> Estimated sales tax and shipping costs </h3>
@@ -525,6 +536,224 @@ class ShippingForm extends Component {
               anywhere else. Orders will ship on or before June 30, 2018.
             </p>
             <div className="next-button" onClick={handleNextClick} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+class CouponEntry extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { code: props.coupon.code }
+  }
+
+  handleChange = e => {
+    const code = e.target.value.trim().toUpperCase()
+
+    // Only allow valid characters
+    switch (code.length) {
+      case 1:
+        if (code !== 'O') {
+          return
+        }
+        break
+      case 2:
+        if (code !== 'O-') {
+          return
+        }
+        break
+
+      default:
+        if (code.length > 12) {
+          return
+        } else if (!/^O-[0-9ABCDEF]{1,10}$/.test(code)) {
+          return
+        }
+        break
+    }
+
+    this.setState({ code })
+  }
+
+  // Return true if valid and false if not
+  validateCouponCodeFormat = () => {
+    let error
+    if (!/^O-[0-9ABCDEF]{10}$/.test(this.state.code)) {
+      error = "Invalid code.  Must start with 'O-', followed by 10 numbers/letters."
+    }
+    this.props.updateCouponAtIndex(
+      { code: this.state.code, isValid: null, value: 0, unitsUsed: 0, error },
+      this.props.index,
+    )
+    return !error
+  }
+
+  handleBlur = e => {
+    // If basic format looks good, ask the server to tell us the details
+    if (this.validateCouponCodeFormat()) {
+      this.props.onValidate(this.state.code, this.props.index)
+    }
+  }
+
+  handleDeleteCoupon = () => {
+    this.props.removeCouponAtIndex(this.props.index)
+  }
+
+  render() {
+    const { code, error, isValid, isValidationInProgress, unitsUsed, value } = this.props.coupon
+
+    let icon = undefined
+    if (isValidationInProgress) {
+      icon = <img className="coupon-spinner" src="assets/img/spinner.gif" alt="spinner" />
+    } else if (isValid === null) {
+      icon = <div />
+    } else if (isValid) {
+      icon = <img className="coupon-icon" src="assets/img/checkmark.png" alt="valid coupon" />
+    } else {
+      icon = (
+        <img className="coupon-icon" src="assets/img/red-error-icon.png" alt="invalid coupon" />
+      )
+    }
+
+    return (
+      <div>
+        <div className="coupon-entry">
+          <div className="coupon-entry-container">
+            <img
+              className="coupon-delete-button"
+              src="assets/img/red-x.png"
+              alt="valid coupon"
+              onClick={this.handleDeleteCoupon}
+            />
+          </div>
+          <div className="coupon-entry-container">
+            <input
+              className="coupon-input"
+              type="text"
+              placeholder="e.g., O-1234567890"
+              value={this.state.code}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+            />
+            {icon}
+          </div>
+          <div className="coupon-entry-container">
+            {isValidationInProgress || !isValid ? (
+              <div />
+            ) : (
+              <div className="coupon-label">
+                {unitsUsed} x {formatDollars(value)}
+              </div>
+            )}
+          </div>
+          <div className="coupon-entry-container">
+            {isValidationInProgress || !isValid ? (
+              <div />
+            ) : (
+              <div className="coupon-value">-{formatDollars(unitsUsed * value)}</div>
+            )}
+          </div>
+        </div>
+        <div className="coupon-error">{error}</div>
+      </div>
+    )
+  }
+}
+
+class RedeemCoupons extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  handleNextClick = () => {
+    // TODO: Any validation before going to next state?
+    // TODO: Check that all coupons are valid (need a button to delete invalid ones)
+    this.props.next(this.state)
+  }
+
+  render() {
+    const { visible, coupons, totalPrice, quantity } = this.props
+    if (!visible) {
+      return <div />
+    }
+
+    const couponEntries = _.map(coupons, (coupon, index) => (
+      <CouponEntry
+        coupon={coupon}
+        index={index}
+        key={index}
+        onValidate={this.props.validateCouponAtIndex}
+        updateCouponAtIndex={this.props.updateCouponAtIndex}
+        removeCouponAtIndex={this.props.removeCouponAtIndex}
+      />
+    ))
+
+    const totalCouponValue = _.reduce(
+      coupons,
+      (total, coupon) => total + coupon.unitsUsed * coupon.value,
+      0,
+    )
+
+    const totalNumCoupons = _.reduce(coupons, (total, coupon) => total + coupon.unitsUsed, 0)
+
+    let addButton
+    if (quantity > totalNumCoupons) {
+      addButton = (
+        <div className="add-coupon-button" onClick={this.props.addCoupon}>
+          ADD COUPON
+        </div>
+      )
+    }
+
+    return (
+      <div className="container main order-main">
+        <div className="need-help">
+          <p>Need Help?</p>
+          <a href="mailto:hello@obelisk.tech">Contact us</a>
+          <div className="separator-muted" />
+        </div>
+        <div className="row">
+          <div className="col-md-4 order-section">
+            <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
+            <div className="separator" />
+            <div className="coupons-container">
+              <h3>3. SUBTOTAL</h3>
+              <div className="coupon-subtotal-container">
+                <div className="coupon-subheading">{formatNumber(quantity)} x DCR1</div>
+                <div className="coupon-subtotal">{formatDollars(totalPrice)}</div>
+              </div>
+              <div className="coupon-subheading">COUPONS</div>
+              <div className="coupon-list">{couponEntries}</div>
+              <div className="coupon-total-container">
+                <div className="coupon-subheading">SUBTOTAL AFTER COUPONS</div>
+                <div className="coupon-subtotal">
+                  {formatDollars(totalPrice - totalCouponValue)}
+                </div>
+              </div>
+              <div className="coupon-error">{this.props.error}</div>
+              {addButton}
+            </div>
+            <div onClick={this.props.back} className="back-button" />
+            <div className="red-separator" />
+            <div className="separator" />
+          </div>
+          <div className="col-md-1" />
+          <div className="col-md-3 visible-md-block visible-lg-block">
+            <img alt="hardware" className="hardware-shot" src="assets/img/hardware-shot.png" />
+          </div>
+          <div className="col-md-4 cost-section">
+            <h3>Subtotal</h3>
+            <div className="estimated-cost">
+              <span className="money">$</span>
+              <p className="amount">{formatNumber(totalPrice - totalCouponValue)}</p>
+            </div>
+            <p className="note">
+              * Note that the coupons you entered will be reserved for this order once submitted on
+              the next page.
+            </p>
+            <div className="next-button" onClick={this.handleNextClick} />
           </div>
         </div>
       </div>
@@ -579,12 +808,12 @@ class Checkout extends Component {
                   <span className="money">
                     <img src="assets/img/bitcoin-logo.png" alt="bitcoin logo" />
                   </span>
-                  <p className="amount">{parseFloat(this.props.btcPrice.toFixed(3))}</p>
+                  <p className="amount">{formatBTC(this.props.btcPrice)}</p>
                 </div>
                 <p> or </p>
                 <div className="estimated-cost">
                   <span className="money">$</span>
-                  <p className="amount">{parseFloat(this.props.totalPrice.toFixed(2))}</p>
+                  <p className="amount">{formatNumber(this.props.totalPrice)}</p>
                 </div>
               </div>
               <p className="note">
@@ -689,9 +918,8 @@ class Payment extends Component {
                   <div className="payaddr">
                     <p>
                       Use the QR code or send{' '}
-                      <div className="price">
-                        {parseFloat(this.props.btcPrice.toFixed(3))} BTC{' '}
-                      </div>to the address below:
+                      <div className="price">{formatBTC(this.props.btcPrice)} BTC </div>to the
+                      address below:
                     </p>
                     <br />
                     <p>Deposit Address</p>
@@ -762,8 +990,17 @@ class App extends Component {
       uid: '',
       paymentAddr: '',
 
-      step: 0,
+      step: 2,
       checkoutError: '',
+      coupons: [
+        {
+          code: '',
+          isValid: null,
+          unitsUsed: 0,
+          value: 0,
+          isValidationInProgress: false,
+        },
+      ],
     }
     fetch('https://api.gdax.com/products/BTC-USD/ticker').then(res => {
       res.json().then(data => {
@@ -776,6 +1013,115 @@ class App extends Component {
       })
     })
   }
+
+  addCoupon = coupon => {
+    const coupons = this.state.coupons.slice()
+    coupons.push({ coupon, isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
+    this.setState({ coupons })
+  }
+
+  // TODO: Don't show ADD COUPON button if we have already applied coupons to all units
+  checkCouponRestrictions(quantityOrdered, coupons) {
+    // Check that this coupon is not a duplicate of any other
+    for (let i = coupons.length - 1; i >= 0; i--) {
+      const currCoupon = coupons[i]
+      for (let j = i - 1; j >= 0; j--) {
+        if (coupons[j].code === currCoupon.code) {
+          currCoupon.isValidationInProgress = false
+          currCoupon.isValid = false
+          currCoupon.error = `This coupon is duplicated ${i < j ? 'below' : 'above'}`
+        }
+      }
+    }
+
+    // Ensure count of coupons used doesn't exceed units purchased
+    let totalCouponsUsed = 0
+    for (let i = 0; i < coupons.length; i++) {
+      const coupon = coupons[i]
+      totalCouponsUsed += coupon.isValid ? coupon.unitsUsed : 0
+    }
+
+    if (totalCouponsUsed > quantityOrdered) {
+      this.setState({
+        couponError: 'You can use at most one coupon per unit.  Remove some coupons.',
+      })
+      return
+    }
+  }
+
+  updateCouponAtIndex = (coupon, index) => {
+    const coupons = this.state.coupons.slice()
+    coupons.splice(index, 1, { ...coupon })
+
+    this.checkCouponRestrictions(this.state.quantity, coupons)
+
+    this.setState({ coupons })
+  }
+
+  removeCouponAtIndex = index => {
+    const coupons = this.state.coupons.slice()
+    coupons.splice(index, 1)
+    this.setState({ coupons })
+  }
+
+  validateCouponAtIndex = (code, index) => {
+    // Mark the coupon with isValidationInProgress = true
+    const coupons = this.state.coupons.slice()
+    const coupon = coupons[index]
+    if (!coupon) {
+      // TODO: Some error
+      return
+    }
+
+    // Clear out the coupon so we don't show the details while validating with the server
+    coupon.isValidationInProgress = true
+    coupon.error = undefined
+    coupon.code = code
+    this.setState({ coupons })
+
+    // TODO: Ensure validation request indicates how many units have not had coupons applied yet
+    //       so we reserve the right number of units.
+    // fetch(`/validateCoupons/coupons=${JSON.stringify(this.state.coupons),quantityEligible}`, {
+    //   method: 'GET',
+    // })
+    //   .then(res => {
+    //     if (!res.ok) {
+    //       res.json().then(json => {
+    //         this.setState({ coupons: json })
+    //       })
+    //     } else {
+    //       // TODO: Handle other errors
+    //     }
+    //   })
+    //   .catch(err => {
+    //     // TODO: Handle catch
+    //   })
+    setTimeout(() => {
+      const coupons = this.state.coupons.slice()
+      const coupon = coupons[index]
+      if (!coupon) {
+        // TODO: Some error
+        return
+      }
+
+      if (true) {
+        //(index % 2 === 0) {
+        coupon.isValidationInProgress = false
+        coupon.value = 250
+        coupon.unitsUsed = 1
+        coupon.isValid = true
+      } else {
+        coupon.isValidationInProgress = false
+        coupon.isValid = false
+        coupon.error = 'Coupons for that order have already been redeemed'
+      }
+
+      this.checkCouponRestrictions(this.state.quantity, coupons)
+
+      this.setState({ coupons })
+    }, 1000)
+  }
+
   render() {
     const totalPrice = 2499 * this.state.quantity + this.state.shippingCost
     const btcPrice = totalPrice / this.state.btcUsd
@@ -805,7 +1151,7 @@ class App extends Component {
           if (result.paymentMethod === 'transfer') {
             return totalPrice
           }
-          return parseFloat(btcPrice.toFixed(3))
+          return formatBTC(btcPrice)
         })(),
       )
       formData.append('wire', result.paymentMethod === 'transfer')
@@ -849,17 +1195,31 @@ class App extends Component {
           next={next}
           back={back}
         />
-        <Checkout
+        <RedeemCoupons
           visible={this.state.step === 2}
+          quantity={this.state.quantity}
+          totalPrice={totalPrice}
+          coupons={this.state.coupons}
+          addCoupon={this.addCoupon}
+          error={this.state.couponError}
+          validateCouponAtIndex={this.validateCouponAtIndex}
+          removeCouponAtIndex={this.removeCouponAtIndex}
+          updateCouponAtIndex={this.updateCouponAtIndex}
+          next={next}
+          back={back}
+        />
+        <Checkout
+          visible={this.state.step === 3}
           checkoutError={this.state.checkoutError}
           shippingCost={this.state.shippingCost}
           totalPrice={totalPrice}
           btcPrice={btcPrice}
+          coupons={this.state.coupons}
           next={handleSubmit}
           back={back}
         />
         <Payment
-          visible={this.state.step === 3}
+          visible={this.state.step === 4}
           paymentMethod={this.state.paymentMethod}
           uid={this.state.uid}
           btcaddr={this.state.paymentAddr}
