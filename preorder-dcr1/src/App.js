@@ -990,7 +990,7 @@ class App extends Component {
       uid: '',
       paymentAddr: '',
 
-      step: 2,
+      step: 0,
       checkoutError: '',
       coupons: [
         {
@@ -1081,7 +1081,7 @@ class App extends Component {
 
     // TODO: Ensure validation request indicates how many units have not had coupons applied yet
     //       so we reserve the right number of units.
-    // fetch(`/validateCoupons/coupons=${JSON.stringify(this.state.coupons),quantityEligible}`, {
+    // fetch(`/validateCoupons/coupons=${JSON.stringify(this.state.coupons),quantityEligible=${???}}`, {
     //   method: 'GET',
     // })
     //   .then(res => {
