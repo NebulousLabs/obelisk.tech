@@ -152,13 +152,13 @@ body {
 	font-size: 40px;
 	font-family: "Karbon Thin";
 	margin-top: 30px;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	color: #fff;
 }
 .newdevelopment {
 	font-size: 18px;
 	color: #8f989f;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 .center-block {
 	margin-bottom: 30px;
@@ -882,7 +882,7 @@ body {
 	display: flex;
 	width: 560px;
 	margin-left: 18px;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 }
 .ordercount {
 	display: flex;
@@ -914,6 +914,7 @@ body {
 }
 .ordercount-coin-logo {
 	margin-right: 10px;
+	width: 30px;
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
@@ -926,6 +927,7 @@ body {
 	height: 3px;
 	background-color: #666;
 	margin: 0;
+	margin-bottom: 5px;
 }
 .order-bar-sc1-inner,
 .order-bar-dcr1-inner {
