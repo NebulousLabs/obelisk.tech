@@ -551,9 +551,11 @@ class CouponEntry extends Component {
 
   handleChange = e => {
     const code = e.target.value.trim().toUpperCase()
-
     // Only allow valid characters
     switch (code.length) {
+      case 0:
+        break
+
       case 1:
         if (code !== 'O') {
           return
@@ -1024,9 +1026,9 @@ class App extends Component {
     this.setState({ couponDiscount })
   }
 
-  addCoupon = coupon => {
+  addCoupon = () => {
     const coupons = this.state.coupons.slice()
-    coupons.push({ coupon, isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
+    coupons.push({ code: '', isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
     this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
@@ -1094,51 +1096,42 @@ class App extends Component {
 
     // TODO: Ensure validation request indicates how many units have not had coupons applied yet
     //       so we reserve the right number of units.
-    // fetch(`/validateCoupons/coupons=${JSON.stringify(this.state.coupons),quantityEligible=${???}}`, {
-    //   method: 'GET',
-    // })
-    //   .then(res => {
-    //     if (!res.ok) {
-    //       res.json().then(json => {
-    //         this.setState({ coupons: json })
-    //       })
-    //     } else {
-    //       // TODO: Handle other errors
-    //     }
-    //   })
-    //   .catch(err => {
-    //     // TODO: Handle catch
-    //   })
-    setTimeout(() => {
-      const coupons = this.state.coupons.slice()
-      const coupon = coupons[index]
-      if (!coupon) {
-        // TODO: Some error
-        return
-      }
-
-      if (true) {
-        //(index % 2 === 0) {
-        coupon.isValidationInProgress = false
-        coupon.value = 250
-        coupon.unitsUsed = 1
-        coupon.isValid = true
-      } else {
-        coupon.isValidationInProgress = false
-        coupon.isValid = false
-        coupon.error = 'Coupons for that order have already been redeemed'
-      }
-
-      this.checkCouponRestrictions(this.state.quantity, coupons)
-
-      this.setState({ coupons })
-      this.updateCouponDiscount(coupons)
-    }, 1000)
+    const couponCodes = _.map(this.state.coupons, coupon => coupon.code)
+    fetch(`/validateCoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
+      method: 'GET',
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(json => {
+            const coupons = _.map(json, resp => {
+              const coupon = {}
+              coupon.code = resp.uniqueID
+              coupon.isValidationInProgress = false
+              coupon.value = resp.couponValue
+              coupon.unitsUsed = resp.couponsReserved
+              coupon.error = resp.error
+              coupon.isValid = resp.isValid
+              return coupon
+            })
+            // TODO: Not sure if this is necessary or helpful, since it
+            //       should have already run before.
+            // this.checkCouponRestrictions(this.state.quantity, coupons)
+            this.setState({ coupons })
+            this.updateCouponDiscount(coupons)
+          })
+        } else {
+          // TODO: Handle other errors
+        }
+      })
+      .catch(err => {
+        // TODO: Handle catch
+      })
   }
 
   render() {
     const undiscountedPrice = 2499 * this.state.quantity + this.state.shippingCost
     const totalPrice = undiscountedPrice - this.state.couponDiscount
+    const undiscountedBtcPrice = undiscountedPrice / this.state.btcUsd
     const btcPrice = totalPrice / this.state.btcUsd
     const next = result => {
       this.setState(result)
@@ -1160,17 +1153,25 @@ class App extends Component {
       formData.append('backupEmail', this.state.backupemail)
       formData.append('phone', this.state.backupphone)
       formData.append('units', this.state.quantity)
+      // We send the undiscounted price here, as the coupon is applied on the server side
+      // TODO:
       formData.append(
         'price',
         (() => {
           if (result.paymentMethod === 'transfer') {
-            return totalPrice
+            return undiscountedPrice
           }
-          return formatBTC(btcPrice)
+          return formatBTC(undiscountedBtcPrice)
         })(),
       )
       formData.append('wire', result.paymentMethod === 'transfer')
       formData.append('product', 'DCR1')
+
+      // Add on the coupon info, including the discount, so we can double-check it
+      const couponCodes = _.map(this.state.coupons, coupon => coupon.code)
+      formData.append('coupons', couponCodes.join(','))
+      formData.append('couponDiscount', this.state.couponDiscount)
+
       fetch(`/adduser`, {
         method: 'POST',
         body: formData,
