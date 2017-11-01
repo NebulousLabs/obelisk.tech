@@ -983,36 +983,38 @@ body {
 	margin-bottom: 10px;
 }
 
-.coupon-list {
+.coupon-table {
 	font-family: "Karbon Thin";
+	color: #7e7e7e;
 	font-size: 20px;
-	color: white;
 	width: 450px;
 }
-
-.coupon-entry {
-	color: #7e7e7e;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	
+.coupon-col-center {
+	text-align: center;
+	padding-bottom: 20px;
 }
 
-.coupon-entry-container {
-	display: flex;
-	align-items: center;
+.coupon-col-left {
+	text-align: left;
+	padding-bottom: 20px;
+}
+
+.coupon-col-right {
+	text-align: right;
+	padding-bottom: 20px;
 }
 
 .coupon-input {
 	background: transparent;
-	margin-right: 8px;
 	border: none;
 	border-bottom: 1px solid #3e3e3e;
-	margin-bottom: 20px;
 	outline: none;
 	color: #ffffff;
+	margin-left: 8px;
 }
 
-.coupon-input:selected {
+.coupon-input:focus {
 	border-bottom: 1px solid white;
 }
 
@@ -1068,4 +1070,5 @@ body {
 
 .coupon-delete-button {
 	width: 14px;
+	cursor: pointer;
 }

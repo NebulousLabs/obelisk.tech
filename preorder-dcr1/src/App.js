@@ -620,46 +620,43 @@ class CouponEntry extends Component {
     }
 
     return (
-      <div>
-        <div className="coupon-entry">
-          <div className="coupon-entry-container">
-            <img
-              className="coupon-delete-button"
-              src="assets/img/red-x.png"
-              alt="valid coupon"
-              onClick={this.handleDeleteCoupon}
-            />
-          </div>
-          <div className="coupon-entry-container">
-            <input
-              className="coupon-input"
-              type="text"
-              placeholder="e.g., O-123456789012"
-              value={this.state.code}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-            />
-            {icon}
-          </div>
-          <div className="coupon-entry-container">
-            {isValidationInProgress || !isValid ? (
-              <div />
-            ) : (
-              <div className="coupon-label">
-                {unitsUsed} x {formatDollars(value)}
-              </div>
-            )}
-          </div>
-          <div className="coupon-entry-container">
-            {isValidationInProgress || !isValid ? (
-              <div />
-            ) : (
-              <div className="coupon-value">-{formatDollars(unitsUsed * value)}</div>
-            )}
-          </div>
-        </div>
-        <div className="coupon-error">{error}</div>
-      </div>
+      <tr>
+        <td className="coupon-col-center">
+          <img
+            className="coupon-delete-button"
+            src="assets/img/red-x.png"
+            alt="valid coupon"
+            onClick={this.handleDeleteCoupon}
+          />
+        </td>
+        <td className="coupon-col-left">
+          <input
+            className="coupon-input"
+            type="text"
+            placeholder="e.g., O-123456789012"
+            value={this.state.code}
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+        </td>
+        <td className="coupon-col-left">{icon}</td>
+        <td className="coupon-col-right">
+          {isValidationInProgress || !isValid ? (
+            <div />
+          ) : (
+            <div className="coupon-label">
+              {unitsUsed} x {formatDollars(value)}
+            </div>
+          )}
+        </td>
+        <td className="coupon-col-right">
+          {isValidationInProgress || !isValid ? (
+            <div />
+          ) : (
+            <div className="coupon-value">-{formatDollars(unitsUsed * value)}</div>
+          )}
+        </td>
+      </tr>
     )
   }
 }
@@ -681,16 +678,30 @@ class RedeemCoupons extends Component {
       return <div />
     }
 
-    const couponEntries = _.map(coupons, (coupon, index) => (
-      <CouponEntry
-        coupon={coupon}
-        index={index}
-        key={index}
-        onValidate={this.props.validateCouponAtIndex}
-        updateCouponAtIndex={this.props.updateCouponAtIndex}
-        removeCouponAtIndex={this.props.removeCouponAtIndex}
-      />
-    ))
+    const couponEntries = []
+    for (let index = 0; index < coupons.length; index++) {
+      const coupon = coupons[index]
+      couponEntries.push(
+        <CouponEntry
+          coupon={coupon}
+          index={index}
+          key={index}
+          onValidate={this.props.validateCouponAtIndex}
+          updateCouponAtIndex={this.props.updateCouponAtIndex}
+          removeCouponAtIndex={this.props.removeCouponAtIndex}
+        />,
+      )
+
+      if (coupon.error) {
+        couponEntries.push(
+          <tr>
+            <td colSpan="5">
+              <div className="coupon-error">{coupon.error}</div>
+            </td>
+          </tr>,
+        )
+      }
+    }
 
     const totalCouponValue = _.reduce(
       coupons,
@@ -727,7 +738,19 @@ class RedeemCoupons extends Component {
                 <div className="coupon-subtotal">{formatDollars(totalPrice)}</div>
               </div>
               <div className="coupon-subheading">COUPONS</div>
-              <div className="coupon-list">{couponEntries}</div>
+              <div className="coupon-list">
+                <table className="coupon-table">
+                  <colgroup>
+                    <col width="5%" />
+                    <col width="40%" />
+                    <col width="5%" />
+                    <col width="25%" />
+                    <col width="25%" />
+                  </colgroup>
+                  {couponEntries}
+                </table>
+              </div>
+
               <div className="coupon-total-container">
                 <div className="coupon-subheading">SUBTOTAL AFTER COUPONS</div>
                 <div className="coupon-subtotal">
@@ -1107,10 +1130,10 @@ class App extends Component {
               const coupon = {}
               coupon.code = resp.uniqueID
               coupon.isValidationInProgress = false
-              coupon.value = resp.couponValue
-              coupon.unitsUsed = resp.couponsReserved
+              coupon.value = parseInt(resp.couponValue, 10)
+              coupon.unitsUsed = parseInt(resp.couponsReserved, 10)
               coupon.error = resp.error
-              coupon.isValid = resp.isValid
+              coupon.isValid = resp.isValid === 'true'
               return coupon
             })
             // TODO: Not sure if this is necessary or helpful, since it
