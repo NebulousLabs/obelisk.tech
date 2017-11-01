@@ -1,3 +1,4 @@
+import axios from 'axios'
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { validate } from 'email-validator'
@@ -604,7 +605,7 @@ class CouponEntry extends Component {
   }
 
   render() {
-    const { code, error, isValid, isValidationInProgress, unitsUsed, value } = this.props.coupon
+    const { isValid, isValidationInProgress, unitsUsed, value } = this.props.coupon
 
     let icon = undefined
     if (isValidationInProgress) {
@@ -662,10 +663,6 @@ class CouponEntry extends Component {
 }
 
 class RedeemCoupons extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   handleNextClick = () => {
     // TODO: Any validation before going to next state?
     // TODO: Check that all coupons are valid (need a button to delete invalid ones)
@@ -685,7 +682,7 @@ class RedeemCoupons extends Component {
         <CouponEntry
           coupon={coupon}
           index={index}
-          key={index}
+          key={index + coupon.code}
           onValidate={this.props.validateCouponAtIndex}
           updateCouponAtIndex={this.props.updateCouponAtIndex}
           removeCouponAtIndex={this.props.removeCouponAtIndex}
@@ -694,7 +691,7 @@ class RedeemCoupons extends Component {
 
       if (coupon.error) {
         couponEntries.push(
-          <tr>
+          <tr key={'error' + index + coupon.code}>
             <td colSpan="5">
               <div className="coupon-error">{coupon.error}</div>
             </td>
@@ -747,7 +744,7 @@ class RedeemCoupons extends Component {
                     <col width="25%" />
                     <col width="25%" />
                   </colgroup>
-                  {couponEntries}
+                  <tbody>{couponEntries}</tbody>
                 </table>
               </div>
 
@@ -1015,7 +1012,7 @@ class App extends Component {
       uid: '',
       paymentAddr: '',
 
-      step: 0,
+      step: 2,
       checkoutError: '',
       coupons: [
         {
@@ -1028,16 +1025,16 @@ class App extends Component {
       ],
       couponDiscount: 0,
     }
-    fetch('https://api.gdax.com/products/BTC-USD/ticker').then(res => {
-      res.json().then(data => {
-        this.setState({ btcUsd: parseFloat(data.price) })
+    axios
+      .get('https://api.gdax.com/products/BTC-USD/ticker', { responseType: 'json' })
+      .then(res => {
+        this.setState({ btcUsd: parseFloat(res.data.price) })
       })
-    })
-    fetch('https://api.gdax.com/products/ETH-USD/ticker').then(res => {
-      res.json().then(data => {
-        this.setState({ ethUsd: parseFloat(data.price) })
+    axios
+      .get('https://api.gdax.com/products/ETH-USD/ticker', { responseType: 'json' })
+      .then(res => {
+        this.setState({ ethUsd: parseFloat(res.data.price) })
       })
-    })
   }
 
   updateCouponDiscount = coupons => {
@@ -1120,9 +1117,10 @@ class App extends Component {
     // TODO: Ensure validation request indicates how many units have not had coupons applied yet
     //       so we reserve the right number of units.
     const couponCodes = _.map(this.state.coupons, coupon => coupon.code)
-    fetch(`/validateCoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
-      method: 'GET',
-    })
+    axios
+      .get(`/validateCoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
+        timeout: 10000,
+      })
       .then(res => {
         if (res.ok) {
           res.json().then(json => {
@@ -1143,11 +1141,23 @@ class App extends Component {
             this.updateCouponDiscount(coupons)
           })
         } else {
-          // TODO: Handle other errors
+          debugger
         }
       })
       .catch(err => {
-        // TODO: Handle catch
+        // Timeout or other error
+        let coupons = this.state.coupons.slice()
+        coupons.splice(index, 1, {
+          ...coupon,
+          isValidationInProgress: false,
+          isValid: false,
+          error: 'Unable to reach server to validate coupon.  Please try again later.',
+          value: 0,
+          unitsUsed: 0,
+        })
+        this.setState({
+          coupons,
+        })
       })
   }
 
@@ -1195,10 +1205,8 @@ class App extends Component {
       formData.append('coupons', couponCodes.join(','))
       formData.append('couponDiscount', this.state.couponDiscount)
 
-      fetch(`/adduser`, {
-        method: 'POST',
-        body: formData,
-      })
+      axios
+        .post(`/adduser`, formData)
         .then(res => {
           if (!res.ok) {
             res.text().then(text => {

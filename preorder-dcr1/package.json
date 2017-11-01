@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://obelisk.tech/preorder-dcr1",
   "dependencies": {
+    "axios": "^0.17.0",
     "countries-list": "^1.4.1",
     "email-validator": "^1.0.7",
     "fetch": "^1.1.0",
