@@ -566,9 +566,9 @@ class CouponEntry extends Component {
         break
 
       default:
-        if (code.length > 12) {
+        if (code.length > 14) {
           return
-        } else if (!/^O-[0-9ABCDEF]{1,10}$/.test(code)) {
+        } else if (!/^O-[0-9ABCDEF]{1,12}$/.test(code)) {
           return
         }
         break
@@ -580,8 +580,8 @@ class CouponEntry extends Component {
   // Return true if valid and false if not
   validateCouponCodeFormat = () => {
     let error
-    if (!/^O-[0-9ABCDEF]{10}$/.test(this.state.code)) {
-      error = "Invalid code.  Must start with 'O-', followed by 10 numbers/letters."
+    if (!/^O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
+      error = "Invalid code.  Must start with 'O-', followed by 12 numbers/letters."
     }
     this.props.updateCouponAtIndex(
       { code: this.state.code, isValid: null, value: 0, unitsUsed: 0, error },
@@ -632,7 +632,7 @@ class CouponEntry extends Component {
             <input
               className="coupon-input"
               type="text"
-              placeholder="e.g., O-1234567890"
+              placeholder="e.g., O-123456789012"
               value={this.state.code}
               onChange={this.handleChange}
               onBlur={this.handleBlur}
