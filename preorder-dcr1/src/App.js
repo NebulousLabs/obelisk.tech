@@ -1012,7 +1012,7 @@ class App extends Component {
       uid: '',
       paymentAddr: '',
 
-      step: 2,
+      step: 0,
       checkoutError: '',
       coupons: [
         {
