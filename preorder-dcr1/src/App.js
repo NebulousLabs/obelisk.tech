@@ -546,7 +546,7 @@ class ShippingForm extends Component {
 class CouponEntry extends Component {
   constructor(props) {
     super(props)
-    this.state = { code: props.coupon.code }
+    this.state = { code: props.coupon.code || '' }
   }
 
   handleChange = e => {
@@ -1001,6 +1001,7 @@ class App extends Component {
           isValidationInProgress: false,
         },
       ],
+      couponDiscount: 0,
     }
     fetch('https://api.gdax.com/products/BTC-USD/ticker').then(res => {
       res.json().then(data => {
@@ -1014,10 +1015,20 @@ class App extends Component {
     })
   }
 
+  updateCouponDiscount = coupons => {
+    const couponDiscount = _.reduce(
+      coupons,
+      (total, coupon) => total + coupon.value * coupon.unitsUsed,
+      0,
+    )
+    this.setState({ couponDiscount })
+  }
+
   addCoupon = coupon => {
     const coupons = this.state.coupons.slice()
     coupons.push({ coupon, isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
     this.setState({ coupons })
+    this.updateCouponDiscount(coupons)
   }
 
   // TODO: Don't show ADD COUPON button if we have already applied coupons to all units
@@ -1056,12 +1067,14 @@ class App extends Component {
     this.checkCouponRestrictions(this.state.quantity, coupons)
 
     this.setState({ coupons })
+    this.updateCouponDiscount(coupons)
   }
 
   removeCouponAtIndex = index => {
     const coupons = this.state.coupons.slice()
     coupons.splice(index, 1)
     this.setState({ coupons })
+    this.updateCouponDiscount(coupons)
   }
 
   validateCouponAtIndex = (code, index) => {
@@ -1119,11 +1132,13 @@ class App extends Component {
       this.checkCouponRestrictions(this.state.quantity, coupons)
 
       this.setState({ coupons })
+      this.updateCouponDiscount(coupons)
     }, 1000)
   }
 
   render() {
-    const totalPrice = 2499 * this.state.quantity + this.state.shippingCost
+    const undiscountedPrice = 2499 * this.state.quantity + this.state.shippingCost
+    const totalPrice = undiscountedPrice - this.state.couponDiscount
     const btcPrice = totalPrice / this.state.btcUsd
     const next = result => {
       this.setState(result)
@@ -1198,7 +1213,7 @@ class App extends Component {
         <RedeemCoupons
           visible={this.state.step === 2}
           quantity={this.state.quantity}
-          totalPrice={totalPrice}
+          totalPrice={undiscountedPrice}
           coupons={this.state.coupons}
           addCoupon={this.addCoupon}
           error={this.state.couponError}
