@@ -914,7 +914,7 @@ body {
 }
 .ordercount-coin-logo {
 	margin-right: 10px;
-	width: 30px;
+	width: 27px;
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
@@ -923,7 +923,6 @@ body {
 	margin-left: 5px;
 }
 .order-bar {
-	flex: 1;
 	height: 3px;
 	background-color: #666;
 	margin: 0;
@@ -1073,8 +1072,10 @@ a.colo-table-link:hover {
 .preorder-container {
 	display: flex;
 	justify-content: space-around;
-	margin-bottom: 80px;
+	margin-bottom: 30px;
 	position: relative;
+	margin-left: 70px;
+	margin-right: 70px;
 }
 
 .preorder-hardware-button {
@@ -1084,6 +1085,17 @@ a.colo-table-link:hover {
 
 .preorder-hardware-button:hover {
 	border: 1px solid #6a6a6a;
+}
+
+.preorder-coin-logo {
+    width: auto;
+    height: 45px;
+}
+
+.preorder-coin-msg {
+	color: #666666	;
+	font-size: 22px;
+	font-family: 'Karbon Light';
 }
 
 .vertical-spacer {
