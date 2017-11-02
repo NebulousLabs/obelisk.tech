@@ -1053,7 +1053,6 @@ class App extends Component {
     this.updateCouponDiscount(coupons)
   }
 
-  // TODO: Don't show ADD COUPON button if we have already applied coupons to all units
   checkCouponRestrictions(quantityOrdered, coupons) {
     // Check that this coupon is not a duplicate of any other
     for (let i = coupons.length - 1; i >= 0; i--) {
@@ -1114,8 +1113,6 @@ class App extends Component {
     coupon.code = code
     this.setState({ coupons })
 
-    // TODO: Ensure validation request indicates how many units have not had coupons applied yet
-    //       so we reserve the right number of units.
     const couponCodes = _.map(this.state.coupons, coupon => coupon.code)
     axios
       .get(`/validateCoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
@@ -1187,7 +1184,6 @@ class App extends Component {
       formData.append('phone', this.state.backupphone)
       formData.append('units', this.state.quantity)
       // We send the undiscounted price here, as the coupon is applied on the server side
-      // TODO:
       formData.append(
         'price',
         (() => {
@@ -1201,7 +1197,10 @@ class App extends Component {
       formData.append('product', 'DCR1')
 
       // Add on the coupon info, including the discount, so we can double-check it
-      const couponCodes = _.map(this.state.coupons, coupon => coupon.code)
+      const couponCodes = _.map(this.state.coupons, coupon => coupon.code).filter(
+        code => code.length > 0,
+      )
+
       formData.append('coupons', couponCodes.join(','))
       formData.append('couponDiscount', this.state.couponDiscount)
 
