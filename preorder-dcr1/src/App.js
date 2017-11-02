@@ -582,21 +582,44 @@ class CouponEntry extends Component {
 
   // Return true if valid and false if not
   validateCouponCodeFormat = () => {
+    if (this.state.code.length === 0) {
+      return true
+    }
+
     let error
     if (!/^O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
       error = "Invalid code.  Must start with 'O-', followed by 12 numbers/letters."
     }
     this.props.updateCouponAtIndex(
-      { code: this.state.code, isValid: null, value: 0, unitsUsed: 0, error },
+      {
+        code: this.state.code,
+        isValid: null,
+        isValidationInProgress: false,
+        value: 0,
+        unitsUsed: 0,
+        error,
+      },
       this.props.index,
     )
     return !error
   }
 
   handleBlur = e => {
-    // If basic format looks good, ask the server to tell us the details
+    this.props.updateCouponAtIndex(
+      {
+        code: this.state.code,
+        isValid: null,
+        isValidationInProgress: false,
+        value: 0,
+        unitsUsed: 0,
+        error: undefined,
+      },
+      this.props.index,
+    )
+
     if (this.validateCouponCodeFormat()) {
-      this.props.onValidate(this.state.code, this.props.index)
+      // Hack to ensure state is updated before we send server request
+      setTimeout(() => this.props.onValidate(this.state.code, this.props.index), 0)
     }
   }
 
@@ -682,7 +705,7 @@ class RedeemCoupons extends Component {
         <CouponEntry
           coupon={coupon}
           index={index}
-          key={index + coupon.code}
+          key={coupon.code + index}
           onValidate={this.props.validateCouponAtIndex}
           updateCouponAtIndex={this.props.updateCouponAtIndex}
           removeCouponAtIndex={this.props.removeCouponAtIndex}
@@ -691,7 +714,7 @@ class RedeemCoupons extends Component {
 
       if (coupon.error) {
         couponEntries.push(
-          <tr key={'error' + index + coupon.code}>
+          <tr key={coupon.code + index + '_error'}>
             <td colSpan="5">
               <div className="coupon-error">{coupon.error}</div>
             </td>
@@ -1058,7 +1081,7 @@ class App extends Component {
     for (let i = coupons.length - 1; i >= 0; i--) {
       const currCoupon = coupons[i]
       for (let j = i - 1; j >= 0; j--) {
-        if (coupons[j].code === currCoupon.code) {
+        if (coupons[j].code.length > 0 && coupons[j].code === currCoupon.code) {
           currCoupon.isValidationInProgress = false
           currCoupon.isValid = false
           currCoupon.error = `This coupon is duplicated ${i < j ? 'below' : 'above'}`
@@ -1107,39 +1130,39 @@ class App extends Component {
       return
     }
 
+    const couponCodes = _.map(this.state.coupons, coupon => coupon.code).filter(
+      code => code.length > 0,
+    )
+    if (couponCodes.length === 0) {
+      return
+    }
+
     // Clear out the coupon so we don't show the details while validating with the server
     coupon.isValidationInProgress = true
     coupon.error = undefined
     coupon.code = code
     this.setState({ coupons })
 
-    const couponCodes = _.map(this.state.coupons, coupon => coupon.code)
     axios
-      .get(`/validateCoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
+      .get(`/validatecoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
         timeout: 10000,
+        responseType: 'json',
       })
       .then(res => {
-        if (res.ok) {
-          res.json().then(json => {
-            const coupons = _.map(json, resp => {
-              const coupon = {}
-              coupon.code = resp.uniqueID
-              coupon.isValidationInProgress = false
-              coupon.value = parseInt(resp.couponValue, 10)
-              coupon.unitsUsed = parseInt(resp.couponsReserved, 10)
-              coupon.error = resp.error
-              coupon.isValid = resp.isValid === 'true'
-              return coupon
-            })
-            // TODO: Not sure if this is necessary or helpful, since it
-            //       should have already run before.
-            // this.checkCouponRestrictions(this.state.quantity, coupons)
-            this.setState({ coupons })
-            this.updateCouponDiscount(coupons)
-          })
-        } else {
-          debugger
-        }
+        const coupons = _.map(res.data, respCoupon => {
+          const coupon = {
+            code: respCoupon.uniqueID,
+            isValidationInProgress: false,
+            value: parseInt(respCoupon.couponValue, 10),
+            unitsUsed: parseInt(respCoupon.couponsReserved, 10),
+            error: respCoupon.error,
+            isValid: respCoupon.isValid,
+          }
+          return coupon
+        })
+
+        this.setState({ coupons })
+        this.updateCouponDiscount(coupons)
       })
       .catch(err => {
         // Timeout or other error
@@ -1205,30 +1228,26 @@ class App extends Component {
       formData.append('couponDiscount', this.state.couponDiscount)
 
       axios
-        .post(`/adduser`, formData)
+        .post(`/adduser`, formData, { responseType: 'json' })
         .then(res => {
-          if (!res.ok) {
-            res.text().then(text => {
-              if (text.includes('user with that email already exists')) {
-                this.setState({
-                  checkoutError:
-                    'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
-                })
-              } else {
-                this.setState({
-                  checkoutError:
-                    'an unknown error has occurred and has been reported to the developers.',
-                })
-              }
-            })
-          } else {
-            res.json().then(data => {
-              this.setState({ uid: data.uniqueID, paymentAddr: data.paymentAddr })
-              this.setState({ step: 3 })
-            })
-          }
+          this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
+          this.setState({ step: 4 })
         })
         .catch(err => {
+          // The email error is not currently checked on the server, and the "unknown" error
+          // is effectively the same as the one below, so just commenting this out for now.
+          //   if (res.data.includes('user with that email already exists')) {
+          //     this.setState({
+          //       checkoutError:
+          //         'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
+          //     })
+          //   } else {
+          //     this.setState({
+          //       checkoutError:
+          //         'an unknown error has occurred and has been reported to the developers.',
+          //     })
+          //   }
+          // }
           this.setState({ checkoutError: 'could not check out. try again in a few minutes.' })
         })
     }

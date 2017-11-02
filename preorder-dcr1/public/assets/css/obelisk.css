@@ -1066,9 +1066,14 @@ body {
 	font-family: "Karbon Light";
 	font-size: 14px;
 	margin-left: 20px;
+    position: relative;
+    top: -16px;
+	left: 13px;
 }
 
 .coupon-delete-button {
-	width: 14px;
+	width: 16px;
 	cursor: pointer;
+	position: relative;
+    top: -2px;
 }
