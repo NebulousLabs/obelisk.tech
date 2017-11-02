@@ -1063,3 +1063,45 @@ a.colo-table-link:hover {
 .decred-color {
   color: #2971FF;
 }
+
+.preorder-title {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 80px;
+}
+
+.preorder-container {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 80px;
+	position: relative;
+}
+
+.preorder-hardware-button {
+	border: 1px solid #2b2b2b;
+	border-radius: 40px;
+}
+
+.preorder-hardware-button:hover {
+	border: 1px solid #6a6a6a;
+}
+
+.vertical-spacer {
+	height: 120px;
+}
+
+.something-big.preorder-title::after {
+	content: "";
+	color: green;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	height: 1px;
+	width: 100%;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+10,3a3a3a+35,3a3a3a+65,000000+89 */
+	background: #000000; /* Old browsers */
+	background: -moz-linear-gradient(left, #000000 10%, #3a3a3a 35%, #3a3a3a 65%, #000000 89%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #000000 10%,#3a3a3a 35%,#3a3a3a 65%,#000000 89%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #000000 10%,#3a3a3a 35%,#3a3a3a 65%,#000000 89%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
+}
