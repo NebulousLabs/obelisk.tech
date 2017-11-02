@@ -1066,7 +1066,7 @@ a.colo-table-link:hover {
 
 .preorder-title {
 	text-align: center;
-	margin-top: 20px;
+	margin-top:50px;
 	margin-bottom: 80px;
 }
 
@@ -1092,16 +1092,15 @@ a.colo-table-link:hover {
 
 .something-big.preorder-title::after {
 	content: "";
-	color: green;
 	position: absolute;
-	top: 70px;
-	left: 0;
+	top: 95px;
+	left: 20%;
 	height: 1px;
-	width: 100%;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+10,3a3a3a+35,3a3a3a+65,000000+89 */
+	width: 60%;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,3a3a3a+16,3a3a3a+84,000000+100 */
 	background: #000000; /* Old browsers */
-	background: -moz-linear-gradient(left, #000000 10%, #3a3a3a 35%, #3a3a3a 65%, #000000 89%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(left, #000000 10%,#3a3a3a 35%,#3a3a3a 65%,#000000 89%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to right, #000000 10%,#3a3a3a 35%,#3a3a3a 65%,#000000 89%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	background: -moz-linear-gradient(left, #000000 0%, #3a3a3a 16%, #3a3a3a 84%, #000000 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #000000 0%,#3a3a3a 16%,#3a3a3a 84%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #000000 0%,#3a3a3a 16%,#3a3a3a 84%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
 }
