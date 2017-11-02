@@ -687,8 +687,12 @@ class CouponEntry extends Component {
 
 class RedeemCoupons extends Component {
   handleNextClick = () => {
-    // TODO: Any validation before going to next state?
-    // TODO: Check that all coupons are valid (need a button to delete invalid ones)
+    const anyErrors = _.some(this.props.coupons, 'error')
+    if (anyErrors || this.props.error) {
+      // Don't allow user to move to next step if there are errors.
+      return
+    }
+
     this.props.next(this.state)
   }
 
