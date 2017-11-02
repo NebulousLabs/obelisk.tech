@@ -134,7 +134,7 @@ class PageOne extends Component {
               />
               <button onClick={incrementQuantity} className="plus-button" />
             </div>
-            <div className="quantity-price">${2499 * this.state.quantity}</div>
+            <div className="quantity-price">{formatDollars(2499 * this.state.quantity)}</div>
             <div className="shipping-note">*orders are estimated to ship by June, 2018.</div>
             <div className="next-button" onClick={handleNextClick} />
           </div>
@@ -530,7 +530,7 @@ class ShippingForm extends Component {
             <h3> Estimated sales tax and shipping costs </h3>
             <div className="estimated-cost">
               <span className="money">$</span>
-              <p className="amount">{estimatedCost()}</p>
+              <p className="amount">{formatNumber(estimatedCost())}</p>
             </div>
             <p className="note">
               * Shipping costs are $35 per unit for US/Europe/China Customers and $70 per unit for
