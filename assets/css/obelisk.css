@@ -523,11 +523,20 @@ body {
 		display: none;
 	}
 }
-@media (max-width: 1000px) {
+@media (min-width: 1000px) {
 	.smoke-effect {
 		position: absolute;
-		left: 10px;
-		top: 10px;
+		left: 620px;
+		top: -40px;
+		width: 90%;
+		z-index: -1;
+	}
+}
+
+@media (max-width: 1000px) {
+	.smoke-effect {
+		width: 80%;
+		z-index: -1;
 	}
 }
 @media (max-width: 768px) {
@@ -542,13 +551,6 @@ body {
 	nav {
 		display: none;
 	}
-}
-.smoke-effect {
-	position: absolute;
-	left: 620px;
-    top: -40px;
-	width: 90%;
-	z-index: -1;
 }
 
 .order-section, .order-main {
@@ -813,7 +815,7 @@ body {
 
 .preorder-button:hover {
 	text-decoration: none;
-	color: red;
+	color: #e4001b;
 }
 .preorder-button {
 	display: inline-block;
@@ -827,7 +829,7 @@ body {
 	padding-top: 6px;
 	text-decoration: none;
 	font-size: 20px;
-	color: red;
+	color: #e4001b;
 }
 
 .profit-calculator > * > h3 {
@@ -883,12 +885,25 @@ body {
 	width: 85%;
 	height: 35px;
 }
-.ordercounts-container {
-	display: flex;
-	width: 560px;
-	margin-left: 18px;
-	margin-bottom: 30px;
+
+@media (min-width: 768px) {
+	.ordercounts-container {
+		display: flex;
+		width: 560px;
+		margin-left: 18px;
+		margin-bottom: 30px;
+	}
 }
+
+@media (max-width: 768px) {
+	.ordercounts-container {
+		display: block;
+		width: 560px;
+		margin-left: 18px;
+		margin-bottom: 30px;
+	}
+}
+
 .ordercount {
 	display: flex;
 	flex-direction: column;
