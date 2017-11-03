@@ -545,9 +545,9 @@ body {
 }
 .smoke-effect {
 	position: absolute;
-	left: 600px;
-    top: -50px;
-	width: 80%;
+	left: 620px;
+    top: -40px;
+	width: 90%;
 	z-index: -1;
 }
 
