@@ -1159,13 +1159,10 @@ a.colo-table-link:hover {
 
 .company-image {
 	width: 48%;
-	margin-bottom: 9px;
+	margin-bottom: 7px;
 }
 
 .team-member-container {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
 	color: #666666	;
 	font-size: 22px;
 	font-family: 'Karbon Light';
@@ -1176,6 +1173,7 @@ a.colo-table-link:hover {
 .team-role {
 	font-family: 'Karbon Thin';
 	color: #e4001b;
+	margin-bottom: 30px;
 }
 
 .red-color {
