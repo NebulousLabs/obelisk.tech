@@ -1116,3 +1116,25 @@ a.colo-table-link:hover {
 	background: linear-gradient(to right, #000000 0%,#3a3a3a 16%,#3a3a3a 84%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
 }
+
+.team-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 40px;
+}
+
+
+.team-member-container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	color: #666666	;
+	font-size: 22px;
+	font-family: 'Karbon Light';
+	align-items: center;
+}
+
+.team-role {
+	font-family: 'Karbon Thin';
+	color: #e4001b;
+}
