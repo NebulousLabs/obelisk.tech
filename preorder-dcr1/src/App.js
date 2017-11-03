@@ -1033,7 +1033,7 @@ class App extends Component {
       quantity: 1,
       shippingCost: 0,
       newsletter: false,
-      btcUsd: 2400,
+      btcUsd: 7000,
       paymentMethod: '',
 
       uid: '',
@@ -1148,7 +1148,7 @@ class App extends Component {
     this.setState({ coupons })
 
     axios
-      .get(`/validatecoupons?coupons=${couponCodes.join(',')}&q=${this.state.quantity}`, {
+      .get(`/validatecoupons?coupons=${couponCodes.join(',')}`, {
         timeout: 10000,
         responseType: 'json',
       })
@@ -1169,6 +1169,7 @@ class App extends Component {
         this.updateCouponDiscount(coupons)
       })
       .catch(err => {
+				console.log(err)
         // Timeout or other error
         let coupons = this.state.coupons.slice()
         coupons.splice(index, 1, {
@@ -1224,7 +1225,7 @@ class App extends Component {
       formData.append('product', 'DCR1')
 
       // Add on the coupon info, including the discount, so we can double-check it
-      const couponCodes = _.map(this.state.coupons, coupon => coupon.code).filter(
+      const couponCodes = _.map(this.state.coupons, coupon => coupon.code + ":" + coupon.unitsUsed).filter(
         code => code.length > 0,
       )
 
