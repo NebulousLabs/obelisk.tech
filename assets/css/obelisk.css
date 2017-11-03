@@ -1150,7 +1150,13 @@ a.colo-table-link:hover {
 }
 
 .team-member-image {
-	width: 68%;
+	width: 30%;
+	margin-bottom: 5px;
+}
+
+.company-image {
+	width: 45%;
+	margin-bottom: 13px;
 }
 
 .team-member-container {
