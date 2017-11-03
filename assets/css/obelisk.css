@@ -1094,19 +1094,11 @@ a.colo-table-link:hover {
 	margin-bottom: 80px;
 }
 
-.preorder-container {
-	display: flex;
-	justify-content: space-around;
-	margin-bottom: 30px;
-	position: relative;
-	margin-left: 70px;
-	margin-right: 70px;
-}
-
 .preorder-hardware-button {
 	border: 1px solid #2b2b2b;
 	border-radius: 40px;
 	background: black;
+	margin-bottom: 30px;
 }
 
 .preorder-hardware-button:hover {
@@ -1115,7 +1107,9 @@ a.colo-table-link:hover {
 
 .preorder-coin-logo {
     width: auto;
-    height: 45px;
+	height: 45px;
+	align-self: center;
+	margin-bottom: 20px;
 }
 
 .preorder-coin-msg {
@@ -1143,6 +1137,15 @@ a.colo-table-link:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
 }
 
+.preorder-container {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-bottom: 30px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
 .team-row {
 	display: flex;
 	justify-content: space-between;
@@ -1157,6 +1160,8 @@ a.colo-table-link:hover {
 .company-image {
 	width: 45%;
 	margin-bottom: 13px;
+	width: 68%;
+	margin-bottom: 18px;
 }
 
 .team-member-container {
