@@ -1123,6 +1123,9 @@ a.colo-table-link:hover {
 	margin-bottom: 40px;
 }
 
+.team-member-image {
+	width: 120px;
+}
 
 .team-member-container {
 	display: flex;
