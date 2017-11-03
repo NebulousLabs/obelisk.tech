@@ -1113,7 +1113,7 @@ a.colo-table-link:hover {
 
 .preorder-title::after {
 	content: "";
-	position: absolute;red
+	position: absolute;
 	top: 95px;
 	left: 15%;
 	height: 1px;
