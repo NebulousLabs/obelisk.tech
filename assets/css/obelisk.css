@@ -901,6 +901,7 @@ body {
 		width: 560px;
 		margin-left: 18px;
 		margin-bottom: 30px;
+		width: 100%;
 	}
 }
 
@@ -912,6 +913,7 @@ body {
 	vertical-align: middle;
 	flex: 1
 }
+
 .ordercount-product-label {
 	font-size: 42px;
 }
@@ -1159,6 +1161,7 @@ a.colo-table-link:hover {
 	font-size: 22px;
 	font-family: 'Karbon Light';
 	align-items: center;
+	text-align: center;
 }
 
 .team-role {
