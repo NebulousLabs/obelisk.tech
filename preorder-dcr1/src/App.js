@@ -1227,14 +1227,13 @@ class App extends Component {
 			formData.append('backupEmail', this.state.backupemail)
 			formData.append('phone', this.state.backupphone)
 			formData.append('units', this.state.quantity)
-			// We send the undiscounted price here, as the coupon is applied on the server side
 			formData.append(
 				'price',
 				(() => {
 					if (result.paymentMethod === 'transfer') {
-						return undiscountedPrice
+						return totalPrice
 					}
-					return formatBTC(undiscountedBtcPrice)
+					return formatBTC(btcPrice)
 				})(),
 			)
 			formData.append('wire', result.paymentMethod === 'transfer')
