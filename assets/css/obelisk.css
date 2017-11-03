@@ -806,6 +806,11 @@ body {
 .payment-selection-section > .next-button {
 	top: 78px;
 }
+
+.preorder-main {
+	margin-top: 0;
+}
+
 .preorder-button:hover {
 	text-decoration: none;
 	color: red;
@@ -1064,8 +1069,11 @@ a.colo-table-link:hover {
 }
 
 .preorder-title {
+	font-size: 44px;
+    font-family: "Karbon Thin";
+    color: #fff;
 	text-align: center;
-	margin-top:50px;
+	margin-top: 40px;
 	margin-bottom: 80px;
 }
 
@@ -1081,6 +1089,7 @@ a.colo-table-link:hover {
 .preorder-hardware-button {
 	border: 1px solid #2b2b2b;
 	border-radius: 40px;
+	background: black;
 }
 
 .preorder-hardware-button:hover {
@@ -1102,13 +1111,13 @@ a.colo-table-link:hover {
 	height: 120px;
 }
 
-.something-big.preorder-title::after {
+.preorder-title::after {
 	content: "";
-	position: absolute;
+	position: absolute;red
 	top: 95px;
-	left: 20%;
+	left: 15%;
 	height: 1px;
-	width: 60%;
+	width: 70%;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,3a3a3a+16,3a3a3a+84,000000+100 */
 	background: #000000; /* Old browsers */
 	background: -moz-linear-gradient(left, #000000 0%, #3a3a3a 16%, #3a3a3a 84%, #000000 100%); /* FF3.6-15 */
@@ -1139,5 +1148,9 @@ a.colo-table-link:hover {
 
 .team-role {
 	font-family: 'Karbon Thin';
+	color: #e4001b;
+}
+
+.red-color {
 	color: #e4001b;
 }
