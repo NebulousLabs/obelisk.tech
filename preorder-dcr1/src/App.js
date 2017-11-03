@@ -628,14 +628,14 @@ class CouponEntry extends Component {
   }
 
   render() {
-    const { isValid, isValidationInProgress, unitsUsed, value } = this.props.coupon
+    const { isValid, isValidationInProgress, error, unitsUsed, value } = this.props.coupon
 
     let icon = undefined
     if (isValidationInProgress) {
       icon = <img className="coupon-spinner" src="assets/img/spinner.gif" alt="spinner" />
     } else if (isValid === null) {
       icon = <div />
-    } else if (isValid) {
+    } else if (isValid && error === "") {
       icon = <img className="coupon-icon" src="assets/img/checkmark.png" alt="valid coupon" />
     } else {
       icon = (
@@ -688,7 +688,7 @@ class CouponEntry extends Component {
 class RedeemCoupons extends Component {
   handleNextClick = () => {
     const anyErrors = _.some(this.props.coupons, 'error')
-    if (anyErrors || this.props.error) {
+    if (anyErrors) {
       // Don't allow user to move to next step if there are errors.
       return
     }
@@ -721,6 +721,15 @@ class RedeemCoupons extends Component {
           <tr key={coupon.code + index + '_error'}>
             <td colSpan="5">
               <div className="coupon-error">{coupon.error}</div>
+            </td>
+          </tr>,
+        )
+      }
+      if (coupon.note) {
+        couponEntries.push(
+          <tr key={coupon.code + index + '_note'}>
+            <td colSpan="5">
+              <div className="coupon-note">{coupon.note}</div>
             </td>
           </tr>,
         )
@@ -1080,6 +1089,15 @@ class App extends Component {
     this.updateCouponDiscount(coupons)
   }
 
+	totalCouponsUsed = (coupons) => {
+    let used = 0
+    for (let i = 0; i < coupons.length; i++) {
+      const coupon = coupons[i]
+      used += coupon.isValid ? coupon.unitsUsed : 0
+    }
+		return used
+	}
+
   checkCouponRestrictions(quantityOrdered, coupons) {
     // Check that this coupon is not a duplicate of any other
     for (let i = coupons.length - 1; i >= 0; i--) {
@@ -1091,20 +1109,6 @@ class App extends Component {
           currCoupon.error = `This coupon is duplicated ${i < j ? 'below' : 'above'}`
         }
       }
-    }
-
-    // Ensure count of coupons used doesn't exceed units purchased
-    let totalCouponsUsed = 0
-    for (let i = 0; i < coupons.length; i++) {
-      const coupon = coupons[i]
-      totalCouponsUsed += coupon.isValid ? coupon.unitsUsed : 0
-    }
-
-    if (totalCouponsUsed > quantityOrdered) {
-      this.setState({
-        couponError: 'You can use at most one coupon per unit.  Remove some coupons.',
-      })
-      return
     }
   }
 
@@ -1153,7 +1157,7 @@ class App extends Component {
         responseType: 'json',
       })
       .then(res => {
-        const coupons = _.map(res.data, respCoupon => {
+        const coupons = res.data.map(respCoupon => {
           const coupon = {
             code: respCoupon.uniqueID,
             isValidationInProgress: false,
@@ -1162,143 +1166,155 @@ class App extends Component {
             error: respCoupon.error,
             isValid: respCoupon.isValid,
           }
+					const remaining = this.state.quantity - this.totalCouponsUsed(this.state.coupons)
+					if (remaining <= 0) {
+						coupon.isValid = false
+						coupon.isValidationInProgress = false
+						coupon.note = "no remaining coupons."
+						coupon.unitsUsed = 0
+					} else
+					if (coupon.unitsUsed > remaining) {
+						const remainingCouponValue = coupon.unitsUsed - remaining
+						coupon.note = "only one coupon can be applied per unit. coupon has " + remainingCouponValue + " remaining uses"
+						coupon.unitsUsed = remaining
+					}
           return coupon
         })
 
-        this.setState({ coupons })
-        this.updateCouponDiscount(coupons)
-      })
-      .catch(err => {
+				this.setState({ coupons })
+				this.updateCouponDiscount(coupons)
+			})
+			.catch(err => {
 				console.log(err)
-        // Timeout or other error
-        let coupons = this.state.coupons.slice()
-        coupons.splice(index, 1, {
-          ...coupon,
-          isValidationInProgress: false,
-          isValid: false,
-          error: 'Unable to reach server to validate coupon.  Please try again later.',
-          value: 0,
-          unitsUsed: 0,
-        })
-        this.setState({
-          coupons,
-        })
-      })
-  }
+				// Timeout or other error
+				let coupons = this.state.coupons.slice()
+				coupons.splice(index, 1, {
+					...coupon,
+					isValidationInProgress: false,
+					isValid: false,
+					error: 'Unable to reach server to validate coupon.  Please try again later.',
+					value: 0,
+					unitsUsed: 0,
+				})
+				this.setState({
+					coupons,
+				})
+			})
+	}
 
-  render() {
-    const undiscountedPrice = 2499 * this.state.quantity + this.state.shippingCost
-    const totalPrice = undiscountedPrice - this.state.couponDiscount
-    const undiscountedBtcPrice = undiscountedPrice / this.state.btcUsd
-    const btcPrice = totalPrice / this.state.btcUsd
-    const next = result => {
-      this.setState(result)
-      this.setState({ step: this.state.step + 1 })
-    }
-    const back = () => {
-      this.setState({ checkoutError: '' })
-      if (this.state.step > 0) {
-        this.setState({ step: this.state.step - 1 })
-      }
-    }
-    const handleSubmit = result => {
-      this.setState(result)
-      const formData = new FormData()
-      formData.append('email', this.state.email)
-      formData.append('newsletter', this.state.newsletter)
-      formData.append('name', this.state.name)
-      formData.append('address', this.state.address)
-      formData.append('backupEmail', this.state.backupemail)
-      formData.append('phone', this.state.backupphone)
-      formData.append('units', this.state.quantity)
-      // We send the undiscounted price here, as the coupon is applied on the server side
-      formData.append(
-        'price',
-        (() => {
-          if (result.paymentMethod === 'transfer') {
-            return undiscountedPrice
-          }
-          return formatBTC(undiscountedBtcPrice)
-        })(),
-      )
-      formData.append('wire', result.paymentMethod === 'transfer')
-      formData.append('product', 'DCR1')
+	render() {
+		const undiscountedPrice = 2499 * this.state.quantity + this.state.shippingCost
+		const totalPrice = undiscountedPrice - this.state.couponDiscount
+		const undiscountedBtcPrice = undiscountedPrice / this.state.btcUsd
+		const btcPrice = totalPrice / this.state.btcUsd
+		const next = result => {
+			this.setState(result)
+			this.setState({ step: this.state.step + 1 })
+		}
+		const back = () => {
+			this.setState({ checkoutError: '' })
+			if (this.state.step > 0) {
+				this.setState({ step: this.state.step - 1 })
+			}
+		}
+		const handleSubmit = result => {
+			this.setState(result)
+			const formData = new FormData()
+			formData.append('email', this.state.email)
+			formData.append('newsletter', this.state.newsletter)
+			formData.append('name', this.state.name)
+			formData.append('address', this.state.address)
+			formData.append('backupEmail', this.state.backupemail)
+			formData.append('phone', this.state.backupphone)
+			formData.append('units', this.state.quantity)
+			// We send the undiscounted price here, as the coupon is applied on the server side
+			formData.append(
+				'price',
+				(() => {
+					if (result.paymentMethod === 'transfer') {
+						return undiscountedPrice
+					}
+					return formatBTC(undiscountedBtcPrice)
+				})(),
+			)
+			formData.append('wire', result.paymentMethod === 'transfer')
+			formData.append('product', 'DCR1')
 
-      // Add on the coupon info, including the discount, so we can double-check it
-      const couponCodes = _.map(this.state.coupons, coupon => coupon.code + ":" + coupon.unitsUsed).filter(
-        code => code.length > 0,
-      )
+			// Add on the coupon info, including the discount, so we can double-check it
+			const couponCodes = _.map(this.state.coupons, coupon => coupon.code + ":" + coupon.unitsUsed).filter(
+				code => code.length > 0,
+			)
 
-      formData.append('coupons', couponCodes.join(','))
-      formData.append('couponDiscount', this.state.couponDiscount)
+			formData.append('coupons', couponCodes.join(','))
+			formData.append('couponDiscount', this.state.couponDiscount)
 
-      axios
-        .post(`/adduser`, formData, { responseType: 'json' })
-        .then(res => {
-          this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
-          this.setState({ step: 4 })
-        })
-        .catch(err => {
-          // The email error is not currently checked on the server, and the "unknown" error
-          // is effectively the same as the one below, so just commenting this out for now.
-          //   if (res.data.includes('user with that email already exists')) {
-          //     this.setState({
-          //       checkoutError:
-          //         'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
-          //     })
-          //   } else {
-          //     this.setState({
-          //       checkoutError:
-          //         'an unknown error has occurred and has been reported to the developers.',
-          //     })
-          //   }
-          // }
-          this.setState({ checkoutError: 'could not check out. try again in a few minutes.' })
-        })
-    }
-    return (
-      <div>
-        <PageOne visible={this.state.step === 0} next={next} />
-        <ShippingForm
-          visible={this.state.step === 1}
-          quantity={this.state.quantity}
-          next={next}
-          back={back}
-        />
-        <RedeemCoupons
-          visible={this.state.step === 2}
-          quantity={this.state.quantity}
-          totalPrice={undiscountedPrice}
-          coupons={this.state.coupons}
-          addCoupon={this.addCoupon}
-          error={this.state.couponError}
-          validateCouponAtIndex={this.validateCouponAtIndex}
-          removeCouponAtIndex={this.removeCouponAtIndex}
-          updateCouponAtIndex={this.updateCouponAtIndex}
-          next={next}
-          back={back}
-        />
-        <Checkout
-          visible={this.state.step === 3}
-          checkoutError={this.state.checkoutError}
-          shippingCost={this.state.shippingCost}
-          totalPrice={totalPrice}
-          btcPrice={btcPrice}
-          coupons={this.state.coupons}
-          next={handleSubmit}
-          back={back}
-        />
-        <Payment
-          visible={this.state.step === 4}
-          paymentMethod={this.state.paymentMethod}
-          uid={this.state.uid}
-          btcaddr={this.state.paymentAddr}
-          btcPrice={btcPrice}
-          back={back}
-        />
-      </div>
-    )
-  }
+			axios
+				.post(`/adduser`, formData, { responseType: 'json' })
+				.then(res => {
+					this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
+					this.setState({ step: 4 })
+				})
+				.catch(err => {
+					// The email error is not currently checked on the server, and the "unknown" error
+					// is effectively the same as the one below, so just commenting this out for now.
+					//   if (res.data.includes('user with that email already exists')) {
+					//     this.setState({
+					//       checkoutError:
+					//         'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
+					//     })
+					//   } else {
+					//     this.setState({
+					//       checkoutError:
+					//         'an unknown error has occurred and has been reported to the developers.',
+					//     })
+					//   }
+					// }
+					this.setState({ checkoutError: 'could not check out. try again in a few minutes.' })
+				})
+		}
+		return (
+			<div>
+				<PageOne visible={this.state.step === 0} next={next} />
+				<ShippingForm
+					visible={this.state.step === 1}
+					quantity={this.state.quantity}
+					next={next}
+					back={back}
+				/>
+				<RedeemCoupons
+					visible={this.state.step === 2}
+					quantity={this.state.quantity}
+					totalPrice={undiscountedPrice}
+					coupons={this.state.coupons}
+					addCoupon={this.addCoupon}
+					error={this.state.couponError}
+					validateCouponAtIndex={this.validateCouponAtIndex}
+					removeCouponAtIndex={this.removeCouponAtIndex}
+					updateCouponAtIndex={this.updateCouponAtIndex}
+					next={next}
+					back={back}
+				/>
+				<Checkout
+					visible={this.state.step === 3}
+					checkoutError={this.state.checkoutError}
+					shippingCost={this.state.shippingCost}
+					totalPrice={totalPrice}
+					btcPrice={btcPrice}
+					coupons={this.state.coupons}
+					next={handleSubmit}
+					back={back}
+				/>
+				<Payment
+					visible={this.state.step === 4}
+					paymentMethod={this.state.paymentMethod}
+					uid={this.state.uid}
+					btcaddr={this.state.paymentAddr}
+					btcPrice={btcPrice}
+					back={back}
+				/>
+			</div>
+		)
+	}
 }
 
 export default App
