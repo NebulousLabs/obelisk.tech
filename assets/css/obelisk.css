@@ -1012,50 +1012,47 @@ h4 {
 	font-family: "Karbon Regular";
 }
 
+
 .colo-table {
 	color: #a7a7a7;
-	font-size: 18px;
+	font-size: 22px;
 	font-family: "Karbon Light";
 	border: 1px solid #ba0f1a;
 	margin-bottom: 20px;
+	margin-top: 40px;
 }
-.colo-table th {
-  padding: 10px 10px 4px 10px;
+
+.colo-table-header, .colo-table-footer {
+	color: white;
 	background: #ba0f1a;
 }
-.colo-table td {
-	padding: 10px;
+
+.colo-table-header div {
+	position: relative;
+    top: 3px;
+}
+.colo-table-header div:last-child {
+    left: 18px;
 }
 
-.colo-table tr:last-child td {
-  padding: 10px 10px 4px 10px;
+.colo-table-footer {
+	font-size: 16px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #ff8888;
 }
 
-.colo-table tr:first-child th:last-child {
-  padding: 10px 10px 4px 30px;
+.colo-table-footer:last-child {
+	border-bottom: none;
 }
 
-.colo-table-header {
-	color: white;
-	font-family: "Karbon Regular"
+.colo-table-row {
+	margin-top: 10px;
+	border-bottom: 1px solid #ba0f1a;	
 }
 
-.colo-table tr {
-	border-bottom: 1px solid #ba0f1a;
-}
-
-.colo-table-contact-link,
-.colo-table-contact-link:hover  {
-	color: red;
-}
-
-.colo-table-contact-link:hover {
-  color: red;
-}
-
-.colo-table-last-row {
-  color: white;
-  background: #ba0f1a;
+.colo-table-row:last-child {
+	border: none;
 }
 
 a.colo-table-link,
@@ -1063,11 +1060,12 @@ a.colo-table-link:hover {
   color: white;
 }
 
-a.colo-table-link:hover {
-  text-decoration-style: underline;
+.colo-table-contact-link,
+.colo-table-contact-link:hover  {
+	color: red;
 }
 
-.colo-features-list {
+.colo-common-features-list {
   color: #a7a7a7;
   font-size: 22px;
   font-family: 'Karbon Light';
