@@ -990,6 +990,17 @@ body {
 	font-family: 'Karbon Light';
 	background-clip: text;
 }
+
+/* Oerride for IE */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	/* IE10+ CSS styles go here */
+	.red-gradient-text {
+		background-image: none;
+		color: red;
+		font-family: 'Karbon Light';
+	}
+}
+
 .ordercount-label {
 	font-size: 16px;
 	color: #666;
