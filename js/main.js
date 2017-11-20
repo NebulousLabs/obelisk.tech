@@ -11,21 +11,26 @@ const dcr1SellCap = 4000
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
 // obelisks and the number of obelisks sold
-const monthlySC1Revenue = obelisks => obelisks / sc1SellCap * sc1BlockReward * 30
-const monthlyDCR1Revenue = obelisks => obelisks / dcr1SellCap * dcr1BlockReward * 30
+const monthlySC1Revenue = function(obelisks) {
+  return obelisks / sc1SellCap * sc1BlockReward * 30
+}
+const monthlyDCR1Revenue = function(obelisks) {
+  return obelisks / dcr1SellCap * dcr1BlockReward * 30
+}
 
 // monthlyElectricityCost returns the estimated monthly electricity cost given
 // the cost of electricity per KW/H
-const monthlyElectricityCost = (obelisks, electricityPrice) =>
-  obelisks * electricityPrice * (500 / 1000) * 24 * 30
+const monthlyElectricityCost = function(obelisks, electricityPrice) {
+  return obelisks * electricityPrice * (500 / 1000) * 24 * 30
+}
 
-const updateProfitFields = () => {
+const updateProfitFields = function() {
   $('#electricity-cost-result').text(Math.round(monthlyElectricityCost(obelisks, electricityPrice)))
   $('#sc1-mining-reward-result').text(Math.round(monthlySC1Revenue(obelisks)).toLocaleString())
   $('#dcr1-mining-reward-result').text(Math.round(monthlyDCR1Revenue(obelisks)).toLocaleString())
 }
 
-$('#quantity-input').on('input', e => {
+$('#quantity-input').on('input', function(e) {
   if (isNaN(parseInt(e.target.value, 10))) {
     return
   }
@@ -33,7 +38,7 @@ $('#quantity-input').on('input', e => {
   updateProfitFields()
 })
 
-$('#electricity-cost').on('input', e => {
+$('#electricity-cost').on('input', function(e) {
   if (isNaN(parseFloat(e.target.value))) {
     return
   }
@@ -43,7 +48,9 @@ $('#electricity-cost').on('input', e => {
 
 updateProfitFields()
 
-const formatNumber = n => n.toLocaleString(n)
+const formatNumber = function(n) {
+  return n.toLocaleString(n)
+}
 
 $('.order-bar-sc1-inner').css('width', sc1Sold / sc1SellCap * 100 + '%')
 $('#sc1-sold').text(formatNumber(sc1Sold))
