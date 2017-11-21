@@ -3,10 +3,10 @@ const dcr1BlockReward = 3570 // DCR per day on end of june 2018
 let obelisks = 1
 let electricityPrice = 0.1
 
-const sc1Sold = 2238
+const sc1Sold = 2355
 const sc1SellCap = 4000
 
-const dcr1Sold = 312
+const dcr1Sold = 446
 const dcr1SellCap = 4000
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
