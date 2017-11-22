@@ -59,3 +59,44 @@ $('#sc1-sell-cap').text(formatNumber(sc1SellCap))
 $('.order-bar-dcr1-inner').css('width', dcr1Sold / dcr1SellCap * 100 + '%')
 $('#dcr1-sold').text(formatNumber(dcr1Sold))
 $('#dcr1-sell-cap').text(formatNumber(dcr1SellCap))
+
+var saleEndTime = Date.UTC(2017, 10, 25, 5, 0, 0)
+var isSaleOver = false
+
+var MS_PER_SEC = 1000
+var MS_PER_MIN = MS_PER_SEC * 60
+var MS_PER_HOUR = MS_PER_MIN * 60
+
+// Countdown timer
+var updatePresaleTimer = function() {
+  var currTime = new Date()
+  var timeRemaining = saleEndTime - currTime.getTime()
+  if (timeRemaining <= 0) {
+    $('#countdown-timer').text('SALE OVER')
+    $('#countdown-container').css('width', '230px')
+    $('.hide-when-sale-closed').css('visibility', 'hidden')
+    $('.no-disp-when-sale-closed').css('display', 'none')
+    clearInterval(interval)
+    return
+  }
+
+  var hours = Math.floor(timeRemaining / MS_PER_HOUR)
+  timeRemaining -= hours * MS_PER_HOUR
+
+  var mins = Math.floor(timeRemaining / MS_PER_MIN)
+  timeRemaining -= mins * MS_PER_MIN
+
+  var secs = Math.floor(timeRemaining / MS_PER_SEC)
+  timeRemaining -= secs * MS_PER_SEC
+
+  var timeString = ''
+  timeString += (hours < 10 ? '0' + hours : hours) + ':'
+  timeString += (mins < 10 ? '0' + mins : mins) + ':'
+  timeString += secs < 10 ? '0' + secs : secs
+
+  $('#countdown-timer').text(timeString)
+}
+
+var interval = setInterval(updatePresaleTimer, 1000)
+
+updatePresaleTimer()

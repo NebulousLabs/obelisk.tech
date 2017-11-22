@@ -979,6 +979,7 @@ body {
 .ordercount-product-label {
 	font-size: 42px;
 }
+
 .red-gradient-text {
 	background-image: -webkit-linear-gradient(top, #ff0000, #230000); /* For Chrome and Safari */
     background-image:    -moz-linear-gradient(top, #ff0000, #230000); /* For old Fx (3.6 to 15) */
@@ -1251,4 +1252,42 @@ a.colo-table-link:hover {
 
 .red-color {
 	color: #e4001b;
+}
+
+.countdown-container {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	top: -2px;
+	float: right;
+    width: 154px;
+}
+
+.countdown-msg {
+	color: #666666;
+	font-size: 16px;
+}
+
+.countdown-hhmmss {
+	color: #404040;
+	font-size: 16px;
+	position: relative;
+	top: -20px;
+}
+
+.countdown-hh {
+	margin-left: 10px;
+}
+	
+.countdown-mm {
+	margin-left: 24px;
+}
+	
+.countdown-ss {
+	margin-left: 30px;
+}
+	
+.countdown-timer {
+	font-size: 48px;
+	font-family: "Karbon Regular";
 }
