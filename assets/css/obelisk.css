@@ -61,7 +61,7 @@ body {
 		margin-top: 60px;
 	}
 }
-		
+
 .nav-item {
 	margin-left: 10px;
 	margin-right: 10px;
@@ -116,7 +116,7 @@ body {
     background-image: none;
     border: 1px solid transparent;
 	border-radius: 4px;
-	outline: none;	
+	outline: none;
 }
 
 #mobile-navbar li {
@@ -661,7 +661,7 @@ body {
 		background: -webkit-linear-gradient(left, #000000 0%,#3a3a3a 16%,#3a3a3a 84%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
 		background: linear-gradient(to right, #000000 0%,#3a3a3a 16%,#3a3a3a 84%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
-	}	
+	}
 }
 
 @media (max-width: 768px) {
@@ -670,7 +670,7 @@ body {
 	}
 	.preorder-title::after {
 		background: none;
-	}	
+	}
 }
 
 .quantity-section > h3 {
@@ -1122,7 +1122,7 @@ h4 {
 
 .colo-table-row {
 	margin-top: 10px;
-	border-bottom: 1px solid #ba0f1a;	
+	border-bottom: 1px solid #ba0f1a;
 }
 
 .colo-table-row:last-child {
@@ -1194,7 +1194,7 @@ a.colo-table-link:hover {
 	height: 120px;
 }
 
-@media (min-width: 992px) {	
+@media (min-width: 992px) {
 	.preorder-title::after {
 		content: "";
 		position: absolute;
@@ -1258,8 +1258,7 @@ a.colo-table-link:hover {
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
-	top: -2px;
-	float: right;
+	float: left;
     width: 154px;
 }
 
@@ -1272,22 +1271,22 @@ a.colo-table-link:hover {
 	color: #404040;
 	font-size: 16px;
 	position: relative;
-	top: -20px;
+	top: -12px;
 }
 
 .countdown-hh {
-	margin-left: 10px;
+	margin-left: 1px;
 }
-	
+
 .countdown-mm {
-	margin-left: 24px;
+	margin-left: 12px;
 }
-	
+
 .countdown-ss {
-	margin-left: 30px;
+	margin-left: 13px;
 }
-	
+
 .countdown-timer {
-	font-size: 48px;
+	font-size: 32px;
 	font-family: "Karbon Regular";
 }
