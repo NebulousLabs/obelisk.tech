@@ -6,7 +6,7 @@ let electricityPrice = 0.1
 const sc1Sold = 2635
 const sc1SellCap = 4000
 
-const dcr1Sold = 938
+const dcr1Sold = 1054
 const dcr1SellCap = 4000
 
 // monthlyRevenue returns the estimated monthly revenue given the number of
