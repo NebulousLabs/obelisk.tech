@@ -969,14 +969,12 @@ body {
 
 .ordercount {
 	display: flex;
-	flex-direction: column;
-	margin-top: 7px;
-	margin-right: 40px;
-	vertical-align: middle;
-	flex: 1
+	align-items: center;
+	margin-left: -15px;
 }
 
 .ordercount-product-label {
+	margin-right: 20px;
 	font-size: 42px;
 }
 
@@ -992,6 +990,12 @@ body {
 	background-clip: text;
 }
 
+@media (max-width: 768px) {
+	.red-gradient-text {
+		width: 82px;
+	}
+}
+
 /* Oerride for IE */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 	/* IE10+ CSS styles go here */
@@ -1003,14 +1007,17 @@ body {
 }
 
 .ordercount-label {
-	font-size: 16px;
+	font-size: 20px;
 	color: #666;
 	text-align: left;
-	margin-top: 5px;
+    position: relative;
+	top: -2px;
 }
 .ordercount-coin-logo {
 	margin-right: 10px;
 	width: 27px;
+	position: relative;
+	top: -4px;
 }
 .ordercount-count {
 	font-family: "Karbon Bold";
