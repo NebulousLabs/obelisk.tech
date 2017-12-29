@@ -918,7 +918,7 @@ class Checkout extends Component {
             <div className="terms-check">
               <p>
                 By checking this box, you agree to the{' '}
-                <a href="/assets/img/terms_dcr1.pdf" target="_blank" rel="noopener noreferrer">
+                <a href="/assets/img/terms_dcr1_batch2.pdf" target="_blank" rel="noopener noreferrer">
                   Terms and Conditions
                 </a>{' '}
                 and acknowledge the{' '}
