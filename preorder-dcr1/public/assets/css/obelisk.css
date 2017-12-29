@@ -706,7 +706,7 @@ body {
 .final-cost-section > .next-button {
 	top: 0px;
 }
-.payment > p {
+.payment > p, .paywith {
 	color: #a0a3a9;
 	font-family: "Karbon Light";
 	margin-left: 30px;
@@ -745,6 +745,15 @@ body {
 .payment-selection-section > .next-button {
 	top: 30px;
 }
+.payment-timer-container {
+	margin-left: 30px;
+	color: #a0a3a9;
+}
+.expiration-message {
+	font-family: "Karbon Light";
+    color: #a0a3a9;
+    font-size: 18px;
+}
 .input-error {
 	color: red;
 }
@@ -755,6 +764,7 @@ body {
 .payaddr > p > .price {
 	margin-top: 0;
 	font-size: 18px;
+	color: white;
 }
 .payinfo {
 	display: flex;
@@ -1077,4 +1087,52 @@ body {
 	cursor: pointer;
 	position: relative;
     top: -2px;
+}
+
+
+.countdown-label {
+	color: #666666;
+	text-align: center;
+	line-height: 10px;
+}
+
+.countdown-dd::after,
+.countdown-hh::after,
+.countdown-mm::after {
+	content: ':'
+}
+
+.countdown-ddhhmmss {
+	color: #404040;
+	font-size: 16px;
+	position: relative;
+	top: -12px;
+}
+
+.countdown-timer {
+	font-size: 25px;
+	font-family: "Karbon Regular";
+	width: 28px;
+	text-align: center;
+	line-height: 28px;
+}
+
+.countdown-dd::after,
+.countdown-hh::after,
+.countdown-mm::after {
+	content: ':'
+}
+.red-gradient-text {
+    color:red;
+	font-family: 'Karbon Light';
+}
+
+/* Oerride for IE */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	/* IE10+ CSS styles go here */
+	.red-gradient-text {
+		background-image: none;
+		color: red;
+		font-family: 'Karbon Light';
+	}
 }
