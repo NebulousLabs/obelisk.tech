@@ -506,7 +506,7 @@ body {
 .order-form > p, input, select {
 	margin-left: 23px;
 }
-.order-form > select, .order-form > input, .statezip > input {
+.order-form select, .order-form > input, .statezip > input {
 	background: transparent;
 	border: none;
 	border-bottom: 1px solid #3e3e3e;
@@ -521,6 +521,13 @@ body {
 .order-form > select {
 	padding-left: 0;
 	width: 100%;
+}
+.order-form select.state-select {
+	margin-left: -3px;
+	margin-right: 5px;
+	margin-bottom: 0;
+	width: 49.5%;
+	height: 34px;
 }
 .order-form > input:focus, .statezip > input:focus {
 	border-bottom: 1px solid #8e8e8e;

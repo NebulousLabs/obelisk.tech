@@ -9,11 +9,13 @@
     "email-validator": "^1.0.7",
     "fetch": "^1.1.0",
     "gemini-api": "^2.0.2",
+    "i18n-iso-countries": "^3.3.0",
     "lodash": "^4.17.4",
     "qrcode": "^0.8.2",
     "qrcode-generator": "^1.2.0",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "us": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",
