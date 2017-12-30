@@ -890,7 +890,7 @@ class Payment extends Component {
               </div>
             ) : (
               <div className="payment order-form">
-                <h3> {this.state.step}. PAYMENT </h3>
+                <h3> {this.props.step + 1}. PAYMENT </h3>
                 <p className="paywith">Pay with Wire Transfer</p>
                 <div className="payinfo">
                   <p className="transfer-instructions">
