@@ -618,7 +618,7 @@ class Checkout extends Component {
     this.state = {
       paymentMethod: '',
       checked: false,
-
+      ackPaymentTime: false,
       error: '',
     }
   }
@@ -628,11 +628,15 @@ class Checkout extends Component {
     }
     const handleNextClick = () => {
       if (!this.state.checked) {
-        this.setState({ error: 'you must agree to the terms and conditions before continuing' })
+        this.setState({ error: 'You must agree to the terms and conditions before continuing' })
+        return
+      }
+      if (this.state.paymentMethod === 'bitcoin' && !this.state.ackPaymentTime) {
+        this.setState({ error: 'You must acknowledge the payment time limit before continuing' })
         return
       }
       if (this.state.paymentMethod === '') {
-        this.setState({ error: 'you must select a payment method' })
+        this.setState({ error: 'You must select a payment method' })
         return
       }
       this.setState({ error: '' })
@@ -698,6 +702,21 @@ class Checkout extends Component {
                 <p> Bank Wire </p>
               </div>
             </div>
+            {this.state.paymentMethod === 'bitcoin' ? (
+              <div className="terms-check">
+                <p>
+                  By checking this box, you acknowledge that payment must be made within 8 hours.
+                </p>
+                <input
+                  checked={this.state.ackPaymentTime}
+                  onChange={() => this.setState({ ackPaymentTime: !this.state.ackPaymentTime })}
+                  type="checkbox"
+                  name="terms-check"
+                />
+              </div>
+            ) : (
+              undefined
+            )}
             <div className="terms-check">
               <p>
                 By checking this box, you agree to the{' '}
