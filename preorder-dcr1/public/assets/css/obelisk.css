@@ -1007,7 +1007,13 @@ body {
 	font-size: 20px;
 	width: 450px;
 }
-	
+
+.coupon-note {
+	font-size: 14px;
+	font-family: "Karbon Regular";
+	margin-left: 30px;
+}
+
 .coupon-col-center {
 	text-align: center;
 	padding-bottom: 20px;

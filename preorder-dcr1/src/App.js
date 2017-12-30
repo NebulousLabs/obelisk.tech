@@ -84,7 +84,7 @@ class PageOne extends Component {
             <img className="obelisk-header" src="assets/img/obelisk-text.png" alt="obelisk logo" />
             <div className="separator" />
             <div className="order-form">
-              <h3> 1. YOUR ORDER </h3>
+              <h3> {this.props.step + 1}. YOUR ORDER </h3>
               <input
                 value={this.state.name}
                 onChange={handleNameChange}
@@ -254,7 +254,7 @@ class ShippingForm extends Component {
             <img className="obelisk-header" src="assets/img/obelisk-text.png" alt="obelisk logo" />
             <div className="separator" />
             <div className="order-form">
-              <h3> 2. SHIPPING </h3>
+              <h3> {this.props.step + 1}. SHIPPING </h3>
               <select value={this.state.country} onChange={handleCountryChange} name="Country">
                 {countryOptions}
               </select>
@@ -380,7 +380,7 @@ class CouponEntry extends Component {
     }
 
     let error
-    if (!/^O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
+    if (!/^[800-]*O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
       error = "Invalid code.  Must start with 'O-', followed by 12 numbers/letters."
     }
     this.props.updateCouponAtIndex(
@@ -558,7 +558,7 @@ class RedeemCoupons extends Component {
             <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
             <div className="separator" />
             <div className="coupons-container">
-              <h3>3. SUBTOTAL</h3>
+              <h3>{this.props.step + 1}. SUBTOTAL</h3>
               <div className="coupon-subtotal-container">
                 <div className="coupon-subheading">{formatNumber(quantity)} x DCR1</div>
                 <div className="coupon-subtotal">{formatDollars(totalPrice)}</div>
@@ -652,7 +652,7 @@ class Checkout extends Component {
             <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
             <div className="separator" />
             <div className="checkout order-form">
-              <h3> 3. CHECKOUT </h3>
+              <h3>{this.props.step + 1}. CHECKOUT </h3>
               <p> Payment is accepted in both Bitcoin or USD.</p>
               <div className="estimated-costs">
                 <div className="estimated-cost">
@@ -812,7 +812,7 @@ class Payment extends Component {
             <div className="separator" />
             {paymentMethod === 'bitcoin' ? (
               <div className="payment order-form">
-                <h3> 4. PAYMENT </h3>
+                <h3>{this.props.step + 1}. PAYMENT </h3>
                 {!this.state.isPaymentTimerExpired ? (
                   <div>
                     <p className="paywith">Pay with Bitcoin</p>
@@ -871,7 +871,7 @@ class Payment extends Component {
               </div>
             ) : (
               <div className="payment order-form">
-                <h3> 4. PAYMENT </h3>
+                <h3> {this.state.step}. PAYMENT </h3>
                 <p className="paywith">Pay with Wire Transfer</p>
                 <div className="payinfo">
                   <p className="transfer-instructions">
@@ -967,18 +967,44 @@ class App extends Component {
   }
 
   updateCouponDiscount = coupons => {
+    const quantity = this.state.quantity
+    let remaining = quantity
+    coupons = _.orderBy(coupons, 'value', 'desc')
+
+    _.map(coupons, coupon => {
+      if (coupon.unitsAvailable === 0) {
+        coupon.isValid = false
+        coupon.isValidationInProgress = false
+        coupon.note = 'No remaining coupons.'
+        coupon.unitsUsed = 0
+      } else if (coupon.unitsAvailable > remaining) {
+        const remainingCouponValue = coupon.unitsAvailable - remaining
+        coupon.note =
+          'Only one coupon can be applied per unit. Coupon has ' +
+          remainingCouponValue +
+          ' remaining use(s).'
+        coupon.unitsUsed = remaining
+      } else {
+        coupon.unitsUsed = coupon.unitsAvailable
+        coupon.note = undefined
+      }
+
+      remaining -= coupon.unitsUsed
+      return coupon
+    })
+
     const couponDiscount = _.reduce(
       coupons,
       (total, coupon) => total + coupon.value * coupon.unitsUsed,
       0,
     )
-    this.setState({ couponDiscount })
+
+    this.setState({ coupons, couponDiscount })
   }
 
   addCoupon = () => {
     const coupons = this.state.coupons.slice()
     coupons.push({ code: '', isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
-    this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
 
@@ -1011,14 +1037,12 @@ class App extends Component {
 
     this.checkCouponRestrictions(this.state.quantity, coupons)
 
-    this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
 
   removeCouponAtIndex = index => {
     const coupons = this.state.coupons.slice()
     coupons.splice(index, 1)
-    this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
 
@@ -1044,39 +1068,35 @@ class App extends Component {
     coupon.code = code
     this.setState({ coupons })
 
+    // Replicate coupon code $800 coupons - temporary hack
+    const expandedCouponCodes = _.filter(couponCodes, code => !_.startsWith(code, '800-')).reduce(
+      (newCouponCodes, code) => {
+        newCouponCodes.push('800-' + code)
+        newCouponCodes.push(code)
+        return newCouponCodes
+      },
+      [],
+    )
+
     axios
-      .get(`/validatecoupons?coupons=${couponCodes.join(',')}`, {
+      .get(`/validatecoupons?coupons=${expandedCouponCodes.join(',')}`, {
         timeout: 10000,
         responseType: 'json',
       })
       .then(res => {
-        const coupons = res.data.map(respCoupon => {
+        let coupons = res.data.map(respCoupon => {
           const coupon = {
             code: respCoupon.uniqueID,
             isValidationInProgress: false,
             value: parseInt(respCoupon.couponValue, 10),
             unitsUsed: parseInt(respCoupon.couponsReserved, 10),
+            unitsAvailable: parseInt(respCoupon.couponsReserved, 10),
             error: respCoupon.error,
             isValid: respCoupon.isValid,
-          }
-          const remaining = this.state.quantity - this.totalCouponsUsed(this.state.coupons)
-          if (remaining <= 0) {
-            coupon.isValid = false
-            coupon.isValidationInProgress = false
-            coupon.note = 'no remaining coupons.'
-            coupon.unitsUsed = 0
-          } else if (coupon.unitsUsed > remaining) {
-            const remainingCouponValue = coupon.unitsUsed - remaining
-            coupon.note =
-              'only one coupon can be applied per unit. coupon has ' +
-              remainingCouponValue +
-              ' remaining uses'
-            coupon.unitsUsed = remaining
           }
           return coupon
         })
 
-        this.setState({ coupons })
         this.updateCouponDiscount(coupons)
       })
       .catch(err => {
@@ -1145,7 +1165,7 @@ class App extends Component {
         .post(`/adduser`, formData, { responseType: 'json' })
         .then(res => {
           this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
-          this.setState({ step: 4 })
+          this.setState({ step: this.state.step + 1 })
         })
         .catch(err => {
           // The email error is not currently checked on the server, and the "unknown" error
@@ -1167,12 +1187,13 @@ class App extends Component {
     }
     return (
       <div>
-        <PageOne visible={this.state.step === 0} next={next} />
+        <PageOne visible={this.state.step === 0} next={next} step={this.state.step} />
         <ShippingForm
           visible={this.state.step === 1}
           quantity={this.state.quantity}
           next={next}
           back={back}
+          step={this.state.step}
         />
         <RedeemCoupons
           visible={this.state.step === 2}
@@ -1186,6 +1207,7 @@ class App extends Component {
           updateCouponAtIndex={this.updateCouponAtIndex}
           next={next}
           back={back}
+          step={this.state.step}
         />
         <Checkout
           visible={this.state.step === 3}
@@ -1196,6 +1218,7 @@ class App extends Component {
           coupons={this.state.coupons}
           next={handleSubmit}
           back={back}
+          step={this.state.step}
         />
         <Payment
           visible={this.state.step === 4}
@@ -1204,6 +1227,7 @@ class App extends Component {
           btcaddr={this.state.paymentAddr}
           btcPrice={btcPrice}
           back={back}
+          step={this.state.step}
         />
       </div>
     )
