@@ -2,9 +2,18 @@ import axios from 'axios'
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { validate } from 'email-validator'
-import { countries } from 'countries-list'
 
 import { formatBTC, formatDollars, formatNumber } from './utils'
+
+import Countries from './countries'
+const US = require('us')
+
+const unitPrice = 1599
+
+const MS_PER_SEC = 1000
+const MS_PER_MIN = MS_PER_SEC * 60
+const MS_PER_HOUR = MS_PER_MIN * 60
+const MS_PER_DAY = MS_PER_HOUR * 24
 
 class PageOne extends Component {
   constructor(props) {
@@ -20,6 +29,7 @@ class PageOne extends Component {
       error: '',
     }
   }
+
   render() {
     if (!this.props.visible) {
       return <div />
@@ -66,7 +76,7 @@ class PageOne extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="mailto:hello@obelisk.tech">Contact us</a>
+          <a href="javascript:groove.widget('open')">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -74,7 +84,7 @@ class PageOne extends Component {
             <img className="obelisk-header" src="assets/img/obelisk-text.png" alt="obelisk logo" />
             <div className="separator" />
             <div className="order-form">
-              <h3> 1. YOUR ORDER </h3>
+              <h3> {this.props.step + 1}. YOUR ORDER </h3>
               <input
                 value={this.state.name}
                 onChange={handleNameChange}
@@ -134,8 +144,10 @@ class PageOne extends Component {
               />
               <button onClick={incrementQuantity} className="plus-button" />
             </div>
-            <div className="quantity-price">{formatDollars(2499 * this.state.quantity)}</div>
-            <div className="shipping-note">*orders are estimated to ship by June, 2018.</div>
+            <div className="quantity-price">{formatDollars(unitPrice * this.state.quantity)}</div>
+            <div className="shipping-note">
+              *orders are estimated to ship on or before August 31, 2018.
+            </div>
             <div className="next-button" onClick={handleNextClick} />
           </div>
         </div>
@@ -162,26 +174,26 @@ class ShippingForm extends Component {
     if (!this.props.visible) {
       return <div />
     }
-    const isEurope = country => {
-      if (!countries.hasOwnProperty(country)) {
-        return false
-      }
-      return countries[country].continent === 'EU'
-    }
+    // const isEurope = country => {
+    //   if (!countries.hasOwnProperty(country)) {
+    //     return false
+    //   }
+    //   return countries[country].continent === 'EU'
+    // }
     const estimatedCost = () => {
-      let baseCost = 70
-      if (
-        this.state.country === 'US' ||
-        isEurope(this.state.country) ||
-        this.state.country === 'CN'
-      ) {
-        baseCost = 35
-      }
+      let shippingCost = 80
+      // if (
+      //   this.state.country === 'US' ||
+      //   isEurope(this.state.country) ||
+      //   this.state.country === 'CN'
+      // ) {
+      //   shippingCost = 35
+      // }
       let tax = 0
       if (this.state.country === 'US' && this.state.region.toLowerCase() === 'ma') {
-        tax = 2499 * 0.0625
+        tax = unitPrice * 0.0625
       }
-      return parseFloat(((baseCost + tax) * this.props.quantity).toFixed(2))
+      return parseFloat(((shippingCost + tax) * this.props.quantity).toFixed(2))
     }
     const handleAddr1Change = e => this.setState({ addr1: e.target.value })
     const handleAddr2Change = e => this.setState({ addr2: e.target.value })
@@ -211,16 +223,30 @@ class ShippingForm extends Component {
         return
       }
       this.props.next({
-        address: `${this.state.addr1}\n${this.state.addr2}\n${this.state.city}\n${this.state
-          .region}\n${this.state.postal}\n${this.state.country}`,
+        address: `${this.state.addr1}\n${this.state.addr2}\n${this.state.city}\n${
+          this.state.region
+        }\n${this.state.postal}\n${this.state.country}`,
         shippingCost: estimatedCost(),
       })
     }
+
+    const countryOptions = _.map(Countries, countryInfo => (
+      <option value={countryInfo.code2} key={countryInfo.code2}>
+        {countryInfo.name}
+      </option>
+    ))
+    countryOptions.unshift(<option value="">Country...</option>)
+
+    const stateOptions = _.map(US.states, state => {
+      return <option value={state.abbr}>{state.name}</option>
+    })
+    stateOptions.unshift(<option value="">State...</option>)
+
     return (
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="mailto:hello@obelisk.tech">Contact us</a>
+          <a href="javascript:groove.widget('open')">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -228,7 +254,10 @@ class ShippingForm extends Component {
             <img className="obelisk-header" src="assets/img/obelisk-text.png" alt="obelisk logo" />
             <div className="separator" />
             <div className="order-form">
-              <h3> 2. SHIPPING </h3>
+              <h3> {this.props.step + 1}. SHIPPING </h3>
+              <select value={this.state.country} onChange={handleCountryChange} name="Country">
+                {countryOptions}
+              </select>
               <input
                 type="text"
                 value={this.state.addr1}
@@ -251,13 +280,24 @@ class ShippingForm extends Component {
                 placeholder="City"
               />
               <div className="statezip">
-                <input
-                  type="text"
-                  value={this.state.region}
-                  onChange={handleStateChange}
-                  className="form-control"
-                  placeholder="State/Region"
-                />
+                {this.state.country === 'US' ? (
+                  <select
+                    className="state-select"
+                    value={this.state.region}
+                    onChange={handleStateChange}
+                    name="State"
+                  >
+                    {stateOptions}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    value={this.state.region}
+                    onChange={handleStateChange}
+                    className="form-control"
+                    placeholder="State/Region"
+                  />
+                )}
                 <input
                   type="text"
                   value={this.state.postal}
@@ -266,252 +306,6 @@ class ShippingForm extends Component {
                   placeholder="ZIP/Postal Code"
                 />
               </div>
-              <select value={this.state.country} onChange={handleCountryChange} name="Country">
-                <option value="">Country...</option>
-                <option value="AF">Afghanistan</option>
-                <option value="AL">Albania</option>
-                <option value="DZ">Algeria</option>
-                <option value="AS">American Samoa</option>
-                <option value="AD">Andorra</option>
-                <option value="AG">Angola</option>
-                <option value="AI">Anguilla</option>
-                <option value="AG">Antigua &amp; Barbuda</option>
-                <option value="AR">Argentina</option>
-                <option value="AA">Armenia</option>
-                <option value="AW">Aruba</option>
-                <option value="AU">Australia</option>
-                <option value="AT">Austria</option>
-                <option value="AZ">Azerbaijan</option>
-                <option value="BS">Bahamas</option>
-                <option value="BH">Bahrain</option>
-                <option value="BD">Bangladesh</option>
-                <option value="BB">Barbados</option>
-                <option value="BY">Belarus</option>
-                <option value="BE">Belgium</option>
-                <option value="BZ">Belize</option>
-                <option value="BJ">Benin</option>
-                <option value="BM">Bermuda</option>
-                <option value="BT">Bhutan</option>
-                <option value="BO">Bolivia</option>
-                <option value="BL">Bonaire</option>
-                <option value="BA">Bosnia &amp; Herzegovina</option>
-                <option value="BW">Botswana</option>
-                <option value="BR">Brazil</option>
-                <option value="BC">British Indian Ocean Ter</option>
-                <option value="BN">Brunei</option>
-                <option value="BG">Bulgaria</option>
-                <option value="BF">Burkina Faso</option>
-                <option value="BI">Burundi</option>
-                <option value="KH">Cambodia</option>
-                <option value="CM">Cameroon</option>
-                <option value="CA">Canada</option>
-                <option value="IC">Canary Islands</option>
-                <option value="CV">Cape Verde</option>
-                <option value="KY">Cayman Islands</option>
-                <option value="CF">Central African Republic</option>
-                <option value="TD">Chad</option>
-                <option value="CD">Channel Islands</option>
-                <option value="CL">Chile</option>
-                <option value="CN">China</option>
-                <option value="CI">Christmas Island</option>
-                <option value="CS">Cocos Island</option>
-                <option value="CO">Colombia</option>
-                <option value="CC">Comoros</option>
-                <option value="CG">Congo</option>
-                <option value="CK">Cook Islands</option>
-                <option value="CR">Costa Rica</option>
-                <option value="CT">Cote D'Ivoire</option>
-                <option value="HR">Croatia</option>
-                <option value="CB">Curacao</option>
-                <option value="CY">Cyprus</option>
-                <option value="CZ">Czech Republic</option>
-                <option value="DK">Denmark</option>
-                <option value="DJ">Djibouti</option>
-                <option value="DM">Dominica</option>
-                <option value="DO">Dominican Republic</option>
-                <option value="TM">East Timor</option>
-                <option value="EC">Ecuador</option>
-                <option value="EG">Egypt</option>
-                <option value="SV">El Salvador</option>
-                <option value="GQ">Equatorial Guinea</option>
-                <option value="ER">Eritrea</option>
-                <option value="EE">Estonia</option>
-                <option value="ET">Ethiopia</option>
-                <option value="FA">Falkland Islands</option>
-                <option value="FO">Faroe Islands</option>
-                <option value="FJ">Fiji</option>
-                <option value="FI">Finland</option>
-                <option value="FR">France</option>
-                <option value="GF">French Guiana</option>
-                <option value="PF">French Polynesia</option>
-                <option value="FS">French Southern Ter</option>
-                <option value="GA">Gabon</option>
-                <option value="GM">Gambia</option>
-                <option value="GE">Georgia</option>
-                <option value="DE">Germany</option>
-                <option value="GH">Ghana</option>
-                <option value="GI">Gibraltar</option>
-                <option value="GB">Great Britain</option>
-                <option value="GR">Greece</option>
-                <option value="GL">Greenland</option>
-                <option value="GD">Grenada</option>
-                <option value="GP">Guadeloupe</option>
-                <option value="GU">Guam</option>
-                <option value="GT">Guatemala</option>
-                <option value="GN">Guinea</option>
-                <option value="GY">Guyana</option>
-                <option value="HT">Haiti</option>
-                <option value="HW">Hawaii</option>
-                <option value="HN">Honduras</option>
-                <option value="HK">Hong Kong</option>
-                <option value="HU">Hungary</option>
-                <option value="IS">Iceland</option>
-                <option value="IN">India</option>
-                <option value="ID">Indonesia</option>
-                <option value="IQ">Iraq</option>
-                <option value="IR">Ireland</option>
-                <option value="IM">Isle of Man</option>
-                <option value="IL">Israel</option>
-                <option value="IT">Italy</option>
-                <option value="JM">Jamaica</option>
-                <option value="JP">Japan</option>
-                <option value="JO">Jordan</option>
-                <option value="KZ">Kazakhstan</option>
-                <option value="KE">Kenya</option>
-                <option value="KI">Kiribati</option>
-                <option value="KS">Korea South</option>
-                <option value="XK">Kosovo, Republic Of</option>
-                <option value="KW">Kuwait</option>
-                <option value="KG">Kyrgyzstan</option>
-                <option value="LA">Laos</option>
-                <option value="LV">Latvia</option>
-                <option value="LB">Lebanon</option>
-                <option value="LS">Lesotho</option>
-                <option value="LR">Liberia</option>
-                <option value="LY">Libya</option>
-                <option value="LI">Liechtenstein</option>
-                <option value="LT">Lithuania</option>
-                <option value="LU">Luxembourg</option>
-                <option value="MO">Macau</option>
-                <option value="MK">Macedonia</option>
-                <option value="MG">Madagascar</option>
-                <option value="MY">Malaysia</option>
-                <option value="MW">Malawi</option>
-                <option value="MV">Maldives</option>
-                <option value="ML">Mali</option>
-                <option value="MT">Malta</option>
-                <option value="MH">Marshall Islands</option>
-                <option value="MQ">Martinique</option>
-                <option value="MR">Mauritania</option>
-                <option value="MU">Mauritius</option>
-                <option value="ME">Mayotte</option>
-                <option value="MX">Mexico</option>
-                <option value="MI">Midway Islands</option>
-                <option value="MD">Moldova</option>
-                <option value="MC">Monaco</option>
-                <option value="MN">Mongolia</option>
-                <option value="MS">Montserrat</option>
-                <option value="MA">Morocco</option>
-                <option value="MZ">Mozambique</option>
-                <option value="MM">Myanmar</option>
-                <option value="NA">Nambia</option>
-                <option value="NU">Nauru</option>
-                <option value="NP">Nepal</option>
-                <option value="AN">Netherland Antilles</option>
-                <option value="NL">Netherlands (Holland, Europe)</option>
-                <option value="NV">Nevis</option>
-                <option value="NC">New Caledonia</option>
-                <option value="NZ">New Zealand</option>
-                <option value="NI">Nicaragua</option>
-                <option value="NE">Niger</option>
-                <option value="NG">Nigeria</option>
-                <option value="NW">Niue</option>
-                <option value="NF">Norfolk Island</option>
-                <option value="NO">Norway</option>
-                <option value="OM">Oman</option>
-                <option value="PK">Pakistan</option>
-                <option value="PW">Palau Island</option>
-                <option value="PS">Palestine</option>
-                <option value="PA">Panama</option>
-                <option value="PG">Papua New Guinea</option>
-                <option value="PY">Paraguay</option>
-                <option value="PE">Peru</option>
-                <option value="PH">Philippines</option>
-                <option value="PO">Pitcairn Island</option>
-                <option value="PL">Poland</option>
-                <option value="PT">Portugal</option>
-                <option value="PR">Puerto Rico</option>
-                <option value="QA">Qatar</option>
-                <option value="ME">Republic of Montenegro</option>
-                <option value="RS">Republic of Serbia</option>
-                <option value="RE">Reunion</option>
-                <option value="RO">Romania</option>
-                <option value="RU">Russia</option>
-                <option value="RW">Rwanda</option>
-                <option value="NT">St Barthelemy</option>
-                <option value="EU">St Eustatius</option>
-                <option value="HE">St Helena</option>
-                <option value="KN">St Kitts-Nevis</option>
-                <option value="LC">St Lucia</option>
-                <option value="MB">St Maarten</option>
-                <option value="PM">St Pierre &amp; Miquelon</option>
-                <option value="VC">St Vincent &amp; Grenadines</option>
-                <option value="SP">Saipan</option>
-                <option value="SO">Samoa</option>
-                <option value="AS">Samoa American</option>
-                <option value="SM">San Marino</option>
-                <option value="ST">Sao Tome &amp; Principe</option>
-                <option value="SA">Saudi Arabia</option>
-                <option value="SN">Senegal</option>
-                <option value="RS">Serbia</option>
-                <option value="SC">Seychelles</option>
-                <option value="SL">Sierra Leone</option>
-                <option value="SG">Singapore</option>
-                <option value="SK">Slovakia</option>
-                <option value="SI">Slovenia</option>
-                <option value="SB">Solomon Islands</option>
-                <option value="OI">Somalia</option>
-                <option value="ZA">South Africa</option>
-                <option value="ES">Spain</option>
-                <option value="LK">Sri Lanka</option>
-                <option value="SR">Suriname</option>
-                <option value="SZ">Swaziland</option>
-                <option value="SE">Sweden</option>
-                <option value="CH">Switzerland</option>
-                <option value="TA">Tahiti</option>
-                <option value="TW">Taiwan</option>
-                <option value="TJ">Tajikistan</option>
-                <option value="TZ">Tanzania</option>
-                <option value="TH">Thailand</option>
-                <option value="TG">Togo</option>
-                <option value="TK">Tokelau</option>
-                <option value="TO">Tonga</option>
-                <option value="TT">Trinidad &amp; Tobago</option>
-                <option value="TN">Tunisia</option>
-                <option value="TR">Turkey</option>
-                <option value="TU">Turkmenistan</option>
-                <option value="TC">Turks &amp; Caicos Is</option>
-                <option value="TV">Tuvalu</option>
-                <option value="UG">Uganda</option>
-                <option value="UA">Ukraine</option>
-                <option value="AE">United Arab Emirates</option>
-                <option value="GB">United Kingdom</option>
-                <option value="US">United States of America</option>
-                <option value="UY">Uruguay</option>
-                <option value="UZ">Uzbekistan</option>
-                <option value="VU">Vanuatu</option>
-                <option value="VS">Vatican City State</option>
-                <option value="VE">Venezuela</option>
-                <option value="VN">Vietnam</option>
-                <option value="VB">Virgin Islands (Brit)</option>
-                <option value="VA">Virgin Islands (USA)</option>
-                <option value="WK">Wake Island</option>
-                <option value="WF">Wallis &amp; Futana Is</option>
-                <option value="YE">Yemen</option>
-                <option value="ZR">Zaire</option>
-                <option value="ZM">Zambia</option>
-                <option value="ZW">Zimbabwe</option>
-              </select>
             </div>
             <p className="input-error">{this.state.error}</p>
             <div onClick={this.props.back} className="back-button" />
@@ -533,8 +327,7 @@ class ShippingForm extends Component {
               <p className="amount">{formatNumber(estimatedCost())}</p>
             </div>
             <p className="note">
-              * Shipping costs are $35 per unit for US/Europe/China Customers and $70 per unit for
-              anywhere else. Orders will ship on or before June 30, 2018.
+              * Shipping costs are $80 per unit. Orders will ship on or before August 31, 2018.
             </p>
             <div className="next-button" onClick={handleNextClick} />
           </div>
@@ -587,7 +380,7 @@ class CouponEntry extends Component {
     }
 
     let error
-    if (!/^O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
+    if (!/^[800-]*O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
       error = "Invalid code.  Must start with 'O-', followed by 12 numbers/letters."
     }
     this.props.updateCouponAtIndex(
@@ -635,7 +428,7 @@ class CouponEntry extends Component {
       icon = <img className="coupon-spinner" src="assets/img/spinner.gif" alt="spinner" />
     } else if (isValid === null) {
       icon = <div />
-    } else if (isValid && error === "") {
+    } else if (isValid && error === '') {
       icon = <img className="coupon-icon" src="assets/img/checkmark.png" alt="valid coupon" />
     } else {
       icon = (
@@ -757,7 +550,7 @@ class RedeemCoupons extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="mailto:hello@obelisk.tech">Contact us</a>
+          <a href="javascript:groove.widget('open')">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -765,7 +558,7 @@ class RedeemCoupons extends Component {
             <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
             <div className="separator" />
             <div className="coupons-container">
-              <h3>3. SUBTOTAL</h3>
+              <h3>{this.props.step + 1}. SUBTOTAL</h3>
               <div className="coupon-subtotal-container">
                 <div className="coupon-subheading">{formatNumber(quantity)} x DCR1</div>
                 <div className="coupon-subtotal">{formatDollars(totalPrice)}</div>
@@ -808,7 +601,7 @@ class RedeemCoupons extends Component {
               <p className="amount">{formatNumber(totalPrice - totalCouponValue)}</p>
             </div>
             <p className="note">
-              * Note that the coupons you entered will be reserved for this order once submitted on
+              * Note that the coupons you enter will be reserved for this order once submitted on
               the next page.
             </p>
             <div className="next-button" onClick={this.handleNextClick} />
@@ -825,7 +618,7 @@ class Checkout extends Component {
     this.state = {
       paymentMethod: '',
       checked: false,
-
+      ackPaymentTime: false,
       error: '',
     }
   }
@@ -835,11 +628,15 @@ class Checkout extends Component {
     }
     const handleNextClick = () => {
       if (!this.state.checked) {
-        this.setState({ error: 'you must agree to the terms and conditions before continuing' })
+        this.setState({ error: 'You must agree to the terms and conditions before continuing' })
+        return
+      }
+      if (this.state.paymentMethod === 'bitcoin' && !this.state.ackPaymentTime) {
+        this.setState({ error: 'You must acknowledge the payment time limit before continuing' })
         return
       }
       if (this.state.paymentMethod === '') {
-        this.setState({ error: 'you must select a payment method' })
+        this.setState({ error: 'You must select a payment method' })
         return
       }
       this.setState({ error: '' })
@@ -851,7 +648,7 @@ class Checkout extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="mailto:hello@obelisk.tech">Contact us</a>
+          <a href="javascript:groove.widget('open')">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -859,7 +656,7 @@ class Checkout extends Component {
             <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
             <div className="separator" />
             <div className="checkout order-form">
-              <h3> 3. CHECKOUT </h3>
+              <h3>{this.props.step + 1}. CHECKOUT </h3>
               <p> Payment is accepted in both Bitcoin or USD.</p>
               <div className="estimated-costs">
                 <div className="estimated-cost">
@@ -874,11 +671,6 @@ class Checkout extends Component {
                   <p className="amount">{formatNumber(this.props.totalPrice)}</p>
                 </div>
               </div>
-              <p className="note">
-                * If the Bitcoin exchange rate fluctuates by more than 5% before we can convert to
-                USD, we will email you requesting additional payment in Bitcoin. We are using Gemini
-                to exchange your coins as fast as possible.
-              </p>
               <div onClick={this.props.back} className="back-button" />
               <div className="red-separator" />
               <div className="separator" />
@@ -910,10 +702,29 @@ class Checkout extends Component {
                 <p> Bank Wire </p>
               </div>
             </div>
+            {this.state.paymentMethod === 'bitcoin' ? (
+              <div className="terms-check">
+                <p>
+                  By checking this box, you acknowledge that payment must be made within 8 hours.
+                </p>
+                <input
+                  checked={this.state.ackPaymentTime}
+                  onChange={() => this.setState({ ackPaymentTime: !this.state.ackPaymentTime })}
+                  type="checkbox"
+                  name="terms-check"
+                />
+              </div>
+            ) : (
+              undefined
+            )}
             <div className="terms-check">
               <p>
                 By checking this box, you agree to the{' '}
-                <a href="/assets/img/terms_dcr1.pdf" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="/assets/img/terms_dcr1_batch2.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Terms and Conditions
                 </a>{' '}
                 and acknowledge the{' '}
@@ -941,53 +752,145 @@ class Checkout extends Component {
 class Payment extends Component {
   constructor(props) {
     super(props)
+
+    // Look up the payment expiration time in local storage.  Set it if it doesn't exist.
+    let paymentExpirationTimeStr = localStorage.getItem('Obelisk: ' + this.props.uid)
+    let paymentExpirationTime
+    if (!paymentExpirationTimeStr) {
+      const currTime = new Date()
+      paymentExpirationTime = currTime.getTime() + 8 * MS_PER_HOUR
+      localStorage.setItem('Obelisk: ' + this.props.uid, `${paymentExpirationTime}`)
+    } else {
+      paymentExpirationTime = parseInt(paymentExpirationTimeStr, 10)
+    }
+
     this.state = {
       refundAddress: '',
-
       error: '',
+      interval: setInterval(this.updatePaymentTimer, 1000),
+      isPaymentTimerExpired: false,
+      paymentExpirationTime,
+      hoursRemaining: '00',
+      minsRemaining: '00',
+      secsRemaining: '00',
     }
+
+    setTimeout(this.updatePaymentTimer, 0)
   }
+
+  // Payment timer
+  updatePaymentTimer = () => {
+    const currTime = new Date()
+    let timeRemaining = this.state.paymentExpirationTime - currTime.getTime()
+    if (timeRemaining <= 0) {
+      clearInterval(this.state.interval)
+      this.setState({
+        hoursRemaining: '00',
+        minsRemaining: '00',
+        secsRemaining: '00',
+        isPaymentTimerExpired: true,
+      })
+
+      return
+    }
+
+    const days = Math.floor(timeRemaining / MS_PER_DAY)
+    timeRemaining -= days * MS_PER_DAY
+
+    const hours = Math.floor(timeRemaining / MS_PER_HOUR)
+    timeRemaining -= hours * MS_PER_HOUR
+
+    const mins = Math.floor(timeRemaining / MS_PER_MIN)
+    timeRemaining -= mins * MS_PER_MIN
+
+    const secs = Math.floor(timeRemaining / MS_PER_SEC)
+
+    const hoursRemaining = hours < 10 ? '0' + hours : hours
+    const minsRemaining = mins < 10 ? '0' + mins : mins
+    const secsRemaining = secs < 10 ? '0' + secs : secs
+    this.setState({ hoursRemaining, minsRemaining, secsRemaining })
+  }
+
   render() {
-    if (!this.props.visible) {
+    let { paymentMethod, btcaddr, btcPrice, visible, uid } = this.props
+
+    if (!visible) {
       return <div />
     }
+
     return (
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="mailto:hello@obelisk.tech">Contact us</a>
+          <a href="javascript:groove.widget('open')">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
           <div className="col-md-4 order-section">
             <img alt="logo" className="obelisk-header" src="assets/img/obelisk-text.png" />
             <div className="separator" />
-            {this.props.paymentMethod === 'bitcoin' ? (
+            {paymentMethod === 'bitcoin' ? (
               <div className="payment order-form">
-                <h3> 4. PAYMENT </h3>
-                <p className="paywith">Pay with Bitcoin</p>
-                <div className="payinfo">
-                  <img
-                    alt="qrcode"
-                    className="qrcode"
-                    src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=bitcoin:${this
-                      .props.btcaddr}?amount=${this.props.btcPrice}`}
-                  />
-                  <div className="payaddr">
-                    <p>
-                      Use the QR code or send{' '}
-                      <div className="price">{formatBTC(this.props.btcPrice)} BTC </div>to the
-                      address below:
-                    </p>
-                    <br />
-                    <p>Deposit Address</p>
-                    <p className="addr">{this.props.btcaddr}</p>
+                <h3>{this.props.step + 1}. PAYMENT </h3>
+                {!this.state.isPaymentTimerExpired ? (
+                  <div>
+                    <p className="paywith">Pay with Bitcoin</p>
+                    <div className="payinfo">
+                      <img
+                        alt="qrcode"
+                        className="qrcode"
+                        src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=bitcoin:${btcaddr}?amount=${btcPrice}`}
+                      />
+                      <div className="payaddr">
+                        <p>
+                          Use the QR code or send{' '}
+                          <div className="price">{formatBTC(btcPrice)} BTC </div>to the address
+                          below:
+                        </p>
+                        <br />
+                        <p>Deposit Address</p>
+                        <p className="addr">{btcaddr}</p>
+                      </div>
+                    </div>
+                    <div className="payment-timer-container">
+                      <span>Time Remaining To Submit Bitcoin Payment</span>
+                      <table>
+                        <tr>
+                          <td className="countdown-timer red-gradient-text countdown-hh">
+                            {this.state.hoursRemaining}
+                          </td>
+                          <td className="countdown-timer red-gradient-text countdown-mm">
+                            {this.state.minsRemaining}
+                          </td>
+                          <td className="countdown-timer red-gradient-text countdown-ss">
+                            {this.state.secsRemaining}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="countdown-label">HH</td>
+                          <td className="countdown-label">MM</td>
+                          <td className="countdown-label">SS</td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div>
+                    <p className="expiration-message">
+                      The payment window for this order has ended. If you have already sent your
+                      payment, then you will receive a confirmation email once the payment has been
+                      confirmed.
+                    </p>
+                    <p className="expiration-message">
+                      If you haven't sent payment yet, then this order is no longer valid, and you
+                      will need to submit a new order.
+                    </p>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="payment order-form">
-                <h3> 4. PAYMENT </h3>
+                <h3> {this.state.step}. PAYMENT </h3>
                 <p className="paywith">Pay with Wire Transfer</p>
                 <div className="payinfo">
                   <p className="transfer-instructions">
@@ -1012,18 +915,27 @@ class Payment extends Component {
           <div className="col-md-3 visible-md-block visible-lg-block">
             <img alt="hardware-shot" className="hardware-shot" src="assets/img/hardware-shot.png" />
           </div>
-          <div className="col-md-4 payment-selection-section">
-            <p className="confirmation-thanks">
-              Thank you! You will receive a confirmation email shortly.
-            </p>
-            <div className="confirmation-info">
-              <p>Your confirmation number is:</p>
-              <h2 className="confirmation-number">{this.props.uid}</h2>
-              <p className="keep-safe">
-                Keep that reference number safe and treat it as a password!
+          {!this.state.isPaymentTimerExpired ? (
+            <div className="col-md-4 payment-selection-section">
+              <p className="confirmation-thanks">
+                Thank you! You will receive an order acknowledgement email shortly.
+              </p>
+              <div className="confirmation-info">
+                <p>Your confirmation number is:</p>
+                <h2 className="confirmation-number">{uid}</h2>
+                <p className="keep-safe">
+                  Keep your confirmation number safe and treat it as a password!
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="col-md-4 payment-selection-section">
+              <p className="confirmation-thanks">
+                NOTE: If you used any coupons in this order, they will remain locked to this order
+                for 24 hours.
               </p>
             </div>
-          </div>
+          )}
         </div>
       </div>
     )
@@ -1074,29 +986,55 @@ class App extends Component {
   }
 
   updateCouponDiscount = coupons => {
+    const quantity = this.state.quantity
+    let remaining = quantity
+    coupons = _.orderBy(coupons, 'value', 'desc')
+
+    _.map(coupons, coupon => {
+      if (coupon.unitsAvailable === 0) {
+        coupon.isValid = false
+        coupon.isValidationInProgress = false
+        coupon.note = 'No remaining coupons.'
+        coupon.unitsUsed = 0
+      } else if (coupon.unitsAvailable > remaining) {
+        const remainingCouponValue = coupon.unitsAvailable - remaining
+        coupon.note =
+          'Only one coupon can be applied per unit. Coupon has ' +
+          remainingCouponValue +
+          ' remaining use(s).'
+        coupon.unitsUsed = remaining
+      } else {
+        coupon.unitsUsed = coupon.unitsAvailable
+        coupon.note = undefined
+      }
+
+      remaining -= coupon.unitsUsed
+      return coupon
+    })
+
     const couponDiscount = _.reduce(
       coupons,
       (total, coupon) => total + coupon.value * coupon.unitsUsed,
       0,
     )
-    this.setState({ couponDiscount })
+
+    this.setState({ coupons, couponDiscount })
   }
 
   addCoupon = () => {
     const coupons = this.state.coupons.slice()
     coupons.push({ code: '', isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
-    this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
 
-	totalCouponsUsed = (coupons) => {
+  totalCouponsUsed = coupons => {
     let used = 0
     for (let i = 0; i < coupons.length; i++) {
       const coupon = coupons[i]
       used += coupon.isValid ? coupon.unitsUsed : 0
     }
-		return used
-	}
+    return used
+  }
 
   checkCouponRestrictions(quantityOrdered, coupons) {
     // Check that this coupon is not a duplicate of any other
@@ -1118,14 +1056,12 @@ class App extends Component {
 
     this.checkCouponRestrictions(this.state.quantity, coupons)
 
-    this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
 
   removeCouponAtIndex = index => {
     const coupons = this.state.coupons.slice()
     coupons.splice(index, 1)
-    this.setState({ coupons })
     this.updateCouponDiscount(coupons)
   }
 
@@ -1151,167 +1087,174 @@ class App extends Component {
     coupon.code = code
     this.setState({ coupons })
 
+    // Replicate coupon code $800 coupons - temporary hack
+    const expandedCouponCodes = _.filter(couponCodes, code => !_.startsWith(code, '800-')).reduce(
+      (newCouponCodes, code) => {
+        newCouponCodes.push('800-' + code)
+        newCouponCodes.push(code)
+        return newCouponCodes
+      },
+      [],
+    )
+
     axios
-      .get(`/validatecoupons?coupons=${couponCodes.join(',')}`, {
+      .get(`/validatecoupons?coupons=${expandedCouponCodes.join(',')}`, {
         timeout: 10000,
         responseType: 'json',
       })
       .then(res => {
-        const coupons = res.data.map(respCoupon => {
+        let coupons = res.data.map(respCoupon => {
           const coupon = {
             code: respCoupon.uniqueID,
             isValidationInProgress: false,
             value: parseInt(respCoupon.couponValue, 10),
             unitsUsed: parseInt(respCoupon.couponsReserved, 10),
+            unitsAvailable: parseInt(respCoupon.couponsReserved, 10),
             error: respCoupon.error,
             isValid: respCoupon.isValid,
           }
-					const remaining = this.state.quantity - this.totalCouponsUsed(this.state.coupons)
-					if (remaining <= 0) {
-						coupon.isValid = false
-						coupon.isValidationInProgress = false
-						coupon.note = "no remaining coupons."
-						coupon.unitsUsed = 0
-					} else
-					if (coupon.unitsUsed > remaining) {
-						const remainingCouponValue = coupon.unitsUsed - remaining
-						coupon.note = "only one coupon can be applied per unit. coupon has " + remainingCouponValue + " remaining uses"
-						coupon.unitsUsed = remaining
-					}
           return coupon
         })
 
-				this.setState({ coupons })
-				this.updateCouponDiscount(coupons)
-			})
-			.catch(err => {
-				console.log(err)
-				// Timeout or other error
-				let coupons = this.state.coupons.slice()
-				coupons.splice(index, 1, {
-					...coupon,
-					isValidationInProgress: false,
-					isValid: false,
-					error: 'Unable to reach server to validate coupon.  Please try again later.',
-					value: 0,
-					unitsUsed: 0,
-				})
-				this.setState({
-					coupons,
-				})
-			})
-	}
+        this.updateCouponDiscount(coupons)
+      })
+      .catch(err => {
+        console.log(err)
+        // Timeout or other error
+        let coupons = this.state.coupons.slice()
+        coupons.splice(index, 1, {
+          ...coupon,
+          isValidationInProgress: false,
+          isValid: false,
+          error: 'Unable to reach server to validate coupon.  Please try again later.',
+          value: 0,
+          unitsUsed: 0,
+        })
+        this.setState({
+          coupons,
+        })
+      })
+  }
 
-	render() {
-		const undiscountedPrice = 2499 * this.state.quantity + this.state.shippingCost
-		const totalPrice = undiscountedPrice - this.state.couponDiscount
-		const undiscountedBtcPrice = undiscountedPrice / this.state.btcUsd
-		const btcPrice = totalPrice / this.state.btcUsd
-		const next = result => {
-			this.setState(result)
-			this.setState({ step: this.state.step + 1 })
-		}
-		const back = () => {
-			this.setState({ checkoutError: '' })
-			if (this.state.step > 0) {
-				this.setState({ step: this.state.step - 1 })
-			}
-		}
-		const handleSubmit = result => {
-			this.setState(result)
-			const formData = new FormData()
-			formData.append('email', this.state.email)
-			formData.append('newsletter', this.state.newsletter)
-			formData.append('name', this.state.name)
-			formData.append('address', this.state.address)
-			formData.append('backupEmail', this.state.backupemail)
-			formData.append('phone', this.state.backupphone)
-			formData.append('units', this.state.quantity)
-			formData.append(
-				'price',
-				(() => {
-					if (result.paymentMethod === 'transfer') {
-						return totalPrice
-					}
-					return formatBTC(btcPrice)
-				})(),
-			)
-			formData.append('wire', result.paymentMethod === 'transfer')
-			formData.append('product', 'DCR1')
+  render() {
+    const undiscountedPrice = unitPrice * this.state.quantity + this.state.shippingCost
+    const totalPrice = undiscountedPrice - this.state.couponDiscount
+    const btcPrice = totalPrice / this.state.btcUsd
+    const next = result => {
+      this.setState(result)
+      this.setState({ step: this.state.step + 1 })
+    }
+    const back = () => {
+      this.setState({ checkoutError: '' })
+      if (this.state.step > 0) {
+        this.setState({ step: this.state.step - 1 })
+      }
+    }
+    const handleSubmit = result => {
+      this.setState(result)
+      const formData = new FormData()
+      formData.append('email', this.state.email)
+      formData.append('newsletter', this.state.newsletter)
+      formData.append('name', this.state.name)
+      formData.append('address', this.state.address)
+      formData.append('backupEmail', this.state.backupemail)
+      formData.append('phone', this.state.backupphone)
+      formData.append('units', this.state.quantity)
+      formData.append(
+        'price',
+        (() => {
+          if (result.paymentMethod === 'transfer') {
+            return totalPrice
+          }
+          return formatBTC(btcPrice)
+        })(),
+      )
+      formData.append('wire', result.paymentMethod === 'transfer')
+      formData.append('product', 'DCR1')
 
-			// Add on the coupon info, including the discount, so we can double-check it
-			const couponCodes = _.filter(this.state.coupons, coupon => coupon.code.length > 0).map(coupon => coupon.code + ":" + coupon.unitsUsed)
+      // Add on the coupon info, including the discount, so we can double-check it
+      const couponCodes = _.filter(this.state.coupons, coupon => coupon.code.length > 0).map(
+        coupon => coupon.code + ':' + coupon.unitsUsed,
+      )
 
-			formData.append('coupons', couponCodes.join(','))
-			formData.append('couponDiscount', this.state.couponDiscount)
+      formData.append('coupons', couponCodes.join(','))
+      formData.append('couponDiscount', this.state.couponDiscount)
 
-			axios
-				.post(`/adduser`, formData, { responseType: 'json' })
-				.then(res => {
-					this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
-					this.setState({ step: 4 })
-				})
-				.catch(err => {
-					// The email error is not currently checked on the server, and the "unknown" error
-					// is effectively the same as the one below, so just commenting this out for now.
-					//   if (res.data.includes('user with that email already exists')) {
-					//     this.setState({
-					//       checkoutError:
-					//         'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
-					//     })
-					//   } else {
-					//     this.setState({
-					//       checkoutError:
-					//         'an unknown error has occurred and has been reported to the developers.',
-					//     })
-					//   }
-					// }
-					this.setState({ checkoutError: 'could not check out. try again in a few minutes.' })
-				})
-		}
-		return (
-			<div>
-				<PageOne visible={this.state.step === 0} next={next} />
-				<ShippingForm
-					visible={this.state.step === 1}
-					quantity={this.state.quantity}
-					next={next}
-					back={back}
-				/>
-				<RedeemCoupons
-					visible={this.state.step === 2}
-					quantity={this.state.quantity}
-					totalPrice={undiscountedPrice}
-					coupons={this.state.coupons}
-					addCoupon={this.addCoupon}
-					error={this.state.couponError}
-					validateCouponAtIndex={this.validateCouponAtIndex}
-					removeCouponAtIndex={this.removeCouponAtIndex}
-					updateCouponAtIndex={this.updateCouponAtIndex}
-					next={next}
-					back={back}
-				/>
-				<Checkout
-					visible={this.state.step === 3}
-					checkoutError={this.state.checkoutError}
-					shippingCost={this.state.shippingCost}
-					totalPrice={totalPrice}
-					btcPrice={btcPrice}
-					coupons={this.state.coupons}
-					next={handleSubmit}
-					back={back}
-				/>
-				<Payment
-					visible={this.state.step === 4}
-					paymentMethod={this.state.paymentMethod}
-					uid={this.state.uid}
-					btcaddr={this.state.paymentAddr}
-					btcPrice={btcPrice}
-					back={back}
-				/>
-			</div>
-		)
-	}
+      axios
+        .post(`/adduser`, formData, { responseType: 'json' })
+        .then(res => {
+          this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
+          this.setState({ step: this.state.step + 1 })
+        })
+        .catch(err => {
+          // The email error is not currently checked on the server, and the "unknown" error
+          // is effectively the same as the one below, so just commenting this out for now.
+          //   if (res.data.includes('user with that email already exists')) {
+          //     this.setState({
+          //       checkoutError:
+          //         'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
+          //     })
+          //   } else {
+          //     this.setState({
+          //       checkoutError:
+          //         'an unknown error has occurred and has been reported to the developers.',
+          //     })
+          //   }
+          // }
+          this.setState({ checkoutError: 'could not check out. try again in a few minutes.' })
+        })
+    }
+    return (
+      <div>
+        <PageOne visible={this.state.step === 0} next={next} step={this.state.step} />
+        <ShippingForm
+          visible={this.state.step === 1}
+          quantity={this.state.quantity}
+          next={next}
+          back={back}
+          step={this.state.step}
+        />
+        <RedeemCoupons
+          visible={this.state.step === 2}
+          quantity={this.state.quantity}
+          totalPrice={undiscountedPrice}
+          coupons={this.state.coupons}
+          addCoupon={this.addCoupon}
+          error={this.state.couponError}
+          validateCouponAtIndex={this.validateCouponAtIndex}
+          removeCouponAtIndex={this.removeCouponAtIndex}
+          updateCouponAtIndex={this.updateCouponAtIndex}
+          next={next}
+          back={back}
+          step={this.state.step}
+        />
+        <Checkout
+          visible={this.state.step === 3}
+          checkoutError={this.state.checkoutError}
+          shippingCost={this.state.shippingCost}
+          totalPrice={totalPrice}
+          btcPrice={btcPrice}
+          coupons={this.state.coupons}
+          next={handleSubmit}
+          back={back}
+          step={this.state.step}
+        />
+        {this.state.step === 4 ? (
+          <Payment
+            visible={this.state.step === 4}
+            paymentMethod={this.state.paymentMethod}
+            uid={this.state.uid}
+            btcaddr={this.state.paymentAddr}
+            btcPrice={btcPrice}
+            back={back}
+            step={this.state.step}
+          />
+        ) : (
+          undefined
+        )}
+      </div>
+    )
+  }
 }
 
 export default App

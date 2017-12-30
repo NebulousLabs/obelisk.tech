@@ -170,6 +170,7 @@ body {
 
 .obelisk-header {
 	color: #e61b25;
+	margin-left: -10px;
 }
 
 .separator {
@@ -177,6 +178,16 @@ body {
 	height: 28px;
 	width: 15px;
 	border-bottom: 3px solid #696969;
+	margin-bottom: 30px;
+}
+
+.batch-number {
+	font-size: 25px;
+	font-family: "Karbon Regular";
+	color: #8f989f;
+	position: relative;
+	top: 12px;
+	margin-bottom: 10px;
 }
 
 .red-separator {
@@ -304,19 +315,22 @@ body {
 .tech-specs > .note {
 	color: #b4b4b4;
 	width: 90%;
+	border-radius: 3px;
 }
 .tech-specs {
 	background-image: url("../img/calculator-background.png");
-	background-size: 100%;
-	width: 315px;
-	height: 580px;
+	background-size: 106%;
+	background-position: -20px -442px;
+	width: 390px;
+	height: 370px;
 	padding-top: 20px;
-	padding-left: 60px;
+	padding-left: 50px;
+	margin-top: 20px;
+	border-radius: 4px;
 }
 .tech-specs > h3 {
 	font-family: "Karbon Thin";
 	color: #fff;
-	width: 40%;
 	font-size: 30px;
 	margin-bottom: 40px;
 	margin-top: 6px;
@@ -361,21 +375,7 @@ body {
 	width: 210px;
 	color: #be808e;
 }
-.tech-col {
-	height: 600px;
-}
-@media (min-width: 1200px) {
-	.tech-col {
-		margin-left: -27px;
-	}
-}
 @media (max-width: 1200px) {
-	.tech-col {
-		margin-left: 5px;
-		margin-top: 60px;
-		margin-left: 5px;
-		height: 550px;
-	}
 	.specsheet {
 		margin-left: auto;
 		margin-right: auto;
@@ -406,11 +406,11 @@ body {
 	margin-top: 14px;
 }
 .price-dollar {
-	color: #878181;
+	color: #afafaf;
 }
 .price-preorder-section > .preorder-button {
 	display: inline-block;
-	margin-left: 40px;
+	margin-left: 60px;
 }
 .price-preorder-section {
 	display: flex;
@@ -424,8 +424,20 @@ body {
 .tech-specs-side > .spec > span {
 	font-family: "Karbon Light";
 	font-size: 18px;
-	color: #a8b2ba;
+	color: #afafaf;
 	margin-left: 4px;
+}
+.preorder.price {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    font-size: 38px;
+    color: #fff;
+    font-family: "Karbon Light";
+}
+.now-only {
+	font-size: 22px;
+	vertical-align: middle;
 }
 .spec {
 	margin-bottom: 1px;
@@ -525,7 +537,7 @@ body {
 	z-index: 10;
 }
 .footer > *:not(img) {
-	width: 180px;
+	width: 210px;
 }
 .followus {
 	margin-bottom: 10px;
@@ -878,13 +890,14 @@ body {
 .preorder-button:hover {
 	text-decoration: none;
 	color: #e4001b;
+	background: #202020;
 }
+
 .preorder-button {
 	display: inline-block;
 	width: 125px;
 	height: 40px;
 	margin-top: 5px;
-	margin-left: -20px;
 	border: 2px solid #666666;
 	border-radius: 100px;
 	text-align: center;
@@ -892,6 +905,11 @@ body {
 	text-decoration: none;
 	font-size: 20px;
 	color: #e4001b;
+	background: black;
+}
+
+.preorder-button-alt {
+	border: 2px solid #afafaf;
 }
 
 .profit-calculator > * > h3 {
@@ -1262,6 +1280,10 @@ a.colo-table-link:hover {
 	color: #e4001b;
 }
 
+.tech-specs-product-name {
+	color: white;
+}
+
 .countdown-container {
 	display: inline-block;
 	vertical-align: middle;
@@ -1275,26 +1297,27 @@ a.colo-table-link:hover {
 	font-size: 16px;
 }
 
-.countdown-hhmmss {
+.countdown-label {
+	color: #666666;
+	text-align: center;
+}
+
+.countdown-dd::after,
+.countdown-hh::after,
+.countdown-mm::after {
+	content: ':'
+}
+
+.countdown-ddhhmmss {
 	color: #404040;
 	font-size: 16px;
 	position: relative;
 	top: -12px;
 }
 
-.countdown-hh {
-	margin-left: 1px;
-}
-
-.countdown-mm {
-	margin-left: 12px;
-}
-
-.countdown-ss {
-	margin-left: 13px;
-}
-
 .countdown-timer {
 	font-size: 25px;
 	font-family: "Karbon Regular";
+	width: 28px;
+	text-align: center;
 }

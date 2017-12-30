@@ -506,7 +506,7 @@ body {
 .order-form > p, input, select {
 	margin-left: 23px;
 }
-.order-form > select, .order-form > input, .statezip > input {
+.order-form select, .order-form > input, .statezip > input {
 	background: transparent;
 	border: none;
 	border-bottom: 1px solid #3e3e3e;
@@ -522,6 +522,13 @@ body {
 	padding-left: 0;
 	width: 100%;
 }
+.order-form select.state-select {
+	margin-left: -3px;
+	margin-right: 5px;
+	margin-bottom: 0;
+	width: 49.5%;
+	height: 34px;
+}
 .order-form > input:focus, .statezip > input:focus {
 	border-bottom: 1px solid #8e8e8e;
 	box-shadow: none;
@@ -533,7 +540,7 @@ body {
 }
 .hardware-shot {
 	padding-top: 100px;
-	width: 260px;
+    width: 260px;
 }
 .quantity-section, .cost-section {
 	padding-top: 100px;
@@ -706,7 +713,7 @@ body {
 .final-cost-section > .next-button {
 	top: 0px;
 }
-.payment > p {
+.payment > p, .paywith {
 	color: #a0a3a9;
 	font-family: "Karbon Light";
 	margin-left: 30px;
@@ -745,6 +752,15 @@ body {
 .payment-selection-section > .next-button {
 	top: 30px;
 }
+.payment-timer-container {
+	margin-left: 30px;
+	color: #a0a3a9;
+}
+.expiration-message {
+	font-family: "Karbon Light";
+    color: #a0a3a9;
+    font-size: 18px;
+}
 .input-error {
 	color: red;
 }
@@ -755,6 +771,7 @@ body {
 .payaddr > p > .price {
 	margin-top: 0;
 	font-size: 18px;
+	color: white;
 }
 .payinfo {
 	display: flex;
@@ -944,4 +961,191 @@ body {
 	color: grey;
 	margin-top: 25px;
 	margin-left: 10px;
+}
+.add-coupon-button:hover {
+	text-decoration: none;
+	color: red;
+	background: #202020;
+}
+.add-coupon-button {
+	cursor: pointer;
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 2px solid #666666;
+	border-radius: 100px;
+	text-align: center;
+	padding-top: 6px;
+	text-decoration: none;
+	font-size: 20px;
+	color: red;
+}
+
+.coupons-container {
+	width: 450px;
+}
+
+.coupons-container > h3 {
+	color: #fff;
+	font-family: "Karbon Thin";
+	font-size: 35px;
+	margin-top: 43px;
+}
+
+.coupon-subheading {
+	font-family: "Karbon Regular";
+    font-size: 18px;
+	color: #9b9ea2;
+	margin-bottom: 10px;
+}
+
+.coupon-table {
+	font-family: "Karbon Thin";
+	color: #7e7e7e;
+	font-size: 20px;
+	width: 450px;
+}
+
+.coupon-note {
+	font-size: 14px;
+	font-family: "Karbon Regular";
+	margin-left: 30px;
+}
+
+.coupon-col-center {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.coupon-col-left {
+	text-align: left;
+	padding-bottom: 20px;
+}
+
+.coupon-col-right {
+	text-align: right;
+	padding-bottom: 20px;
+}
+
+.coupon-input {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #3e3e3e;
+	outline: none;
+	color: #ffffff;
+	margin-left: 8px;
+}
+
+.coupon-input:focus {
+	border-bottom: 1px solid white;
+}
+
+.coupon-icon {
+	width: 20px;
+}
+
+.coupon-spinner {
+	position: relative;
+	width: 26px;
+	top: -4px;
+}
+
+.coupon-label {
+	min-width: 76px;
+    display: flex;
+	flex-direction: row-reverse;
+}
+
+.coupon-value {
+	margin-left: 10px;
+	min-width: 70px;
+    flex-direction: row-reverse;
+	display: flex;
+}
+
+.coupon-subtotal {
+	display: flex;
+	flex-direction: row-reverse;
+	font-family: "Karbon Light";
+	font-size: 20px;
+	color: #7e7e7e;
+}
+
+.coupon-subtotal-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.coupon-total-container {
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid #3e3e3e;
+	padding-top: 10px;
+}
+
+.coupon-error {
+	color: red;
+	font-family: "Karbon Light";
+	font-size: 14px;
+	margin-left: 20px;
+    position: relative;
+    top: -16px;
+	left: 13px;
+}
+
+.coupon-delete-button {
+	width: 16px;
+	cursor: pointer;
+	position: relative;
+    top: -2px;
+}
+
+
+.countdown-label {
+	color: #666666;
+	text-align: center;
+	line-height: 10px;
+}
+
+.countdown-dd::after,
+.countdown-hh::after,
+.countdown-mm::after {
+	content: ':'
+}
+
+.countdown-ddhhmmss {
+	color: #404040;
+	font-size: 16px;
+	position: relative;
+	top: -12px;
+}
+
+.countdown-timer {
+	font-size: 25px;
+	font-family: "Karbon Regular";
+	width: 28px;
+	text-align: center;
+	line-height: 28px;
+}
+
+.countdown-dd::after,
+.countdown-hh::after,
+.countdown-mm::after {
+	content: ':'
+}
+.red-gradient-text {
+    color:red;
+	font-family: 'Karbon Light';
+}
+
+/* Oerride for IE */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	/* IE10+ CSS styles go here */
+	.red-gradient-text {
+		background-image: none;
+		color: red;
+		font-family: 'Karbon Light';
+	}
 }
