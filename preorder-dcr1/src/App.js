@@ -1239,15 +1239,19 @@ class App extends Component {
           back={back}
           step={this.state.step}
         />
-        <Payment
-          visible={this.state.step === 4}
-          paymentMethod={this.state.paymentMethod}
-          uid={this.state.uid}
-          btcaddr={this.state.paymentAddr}
-          btcPrice={btcPrice}
-          back={back}
-          step={this.state.step}
-        />
+        {this.state.step === 4 ? (
+          <Payment
+            visible={this.state.step === 4}
+            paymentMethod={this.state.paymentMethod}
+            uid={this.state.uid}
+            btcaddr={this.state.paymentAddr}
+            btcPrice={btcPrice}
+            back={back}
+            step={this.state.step}
+          />
+        ) : (
+          undefined
+        )}
       </div>
     )
   }
