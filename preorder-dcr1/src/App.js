@@ -15,6 +15,19 @@ const MS_PER_MIN = MS_PER_SEC * 60
 const MS_PER_HOUR = MS_PER_MIN * 60
 const MS_PER_DAY = MS_PER_HOUR * 24
 
+let isOnBTCAddressPage = false
+window.onbeforeunload = function(e) {
+  const msg =
+    'The Bitcoin address for this order will not be emailed to you, so' +
+    'please make sure you do not navigate away from this page without sending payment.'
+
+  if (isOnBTCAddressPage) {
+    e.returnValue = msg
+    return msg
+  }
+  return undefined
+}
+
 class PageOne extends Component {
   constructor(props) {
     super(props)
@@ -775,6 +788,10 @@ class Payment extends Component {
       secsRemaining: '00',
     }
 
+    if (this.props.paymentMethod === 'bitcoin') {
+      isOnBTCAddressPage = true
+    }
+
     setTimeout(this.updatePaymentTimer, 0)
   }
 
@@ -848,12 +865,17 @@ class Payment extends Component {
                           below:
                         </p>
                         <br />
-                        <p>Deposit Address</p>
+                        <p>Deposit Address:</p>
                         <p className="addr">{btcaddr}</p>
                       </div>
                     </div>
                     <div className="payment-timer-container">
-                      <span>Time Remaining To Submit Bitcoin Payment</span>
+                      <div className="payment-note">
+                        <span>NOTE:</span> The Bitcoin address above will not be emailed to you, so
+                        please make sure you do not navigate away from this page without sending
+                        payment.
+                      </div>
+                      <div>Time Remaining To Submit Bitcoin Payment</div>
                       <table>
                         <tr>
                           <td className="countdown-timer red-gradient-text countdown-hh">

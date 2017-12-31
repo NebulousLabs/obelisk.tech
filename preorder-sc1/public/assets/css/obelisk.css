@@ -756,6 +756,17 @@ body {
 	margin-left: 30px;
 	color: #a0a3a9;
 }
+.payment-note {
+	color: #bdbdbd;
+    margin-bottom: 20px;
+    background: #2f0000;
+    border: 1px solid #e4001c;
+    border-radius: 4px;
+	padding: 8px 10px 8px 10px;
+}
+.payment-note > span {
+	color: white;
+}
 .expiration-message {
 	font-family: "Karbon Light";
     color: #a0a3a9;
@@ -1136,7 +1147,7 @@ body {
 	content: ':'
 }
 .red-gradient-text {
-    color:red;
+    color: #e4001c;
 	font-family: 'Karbon Light';
 }
 
