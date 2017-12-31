@@ -493,12 +493,8 @@ class CouponEntry extends Component {
 
 class RedeemCoupons extends Component {
   handleNextClick = () => {
-    const anyErrors = _.some(this.props.coupons, 'error')
-    if (anyErrors) {
-      // Don't allow user to move to next step if there are errors.
-      return
-    }
-
+    // NOTE: We no longer prevent the user from moving forward even if there
+    //       are errors in some coupons.  Those coupons are just ignored.
     this.props.next(this.state)
   }
 
@@ -548,7 +544,11 @@ class RedeemCoupons extends Component {
       0,
     )
 
-    const totalNumCoupons = _.reduce(coupons, (total, coupon) => total + coupon.unitsUsed, 0)
+    const totalNumCoupons = _.reduce(
+      coupons,
+      (total, coupon) => (total + (coupon.unitsUsed !== undefined) ? coupon.unitsUsed : 0),
+      0,
+    )
 
     let addButton
     if (quantity > totalNumCoupons) {
@@ -1012,6 +1012,8 @@ class App extends Component {
     let remaining = quantity
     coupons = _.orderBy(coupons, 'value', 'desc')
 
+    this.checkForDuplicateCoupons(coupons)
+
     _.map(coupons, coupon => {
       if (coupon.unitsAvailable === 0) {
         coupon.isValid = false
@@ -1058,8 +1060,7 @@ class App extends Component {
     return used
   }
 
-  checkCouponRestrictions(quantityOrdered, coupons) {
-    // Check that this coupon is not a duplicate of any other
+  checkForDuplicateCoupons(coupons) {
     for (let i = coupons.length - 1; i >= 0; i--) {
       const currCoupon = coupons[i]
       for (let j = i - 1; j >= 0; j--) {
@@ -1072,11 +1073,22 @@ class App extends Component {
     }
   }
 
+  dedupeCouponCodes(coupons) {
+    let dedupedCoupons = coupons.slice()
+    for (let i = coupons.length - 1; i >= 0; i--) {
+      const currCoupon = coupons[i]
+      for (let j = i - 1; j >= 0; j--) {
+        if (coupons[j].length > 0 && coupons[j] === currCoupon) {
+          dedupedCoupons = dedupedCoupons.splice(j, 1)
+        }
+      }
+    }
+    return dedupedCoupons
+  }
+
   updateCouponAtIndex = (coupon, index) => {
     const coupons = this.state.coupons.slice()
     coupons.splice(index, 1, { ...coupon })
-
-    this.checkCouponRestrictions(this.state.quantity, coupons)
 
     this.updateCouponDiscount(coupons)
   }
@@ -1096,7 +1108,7 @@ class App extends Component {
       return
     }
 
-    const couponCodes = _.map(this.state.coupons, coupon => coupon.code).filter(
+    let couponCodes = _.map(this.state.coupons, coupon => coupon.code).filter(
       code => code.length > 0,
     )
     if (couponCodes.length === 0) {
@@ -1108,6 +1120,8 @@ class App extends Component {
     coupon.error = undefined
     coupon.code = code
     this.setState({ coupons })
+
+    couponCodes = this.dedupeCouponCodes(couponCodes)
 
     // Replicate coupon code $800 coupons - temporary hack
     const expandedCouponCodes = _.filter(couponCodes, code => !_.startsWith(code, '800-')).reduce(
