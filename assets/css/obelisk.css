@@ -304,6 +304,17 @@ body {
 	color: #4f4d4d;
 	font-size: 20px;
 }
+@media (max-width: 530px) {
+	.poweredby {
+		font-size: 16px !important;
+	}
+	.terms {
+		font-size: 16px;
+		position: relative;
+		left: -16px;
+	}
+}
+
 .terms a {
 	display: inline-block;
 	color: #444;
@@ -550,6 +561,7 @@ body {
 	font-family: "Karbon Light";
 	color: #4f4d4d;
 	font-size: 20px;
+	text-align: center;
 }
 .frameline-left, .frameline-right {
 	background-image: url("../img/frameline-left.png");
