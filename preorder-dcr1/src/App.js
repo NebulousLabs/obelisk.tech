@@ -9,6 +9,8 @@ import Countries from './countries'
 const US = require('us')
 
 const unitPrice = 1599
+const productName = 'DCR1'
+const termsFilename = 'terms_dcr1_batch2.pdf'
 
 const MS_PER_SEC = 1000
 const MS_PER_MIN = MS_PER_SEC * 60
@@ -148,7 +150,7 @@ class PageOne extends Component {
             />
           </div>
           <div className="col-md-4 quantity-section">
-            <h3> How many Obelisk DCR1s would you like to purchase? </h3>
+            <h3> How many Obelisk {productName}s would you like to purchase? </h3>
             <div className="quantity-form">
               <button onClick={decrementQuantity} className="minus-button" />
               <input
@@ -248,7 +250,11 @@ class ShippingForm extends Component {
         {countryInfo.name}
       </option>
     ))
-    countryOptions.unshift(<option value="">Country...</option>)
+    countryOptions.unshift(
+      <option value="" key="country">
+        Country...
+      </option>,
+    )
 
     const stateOptions = _.map(US.states, state => {
       return <option value={state.abbr}>{state.name}</option>
@@ -546,12 +552,6 @@ class RedeemCoupons extends Component {
       0,
     )
 
-    const totalNumCoupons = _.reduce(
-      coupons,
-      (total, coupon) => (total + (coupon.unitsUsed !== undefined) ? coupon.unitsUsed : 0),
-      0,
-    )
-
     return (
       <div className="container main order-main">
         <div className="need-help">
@@ -566,7 +566,9 @@ class RedeemCoupons extends Component {
             <div className="coupons-container">
               <h3>{this.props.step + 1}. SUBTOTAL</h3>
               <div className="coupon-subtotal-container">
-                <div className="coupon-subheading">{formatNumber(quantity)} x DCR1</div>
+                <div className="coupon-subheading">
+                  {formatNumber(quantity)} x {productName}
+                </div>
                 <div className="coupon-subtotal">{formatDollars(totalPrice)}</div>
               </div>
               <div className="coupon-subheading">COUPONS</div>
@@ -727,11 +729,7 @@ class Checkout extends Component {
             <div className="terms-check">
               <p>
                 By checking this box, you agree to the{' '}
-                <a
-                  href="/assets/img/terms_dcr1_batch2.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={`/assets/img/${termsFilename}`} target="_blank" rel="noopener noreferrer">
                   Terms and Conditions
                 </a>{' '}
                 and acknowledge the{' '}
@@ -983,6 +981,7 @@ class App extends Component {
           code: '',
           isValid: null,
           unitsUsed: 0,
+          unitsAvailable: 0,
           value: 0,
           isValidationInProgress: false,
         },
@@ -1009,24 +1008,27 @@ class App extends Component {
     this.checkForDuplicateCoupons(coupons)
 
     _.map(coupons, coupon => {
-      if (coupon.unitsAvailable === 0) {
-        coupon.isValid = false
-        coupon.isValidationInProgress = false
-        coupon.note = 'No remaining coupons.'
-        coupon.unitsUsed = 0
-      } else if (coupon.unitsAvailable > remaining) {
-        const remainingCouponValue = coupon.unitsAvailable - remaining
-        coupon.note =
-          'Only one coupon can be applied per unit. Coupon has ' +
-          remainingCouponValue +
-          ' remaining use(s).'
-        coupon.unitsUsed = remaining
-      } else {
-        coupon.unitsUsed = coupon.unitsAvailable
-        coupon.note = undefined
+      if (coupon.code !== '') {
+        if (coupon.unitsAvailable === 0) {
+          coupon.isValid = false
+          coupon.isValidationInProgress = false
+          coupon.note = 'No remaining coupons.'
+          coupon.unitsUsed = 0
+        } else if (coupon.unitsAvailable > remaining) {
+          const remainingCouponValue = coupon.unitsAvailable - remaining
+          coupon.note =
+            'Only one coupon can be applied per unit. Coupon has ' +
+            remainingCouponValue +
+            ' remaining use(s).'
+          coupon.unitsUsed = remaining
+          remaining = 0
+        } else {
+          coupon.unitsUsed = coupon.unitsAvailable
+          coupon.note = undefined
+          remaining -= coupon.unitsUsed
+        }
       }
 
-      remaining -= coupon.unitsUsed
       return coupon
     })
 
@@ -1208,7 +1210,7 @@ class App extends Component {
         })(),
       )
       formData.append('wire', result.paymentMethod === 'transfer')
-      formData.append('product', 'DCR1')
+      formData.append('product', productName)
 
       // Add on the coupon info, including the discount, so we can double-check it
       const couponCodes = _.filter(this.state.coupons, coupon => coupon.code.length > 0).map(
@@ -1230,7 +1232,7 @@ class App extends Component {
           //   if (res.data.includes('user with that email already exists')) {
           //     this.setState({
           //       checkoutError:
-          //         'a user has already ordered an Obelisk DCR1 using that email. If you want to modify your order, contact hello@obelisk.tech.',
+          //         `a user has already ordered an Obelisk ${productName} using that email. If you want to modify your order, contact hello@obelisk.tech.`,
           //     })
           //   } else {
           //     this.setState({
@@ -1239,7 +1241,11 @@ class App extends Component {
           //     })
           //   }
           // }
-          this.setState({ checkoutError: 'could not check out. try again in a few minutes.' })
+          this.setState({
+            checkoutError: `Could not check out. Try again in a few minutes. (${
+              err ? err.message : 'Server error'
+            })`,
+          })
         })
     }
     return (
@@ -1249,6 +1255,11 @@ class App extends Component {
           visible={this.state.step === 1}
           quantity={this.state.quantity}
           next={next}
+          next={() => {
+            // Update the coupon discount when returning to the coupons screen
+            this.updateCouponDiscount(this.state.coupons)
+            next(this.state)
+          }}
           back={back}
           step={this.state.step}
         />
