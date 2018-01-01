@@ -403,6 +403,7 @@ class CouponEntry extends Component {
         isValidationInProgress: false,
         value: 0,
         unitsUsed: 0,
+        unitsAvailable: 0,
         error,
       },
       this.props.index,
@@ -418,6 +419,7 @@ class CouponEntry extends Component {
         isValidationInProgress: false,
         value: 0,
         unitsUsed: 0,
+        unitsAvailable: 0,
         error: undefined,
       },
       this.props.index,
@@ -550,15 +552,6 @@ class RedeemCoupons extends Component {
       0,
     )
 
-    let addButton
-    if (quantity > totalNumCoupons) {
-      addButton = (
-        <div className="add-coupon-button" onClick={this.props.addCoupon}>
-          ADD COUPON
-        </div>
-      )
-    }
-
     return (
       <div className="container main order-main">
         <div className="need-help">
@@ -589,7 +582,6 @@ class RedeemCoupons extends Component {
                   <tbody>{couponEntries}</tbody>
                 </table>
               </div>
-
               <div className="coupon-total-container">
                 <div className="coupon-subheading">SUBTOTAL AFTER COUPONS</div>
                 <div className="coupon-subtotal">
@@ -597,7 +589,9 @@ class RedeemCoupons extends Component {
                 </div>
               </div>
               <div className="coupon-error">{this.props.error}</div>
-              {addButton}
+              <div className="add-coupon-button" onClick={this.props.addCoupon}>
+                ADD COUPON
+              </div>
             </div>
             <div onClick={this.props.back} className="back-button" />
             <div className="red-separator" />
@@ -1047,7 +1041,14 @@ class App extends Component {
 
   addCoupon = () => {
     const coupons = this.state.coupons.slice()
-    coupons.push({ code: '', isValidationInProgress: false, isValid: null, unitsUsed: 0, value: 0 })
+    coupons.push({
+      code: '',
+      isValidationInProgress: false,
+      isValid: null,
+      unitsUsed: 0,
+      unitsAvailable: 0,
+      value: 0,
+    })
     this.updateCouponDiscount(coupons)
   }
 
@@ -1165,6 +1166,7 @@ class App extends Component {
           error: 'Unable to reach server to validate coupon.  Please try again later.',
           value: 0,
           unitsUsed: 0,
+          unitsAvailable: 0,
         })
         this.setState({
           coupons,
