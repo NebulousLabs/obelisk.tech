@@ -1254,11 +1254,10 @@ class App extends Component {
         <ShippingForm
           visible={this.state.step === 1}
           quantity={this.state.quantity}
-          next={next}
-          next={() => {
+          next={result => {
             // Update the coupon discount when returning to the coupons screen
             this.updateCouponDiscount(this.state.coupons)
-            next(this.state)
+            next(result)
           }}
           back={back}
           step={this.state.step}
