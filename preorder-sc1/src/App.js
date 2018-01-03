@@ -503,7 +503,7 @@ class RedeemCoupons extends Component {
   handleNextClick = () => {
     // NOTE: We no longer prevent the user from moving forward even if there
     //       are errors in some coupons.  Those coupons are just ignored.
-    this.props.next(this.state)
+    this.props.next({})
   }
 
   render() {
@@ -869,22 +869,24 @@ class Payment extends Component {
                       </div>
                       <div>Time Remaining To Submit Bitcoin Payment</div>
                       <table>
-                        <tr>
-                          <td className="countdown-timer red-gradient-text countdown-hh">
-                            {this.state.hoursRemaining}
-                          </td>
-                          <td className="countdown-timer red-gradient-text countdown-mm">
-                            {this.state.minsRemaining}
-                          </td>
-                          <td className="countdown-timer red-gradient-text countdown-ss">
-                            {this.state.secsRemaining}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="countdown-label">HH</td>
-                          <td className="countdown-label">MM</td>
-                          <td className="countdown-label">SS</td>
-                        </tr>
+                        <tbody>
+                          <tr>
+                            <td className="countdown-timer red-gradient-text countdown-hh">
+                              {this.state.hoursRemaining}
+                            </td>
+                            <td className="countdown-timer red-gradient-text countdown-mm">
+                              {this.state.minsRemaining}
+                            </td>
+                            <td className="countdown-timer red-gradient-text countdown-ss">
+                              {this.state.secsRemaining}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="countdown-label">HH</td>
+                            <td className="countdown-label">MM</td>
+                            <td className="countdown-label">SS</td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div>
