@@ -1206,7 +1206,7 @@ class App extends Component {
           if (result.paymentMethod === 'transfer') {
             return totalPrice
           }
-          return formatBTC(btcPrice)
+          return btcPrice
         })(),
       )
       formData.append('wire', result.paymentMethod === 'transfer')
