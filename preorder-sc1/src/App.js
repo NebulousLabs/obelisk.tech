@@ -1215,9 +1215,13 @@ class App extends Component {
       formData.append('product', productName)
 
       // Add on the coupon info, including the discount, so we can double-check it
-      const couponCodes = _.filter(this.state.coupons, coupon => coupon.code.length > 0).map(
-        coupon => coupon.code + ':' + coupon.unitsUsed,
-      )
+      const couponCodes = _.filter(
+        this.state.coupons,
+        coupon =>
+          coupon.code.length > 0 &&
+          (!coupon.error || coupon.error.length === 0) &&
+          coupon.unitsUsed > 0,
+      ).map(coupon => coupon.code + ':' + coupon.unitsUsed)
 
       formData.append('coupons', couponCodes.join(','))
       formData.append('couponDiscount', this.state.couponDiscount)
