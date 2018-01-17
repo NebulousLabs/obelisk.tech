@@ -1181,7 +1181,8 @@ class App extends Component {
   render() {
     const undiscountedPrice = unitPrice * this.state.quantity + this.state.shippingCost
     const totalPrice = undiscountedPrice - this.state.couponDiscount
-    const btcPrice = totalPrice / this.state.btcUsd
+    let btcPrice = totalPrice / this.state.btcUsd
+    btcPrice = parseFloat(btcPrice.toFixed(5))
     const next = result => {
       this.setState(result)
       this.setState({ step: this.state.step + 1 })

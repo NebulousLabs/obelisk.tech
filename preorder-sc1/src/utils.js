@@ -7,4 +7,4 @@ export const formatNumber = (n, fractionDigits = 0) =>
 
 export const formatDollars = n => '$' + formatNumber(n)
 
-export const formatBTC = n => formatNumber(n, 3)
+export const formatBTC = n => formatNumber(n, 5)
