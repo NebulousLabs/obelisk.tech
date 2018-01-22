@@ -652,7 +652,11 @@ class Checkout extends Component {
       this.props.next(this.state)
     }
     const handleBitcoinClick = () => this.setState({ paymentMethod: 'bitcoin' })
-    const handleTransferClick = () => this.setState({ paymentMethod: 'transfer' })
+    const handleTransferClick = () => {
+      alert('Due to fraudulent activity, wire transfers are currently unavailable.')
+      // this.setState({ paymentMethod: 'transfer' })
+    }
+
     return (
       <div className="container main order-main">
         <div className="need-help">
