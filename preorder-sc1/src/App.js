@@ -626,7 +626,7 @@ class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      paymentMethod: '',
+      paymentMethod: 'bitcoin',
       checked: false,
       ackPaymentTime: false,
       error: '',
@@ -671,7 +671,7 @@ class Checkout extends Component {
             <div className="separator" />
             <div className="checkout order-form">
               <h3>{this.props.step + 1}. CHECKOUT </h3>
-              <p> Payment is accepted in both Bitcoin or USD.</p>
+              <p> Payment is accepted in Bitcoin.</p>
               <div className="estimated-costs">
                 <div className="estimated-cost">
                   <span className="money">
@@ -695,7 +695,7 @@ class Checkout extends Component {
             <img alt="logo" className="hardware-shot" src="assets/img/hardware-shot.png" />
           </div>
           <div className="col-md-4 final-cost-section">
-            <h3> Select a form of payment before proceeding to the next step. </h3>
+            <h3> Payment Method </h3>
             <div className="payment-forms">
               <div
                 onClick={handleBitcoinClick}
@@ -705,15 +705,6 @@ class Checkout extends Component {
               >
                 <img src="assets/img/bitcoin-logo.png" alt="bitcoin logo" />
                 <p> Bitcoin </p>
-              </div>
-              <div
-                onClick={handleTransferClick}
-                className={
-                  this.state.paymentMethod === 'transfer' ? 'payment-form selected' : 'payment-form'
-                }
-              >
-                <img src="assets/img/dollar-logo.png" alt="dollar symbol" />
-                <p> Bank Wire </p>
               </div>
             </div>
             {this.state.paymentMethod === 'bitcoin' ? (
@@ -976,7 +967,7 @@ class App extends Component {
       shippingCost: 0,
       newsletter: false,
       btcUsd: 7000,
-      paymentMethod: '',
+      paymentMethod: 'bitcoin',
 
       uid: '',
       paymentAddr: '',
