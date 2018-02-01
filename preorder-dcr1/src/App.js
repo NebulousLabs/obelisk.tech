@@ -8,9 +8,10 @@ import { formatBTC, formatDollars, formatNumber } from './utils'
 import Countries from './countries'
 const US = require('us')
 
-const unitPrice = 1599
+const unitPrice = 1849
+const shipDate = 'September 14, 2018'
 const productName = 'DCR1'
-const termsFilename = 'terms_dcr1_batch2.pdf'
+const termsFilename = 'terms_dcr1_batch3.pdf'
 
 const MS_PER_SEC = 1000
 const MS_PER_MIN = MS_PER_SEC * 60
@@ -161,7 +162,7 @@ class PageOne extends Component {
             </div>
             <div className="quantity-price">{formatDollars(unitPrice * this.state.quantity)}</div>
             <div className="shipping-note">
-              *orders are estimated to ship on or before August 31, 2018.
+              *orders are estimated to ship on or before {shipDate}.
             </div>
             <div className="next-button" onClick={handleNextClick} />
           </div>
@@ -346,7 +347,7 @@ class ShippingForm extends Component {
               <p className="amount">{formatNumber(estimatedCost())}</p>
             </div>
             <p className="note">
-              * Shipping costs are $80 per unit. Orders will ship on or before August 31, 2018.
+              * Shipping costs are $80 per unit. Orders will ship on or before {shipDate}.
             </p>
             <div className="next-button" onClick={handleNextClick} />
           </div>

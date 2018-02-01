@@ -240,7 +240,7 @@ body {
 	margin-top: 50px;
 }
 .counter-row {
-	margin-top: 0px;
+	margin-top: 10px;
 	vertical-align: middle;
 }
 .meettheminer {
@@ -421,7 +421,8 @@ body {
 }
 .price-preorder-section > .preorder-button {
 	display: inline-block;
-	margin-left: 60px;
+	margin-left: 4px;
+	margin-top: 18px;
 }
 .price-preorder-section {
 	display: flex;
@@ -998,8 +999,6 @@ body {
 }
 
 .ordercount {
-	display: flex;
-	align-items: center;
 	margin-left: -15px;
 }
 
@@ -1045,6 +1044,7 @@ body {
 }
 .ordercount-coin-logo {
 	margin-right: 10px;
+    margin-left: 5px;
 	width: 27px;
 	position: relative;
 	top: -4px;
@@ -1199,19 +1199,19 @@ a.colo-table-link:hover {
     font-family: "Karbon Thin";
     color: #fff;
 	text-align: center;
-	margin-top: 60px;
+	margin-top: 0px;
 	margin-bottom: 80px;
 }
 
 .preorder-hardware-button {
-	border: 1px solid #2b2b2b;
+	border: 2px solid #2b2b2b;
 	border-radius: 40px;
 	background: black;
 	margin-bottom: 30px;
 }
 
 .preorder-hardware-button:hover {
-	border: 1px solid #6a6a6a;
+	border: 2px solid #6a6a6a;
 }
 
 .preorder-coin-logo {
@@ -1338,4 +1338,8 @@ a.colo-table-link:hover {
 	font-family: "Karbon Regular";
 	width: 28px;
 	text-align: center;
+}
+
+.countdown-timer-container {
+	width: 27px;
 }
