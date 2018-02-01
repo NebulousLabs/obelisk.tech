@@ -649,6 +649,12 @@ class Checkout extends Component {
         this.setState({ error: 'You must select a payment method' })
         return
       }
+      if (this.props.btcUsd === 0) {
+        this.setState({
+          error: 'Unable to get current Bitcoin price. Try to checkout again later.',
+        })
+        return
+      }
       this.setState({ error: '' })
       this.props.next(this.state)
     }
@@ -966,7 +972,7 @@ class App extends Component {
       quantity: 1,
       shippingCost: 0,
       newsletter: false,
-      btcUsd: 7000,
+      btcUsd: 0,
       paymentMethod: 'bitcoin',
 
       uid: '',
@@ -987,14 +993,16 @@ class App extends Component {
       couponDiscount: 0,
     }
     axios
-      .get('https://api.gdax.com/products/BTC-USD/ticker', { responseType: 'json' })
+      .get('https://api.gemini.com/v1/pubticker/btcusd', { responseType: 'json' })
       .then(res => {
-        this.setState({ btcUsd: parseFloat(res.data.price) })
+        this.setState({ btcUsd: parseFloat(res.data.last) })
       })
-    axios
-      .get('https://api.gdax.com/products/ETH-USD/ticker', { responseType: 'json' })
-      .then(res => {
-        this.setState({ ethUsd: parseFloat(res.data.price) })
+      .catch(() => {
+        axios
+          .get('https://api.gdax.com/products/BTC-USD/ticker', { responseType: 'json' })
+          .then(res => {
+            this.setState({ btcUsd: parseFloat(res.data.price) })
+          })
       })
   }
 
@@ -1285,6 +1293,7 @@ class App extends Component {
           shippingCost={this.state.shippingCost}
           totalPrice={totalPrice}
           btcPrice={btcPrice}
+          btcUsd={this.state.btcUsd}
           coupons={this.state.coupons}
           next={handleSubmit}
           back={back}
