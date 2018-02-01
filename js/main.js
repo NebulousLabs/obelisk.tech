@@ -74,6 +74,7 @@ var updatePresaleTimer = function() {
     $('#countdown-timer').text('SALE OVER')
     $('#countdown-container').css('width', '230px')
     $('.hide-when-sale-closed').css('visibility', 'hidden')
+    $('.disp-when-sale-closed').css('display', 'block')
     $('.no-disp-when-sale-closed').css('display', 'none')
     clearInterval(interval)
     return
