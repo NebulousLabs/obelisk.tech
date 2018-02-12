@@ -2,8 +2,8 @@ const formatNumber = function(n) {
   return n.toLocaleString(n)
 }
 
-const dcr1Sold = 0
-const sc1Sold = 0
+const dcr1Sold = 68
+const sc1Sold = 15
 
 $('#sc1-sold').text(formatNumber(sc1Sold))
 $('#dcr1-sold').text(formatNumber(dcr1Sold))
