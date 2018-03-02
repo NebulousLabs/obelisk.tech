@@ -92,7 +92,7 @@ class PageOne extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="javascript:groove.widget('open')">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -266,7 +266,7 @@ class ShippingForm extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="javascript:groove.widget('open')">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -557,7 +557,7 @@ class RedeemCoupons extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="javascript:groove.widget('open')">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -668,7 +668,7 @@ class Checkout extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="javascript:groove.widget('open')">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -833,7 +833,7 @@ class Payment extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="javascript:groove.widget('open')">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
           <div className="separator-muted" />
         </div>
         <div className="row">
