@@ -13,7 +13,7 @@ let countriesArray = _.map(filteredCountries, (name, code2) => {
   return {
     code2,
     code3,
-    name
+    name,
   }
 })
 
@@ -33,8 +33,9 @@ countriesArray = _.filter(countriesArray, country => {
     case 'North Korea':
       // case 'Crimean Region of the Ukraine': ???
       return false
+    default:
+      return true
   }
-  return true
 })
 
 export default countriesArray

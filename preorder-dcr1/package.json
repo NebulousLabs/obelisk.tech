@@ -1,28 +1,28 @@
 {
-  "name": "obelisk-preorder",
+  "name": "obelisk-preorder-dcr1",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://obelisk.tech/preorder-dcr1",
   "dependencies": {
-    "axios": "^0.17.0",
-    "countries-list": "^1.4.1",
-    "email-validator": "^1.0.7",
-    "fetch": "^1.1.0",
-    "gemini-api": "^2.0.2",
-    "i18n-iso-countries": "^3.3.0",
-    "lodash": "^4.17.4",
-    "qrcode": "^0.8.2",
-    "qrcode-generator": "^1.2.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "us": "^2.0.0"
+    "axios": "0.17.0",
+    "countries-list": "1.4.1",
+    "email-validator": "1.0.7",
+    "fetch": "1.1.0",
+    "gemini-api": "2.0.2",
+    "i18n-iso-countries": "3.3.0",
+    "lodash": "4.17.4",
+    "qrcode": "0.8.2",
+    "qrcode-generator": "1.2.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "us": "2.0.0"
   },
   "devDependencies": {
-    "chai": "^4.0.2",
-    "enzyme": "^2.9.1",
-    "react-dom": "^15.6.1",
+    "chai": "4.0.2",
+    "enzyme": "2.9.1",
+    "react-dom": "15.6.1",
     "react-scripts": "1.0.7",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "15.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +30,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:3001"
 }

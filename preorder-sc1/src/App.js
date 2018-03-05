@@ -11,7 +11,7 @@ const US = require('us')
 const unitPrice = 1599
 const shipDate = 'September 14, 2018'
 const productName = 'SC1'
-const termsFilename = 'terms_sc1_batch3.pdf'
+const termsFilename = 'terms_sc1_batch4.pdf'
 
 const MS_PER_SEC = 1000
 const MS_PER_MIN = MS_PER_SEC * 60
@@ -92,7 +92,9 @@ class PageOne extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank" rel="noopener noreferrer">
+            Contact us
+          </a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -266,7 +268,9 @@ class ShippingForm extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank" rel="noopener noreferrer">
+            Contact us
+          </a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -365,30 +369,30 @@ class CouponEntry extends Component {
 
   handleChange = e => {
     const code = e.target.value.trim().toUpperCase()
-    // Only allow valid characters
-    switch (code.length) {
-      case 0:
-        break
+    // // Only allow valid characters
+    // switch (code.length) {
+    //   case 0:
+    //     break
 
-      case 1:
-        if (code !== 'O') {
-          return
-        }
-        break
-      case 2:
-        if (code !== 'O-') {
-          return
-        }
-        break
+    //   case 1:
+    //     if (code !== 'C') {
+    //       return
+    //     }
+    //     break
+    //   case 2:
+    //     if (code !== 'C-') {
+    //       return
+    //     }
+    //     break
 
-      default:
-        if (code.length > 14) {
-          return
-        } else if (!/^O-[0-9ABCDEF]{1,12}$/.test(code)) {
-          return
-        }
-        break
-    }
+    //   default:
+    //     if (code.length > 14) {
+    //       return
+    //     } else if (!/^C-[0-9]+-[0-9ABCDEF]{1,12}$/.test(code)) {
+    //       return
+    //     }
+    //     break
+    // }
 
     this.setState({ code })
   }
@@ -400,8 +404,8 @@ class CouponEntry extends Component {
     }
 
     let error
-    if (!/^[800-]*O-[0-9ABCDEF]{12}$/.test(this.state.code)) {
-      error = "Invalid code.  Must start with 'O-', followed by 12 numbers/letters."
+    if (!/C-[0-9]+-[0-9ABCDEF]{12}$/.test(this.state.code)) {
+      error = "Invalid code.  Must  be of the format: 'C-999-999999999999'"
     }
     this.props.updateCouponAtIndex(
       {
@@ -450,7 +454,7 @@ class CouponEntry extends Component {
       icon = <img className="coupon-spinner" src="assets/img/spinner.gif" alt="spinner" />
     } else if (isValid === null) {
       icon = <div />
-    } else if (isValid && error === '') {
+    } else if (isValid && !error) {
       icon = <img className="coupon-icon" src="assets/img/checkmark.png" alt="valid coupon" />
     } else {
       icon = (
@@ -472,7 +476,7 @@ class CouponEntry extends Component {
           <input
             className="coupon-input"
             type="text"
-            placeholder="e.g., O-123456789012"
+            placeholder="e.g., C-250-123456789012"
             value={this.state.code}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
@@ -557,7 +561,9 @@ class RedeemCoupons extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank" rel="noopener noreferrer">
+            Contact us
+          </a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -568,7 +574,7 @@ class RedeemCoupons extends Component {
               <h3>{this.props.step + 1}. SUBTOTAL</h3>
               <div className="coupon-subtotal-container">
                 <div className="coupon-subheading">
-                  {formatNumber(quantity)} x {productName}
+                  {formatNumber(quantity)} x {productName} + SHIPPING + TAX
                 </div>
                 <div className="coupon-subtotal">{formatDollars(totalPrice)}</div>
               </div>
@@ -659,16 +665,14 @@ class Checkout extends Component {
       this.props.next(this.state)
     }
     const handleBitcoinClick = () => this.setState({ paymentMethod: 'bitcoin' })
-    const handleTransferClick = () => {
-      alert('Due to fraudulent activity, wire transfers are currently unavailable.')
-      // this.setState({ paymentMethod: 'transfer' })
-    }
 
     return (
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank" rel="noopener noreferrer">
+            Contact us
+          </a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -833,7 +837,9 @@ class Payment extends Component {
       <div className="container main order-main">
         <div className="need-help">
           <p>Need Help?</p>
-          <a href="http://support.obelisk.tech" target="_blank">Contact us</a>
+          <a href="http://support.obelisk.tech" target="_blank" rel="noopener noreferrer">
+            Contact us
+          </a>
           <div className="separator-muted" />
         </div>
         <div className="row">
@@ -969,7 +975,7 @@ class App extends Component {
       email: '',
       backupemail: '',
       backupphone: '',
-      quantity: 1,
+      quantity: 7,
       shippingCost: 0,
       newsletter: false,
       btcUsd: 0,
@@ -978,7 +984,7 @@ class App extends Component {
       uid: '',
       paymentAddr: '',
 
-      step: 0,
+      step: 2,
       checkoutError: '',
       coupons: [
         {
@@ -1132,25 +1138,15 @@ class App extends Component {
 
     couponCodes = this.dedupeCouponCodes(couponCodes)
 
-    // Replicate coupon code $800 coupons - temporary hack
-    const expandedCouponCodes = _.filter(couponCodes, code => !_.startsWith(code, '800-')).reduce(
-      (newCouponCodes, code) => {
-        newCouponCodes.push('800-' + code)
-        newCouponCodes.push(code)
-        return newCouponCodes
-      },
-      [],
-    )
-
     axios
-      .get(`/validatecoupons?coupons=${expandedCouponCodes.join(',')}`, {
+      .get(`/api/validateCoupons?coupons=${couponCodes.join(',')}`, {
         timeout: 10000,
         responseType: 'json',
       })
       .then(res => {
         let coupons = res.data.map(respCoupon => {
           const coupon = {
-            code: respCoupon.uniqueID,
+            code: respCoupon.code,
             isValidationInProgress: false,
             value: parseInt(respCoupon.couponValue, 10),
             unitsUsed: parseInt(respCoupon.couponsReserved, 10),
@@ -1199,25 +1195,25 @@ class App extends Component {
     }
     const handleSubmit = result => {
       this.setState(result)
-      const formData = new FormData()
-      formData.append('email', this.state.email)
-      formData.append('newsletter', this.state.newsletter)
-      formData.append('name', this.state.name)
-      formData.append('address', this.state.address)
-      formData.append('backupEmail', this.state.backupemail)
-      formData.append('phone', this.state.backupphone)
-      formData.append('units', this.state.quantity)
-      formData.append(
-        'price',
-        (() => {
-          if (result.paymentMethod === 'transfer') {
-            return totalPrice
-          }
-          return btcPrice
-        })(),
-      )
-      formData.append('wire', result.paymentMethod === 'transfer')
-      formData.append('product', productName)
+      const request = {}
+      request.email = this.state.email
+      request.newsletter = this.state.newsletter
+      request.name = this.state.name
+      request.address = this.state.address
+      request.backupEmail = this.state.backupemail
+      request.phone = this.state.backupphone
+      request.units = this.state.quantity
+      request.product = productName
+      request.batch = 4
+
+      // let price
+      // if (result.paymentMethod === 'transfer') {
+      //   price = totalPrice
+      // } else {
+      //   price = btcPrice
+      // }
+      // request.price = btcPrice // TODO: Change when more currencies are added
+      // request.wire = false
 
       // Add on the coupon info, including the discount, so we can double-check it
       const couponCodes = _.filter(
@@ -1228,11 +1224,10 @@ class App extends Component {
           coupon.unitsUsed > 0,
       ).map(coupon => coupon.code + ':' + coupon.unitsUsed)
 
-      formData.append('coupons', couponCodes.join(','))
-      formData.append('couponDiscount', this.state.couponDiscount)
+      request.coupons = couponCodes.join(',')
 
       axios
-        .post(`/adduser`, formData, { responseType: 'json' })
+        .post(`/api/submitOrder`, request)
         .then(res => {
           this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
           this.setState({ step: this.state.step + 1 })
