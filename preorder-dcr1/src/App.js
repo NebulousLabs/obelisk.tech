@@ -9,9 +9,10 @@ import Countries from './countries'
 const US = require('us')
 
 const unitPrice = 1849
-const shipDate = 'September 14, 2018'
+const shipDate = 'September 30, 2018'
 const productName = 'DCR1'
 const termsFilename = 'terms_dcr1_batch4.pdf'
+const batch = 4
 
 const MS_PER_SEC = 1000
 const MS_PER_MIN = MS_PER_SEC * 60
@@ -975,7 +976,7 @@ class App extends Component {
       email: '',
       backupemail: '',
       backupphone: '',
-      quantity: 7,
+      quantity: 1,
       shippingCost: 0,
       newsletter: false,
       btcUsd: 0,
@@ -984,7 +985,7 @@ class App extends Component {
       uid: '',
       paymentAddr: '',
 
-      step: 2,
+      step: 0,
       checkoutError: '',
       coupons: [
         {
@@ -1139,12 +1140,20 @@ class App extends Component {
     couponCodes = this.dedupeCouponCodes(couponCodes)
 
     axios
-      .get(`/api/validateCoupons?coupons=${couponCodes.join(',')}`, {
-        timeout: 10000,
-        responseType: 'json',
-      })
+      .get(
+        `/api/validateCoupons?coupons=${couponCodes.join(',')}` +
+          `&quantity=${this.state.quantity}` +
+          `&product=${productName}` +
+          `&batch=${batch}` +
+          `&address=${this.state.address}`,
+        {
+          timeout: 10000,
+          responseType: 'json',
+        },
+      )
       .then(res => {
-        let coupons = res.data.map(respCoupon => {
+        const result = res.data
+        let coupons = result.coupons.map(respCoupon => {
           const coupon = {
             code: respCoupon.code,
             isValidationInProgress: false,
@@ -1158,6 +1167,13 @@ class App extends Component {
         })
 
         this.updateCouponDiscount(coupons)
+
+        // TODO: Add this back in soon
+        // this.setState({
+        //   totalPrice: result.usdPrice,
+        //   btcPrice: result.totalPrice / currBtcPrice,
+        //   btcUsd: result.currBtcPrice,
+        // })
       })
       .catch(err => {
         console.log(err)
@@ -1216,20 +1232,17 @@ class App extends Component {
       // request.wire = false
 
       // Add on the coupon info, including the discount, so we can double-check it
-      const couponCodes = _.filter(
-        this.state.coupons,
-        coupon =>
-          coupon.code.length > 0 &&
-          (!coupon.error || coupon.error.length === 0) &&
-          coupon.unitsUsed > 0,
-      ).map(coupon => coupon.code + ':' + coupon.unitsUsed)
+      const couponCodes = _.map(this.state.coupons, coupon => ({
+        code: coupon.code,
+        unitsRedeemed: coupon.unitsUsed,
+      }))
 
-      request.coupons = couponCodes.join(',')
+      request.coupons = JSON.stringify(couponCodes)
 
       axios
         .post(`/api/submitOrder`, request)
         .then(res => {
-          this.setState({ uid: res.data.uniqueID, paymentAddr: res.data.paymentAddr })
+          this.setState({ uid: res.data.uniqueId, paymentAddr: res.data.paymentAddr })
           this.setState({ step: this.state.step + 1 })
         })
         .catch(err => {
