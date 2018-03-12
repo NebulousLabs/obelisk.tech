@@ -1171,8 +1171,6 @@ class App extends Component {
         // TODO: Add this back in soon
         // this.setState({
         //   totalPrice: result.usdPrice,
-        //   btcPrice: result.totalPrice / currBtcPrice,
-        //   btcUsd: result.currBtcPrice,
         // })
       })
       .catch(err => {
@@ -1222,14 +1220,18 @@ class App extends Component {
       request.product = productName
       request.batch = 4
 
+      // TODO: It's more work than expected to make the server responsible for all
+      //       order price calculations. This is because the previous step also
+      //       shows the BTC price, and a lot of time could pass between when we
+      //
       // let price
       // if (result.paymentMethod === 'transfer') {
       //   price = totalPrice
       // } else {
       //   price = btcPrice
       // }
-      // request.price = btcPrice // TODO: Change when more currencies are added
-      // request.wire = false
+      request.price = btcPrice // TODO: Change when more currencies are added
+      request.wire = false
 
       // Add on the coupon info, including the discount, so we can double-check it
       const couponCodes = _.map(this.state.coupons, coupon => ({
@@ -1237,7 +1239,7 @@ class App extends Component {
         unitsRedeemed: coupon.unitsUsed,
       }))
 
-      request.coupons = JSON.stringify(couponCodes)
+      request.coupons = couponCodes
 
       axios
         .post(`/api/submitOrder`, request)
