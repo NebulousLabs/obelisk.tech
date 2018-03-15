@@ -8,9 +8,9 @@ const sc1Sold = 38
 $('#sc1-sold').text(formatNumber(sc1Sold))
 $('#dcr1-sold').text(formatNumber(dcr1Sold))
 
-// Mar. 1, 8:00AM GMT is Feb. 28, midnight Pacific Time
+// April 1, 2:00AM GMT is March 31, 10PM EST, 7PM PST
 // NOTE: Month is ZERO BASED here!
-var saleEndTime = Date.UTC(2018, 2, 1, 8, 0, 0)
+var saleEndTime = Date.UTC(2018, 3, 1, 3, 0, 0)
 var isSaleOver = false
 
 var MS_PER_SEC = 1000

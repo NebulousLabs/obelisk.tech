@@ -1218,7 +1218,7 @@ class App extends Component {
       request.phone = this.state.backupphone
       request.units = this.state.quantity
       request.product = productName
-      request.batch = 4
+      request.batch = { batch }
 
       // TODO: It's more work than expected to make the server responsible for all
       //       order price calculations. This is because the previous step also
