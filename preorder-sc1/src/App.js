@@ -1248,10 +1248,13 @@ class App extends Component {
           this.setState({ step: this.state.step + 1 })
         })
         .catch(err => {
+          const msg = _.get(
+            err,
+            ['response', 'data', 'error'],
+            'Server error - try again in a few minutes.',
+          )
           this.setState({
-            checkoutError: `Could not check out. Try again in a few minutes. (${
-              err ? err.message : 'Server error'
-            })`,
+            checkoutError: `Checkout Error: ${msg}`,
           })
         })
     }
