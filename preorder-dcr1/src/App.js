@@ -1141,7 +1141,7 @@ class App extends Component {
 
     axios
       .get(
-        `/api/validateCoupons?coupons=${couponCodes.join(',')}` +
+        `https://portal.obelisk.tech/api/validateCoupons?coupons=${couponCodes.join(',')}` +
           `&quantity=${this.state.quantity}` +
           `&product=${productName}` +
           `&batch=${batch}` +
@@ -1242,7 +1242,7 @@ class App extends Component {
       request.coupons = couponCodes
 
       axios
-        .post(`/api/submitOrder`, request)
+        .post(`https://portal.obelisk.tech/api/submitOrder`, request)
         .then(res => {
           this.setState({ uid: res.data.uniqueId, paymentAddr: res.data.paymentAddr })
           this.setState({ step: this.state.step + 1 })
