@@ -8,7 +8,7 @@ import { formatBTC, formatDollars, formatNumber } from './utils'
 import Countries from './countries'
 const US = require('us')
 
-const unitPrice = 1849
+const unitPrice = 1999
 const shipDate = 'September 30, 2018'
 const productName = 'DCR1'
 const termsFilename = 'terms_dcr1_batch4.pdf'
@@ -554,7 +554,7 @@ class RedeemCoupons extends Component {
 
     const totalCouponValue = _.reduce(
       coupons,
-      (total, coupon) => total + coupon.unitsUsed * coupon.value,
+      (total, coupon) => (coupon.isValid ? total + coupon.value * coupon.unitsUsed : total),
       0,
     )
 
@@ -1047,7 +1047,7 @@ class App extends Component {
 
     const couponDiscount = _.reduce(
       coupons,
-      (total, coupon) => total + coupon.value * coupon.unitsUsed,
+      (total, coupon) => (coupon.isValid ? total + coupon.value * coupon.unitsUsed : total),
       0,
     )
 
@@ -1218,7 +1218,7 @@ class App extends Component {
       request.phone = this.state.backupphone
       request.units = this.state.quantity
       request.product = productName
-      request.batch = { batch }
+      request.batch = batch
 
       // TODO: It's more work than expected to make the server responsible for all
       //       order price calculations. This is because the previous step also
@@ -1248,20 +1248,6 @@ class App extends Component {
           this.setState({ step: this.state.step + 1 })
         })
         .catch(err => {
-          // The email error is not currently checked on the server, and the "unknown" error
-          // is effectively the same as the one below, so just commenting this out for now.
-          //   if (res.data.includes('user with that email already exists')) {
-          //     this.setState({
-          //       checkoutError:
-          //         `a user has already ordered an Obelisk ${productName} using that email. If you want to modify your order, contact hello@obelisk.tech.`,
-          //     })
-          //   } else {
-          //     this.setState({
-          //       checkoutError:
-          //         'an unknown error has occurred and has been reported to the developers.',
-          //     })
-          //   }
-          // }
           this.setState({
             checkoutError: `Could not check out. Try again in a few minutes. (${
               err ? err.message : 'Server error'
