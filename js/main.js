@@ -2,15 +2,9 @@ const formatNumber = function(n) {
   return n.toLocaleString(n)
 }
 
-const dcr1Sold = 351
-const sc1Sold = 38
-
-$('#sc1-sold').text(formatNumber(sc1Sold))
-$('#dcr1-sold').text(formatNumber(dcr1Sold))
-
-// April 1, 2:00AM GMT is March 31, 10PM EST, 7PM PST
+// April 1, 7:00AM GMT is March 31, Midnight PDT
 // NOTE: Month is ZERO BASED here!
-var saleEndTime = Date.UTC(2018, 3, 1, 3, 0, 0)
+var saleEndTime = Date.UTC(2018, 3, 1, 7, 0, 0)
 var isSaleOver = false
 
 var MS_PER_SEC = 1000
@@ -57,3 +51,24 @@ var updatePresaleTimer = function() {
 var interval = setInterval(updatePresaleTimer, 1000)
 
 updatePresaleTimer()
+
+var batch = 4
+function updateOrderCounts() {
+  fetch('https://portal.obelisk.tech/api/orderCounts')
+    .then(function(resp) {
+      return resp.json()
+    })
+    .then(function(counts) {
+      if (counts['Batch ' + batch]) {
+        var batch = counts['Batch ' + batch]
+        if (batch.DCR1) {
+          $('dcr1-sold').text(formatNumber(batch.DCR1))
+        }
+        if (batch.SC1) {
+          $('sc1-sold').text(formatNumber(batch.SC1))
+        }
+      }
+    })
+}
+
+updateOrderCounts()
