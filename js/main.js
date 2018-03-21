@@ -52,20 +52,20 @@ var interval = setInterval(updatePresaleTimer, 1000)
 
 updatePresaleTimer()
 
-var batch = 4
 function updateOrderCounts() {
   fetch('https://portal.obelisk.tech/api/orderCounts')
     .then(function(resp) {
       return resp.json()
     })
     .then(function(counts) {
+      var batch = 4
       if (counts['Batch ' + batch]) {
         var batch = counts['Batch ' + batch]
         if (batch.DCR1) {
-          $('dcr1-sold').text(formatNumber(batch.DCR1))
+          $('#dcr1-sold').text(formatNumber(batch.DCR1))
         }
         if (batch.SC1) {
-          $('sc1-sold').text(formatNumber(batch.SC1))
+          $('#sc1-sold').text(formatNumber(batch.SC1))
         }
       }
     })
