@@ -2,10 +2,10 @@
 set -e
 
 rm -rf release/
-cd preorder-sc1
+cd presale-sc1
 npm run build
 cd ../
-cd preorder-dcr1
+cd presale-dcr1
 npm run build
 cd ../
 mkdir release/
@@ -14,6 +14,6 @@ cp about.html release/
 cp colocation.html release/
 cp preorder.html release/
 cp -r assets release/
-cp -r preorder-sc1/build release/preorder-sc1
-cp -r preorder-dcr1/build release/preorder-dcr1
+cp -r presale-sc1/build release/presale-sc1
+cp -r presale-dcr1/build release/presale-dcr1
 cp -r js release/

@@ -1,8 +1,8 @@
 {
-  "name": "obelisk-preorder-dcr1",
+  "name": "obelisk-presale-sc1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://obelisk.tech/preorder-dcr1",
+  "homepage": "https://obelisk.tech/presale-sc1",
   "dependencies": {
     "axios": "0.17.0",
     "countries-list": "1.4.1",
