@@ -1234,6 +1234,12 @@ a.colo-table-link:hover {
 	height: 120px;
 }
 
+@media (max-width: 992px) {
+	.preorder-title {
+		margin-top: 40px;
+	}
+}
+
 @media (min-width: 992px) {
 	.preorder-title::after {
 		content: "";
