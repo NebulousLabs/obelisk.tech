@@ -2,9 +2,9 @@ const formatNumber = function(n) {
   return n.toLocaleString(n)
 }
 
-// April 1, 7:00AM GMT is March 31, Midnight PDT
+// May 1, 7:00AM GMT is March 31, Midnight PDT
 // NOTE: Month is ZERO BASED here!
-var saleEndTime = Date.UTC(2018, 3, 1, 7, 0, 0)
+var saleEndTime = Date.UTC(2018, 4, 1, 7, 0, 0)
 var isSaleOver = false
 
 var MS_PER_SEC = 1000
@@ -58,7 +58,7 @@ function updateOrderCounts() {
       return resp.json()
     })
     .then(function(counts) {
-      var batch = 4
+      var batch = 5
       if (counts['Batch ' + batch]) {
         var batch = counts['Batch ' + batch]
         if (batch.DCR1) {

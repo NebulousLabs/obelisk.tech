@@ -11,8 +11,8 @@ const US = require('us')
 const unitPrice = 1699
 const shipDate = 'September 30, 2018'
 const productName = 'SC1'
-const termsFilename = 'terms_sc1_batch4.pdf'
-const batch = 4
+const termsFilename = 'terms_sc1_batch5.pdf'
+const batch = 5
 
 const MS_PER_SEC = 1000
 const MS_PER_MIN = MS_PER_SEC * 60
@@ -352,7 +352,7 @@ class ShippingForm extends Component {
               <p className="amount">{formatNumber(estimatedCost())}</p>
             </div>
             <p className="note">
-              * Shipping costs are $80 per unit. Orders will ship on or before {shipDate}.
+              * Shipping costs are $80 per unit. Orders are expected to ship on or before {shipDate}.
             </p>
             <div className="next-button" onClick={handleNextClick} />
           </div>
