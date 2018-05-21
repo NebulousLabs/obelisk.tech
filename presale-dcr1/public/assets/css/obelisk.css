@@ -464,7 +464,7 @@ body {
 	}
 }
 @media (max-width: 1000px) {
-	.smoke-effect {
+	.hardware-shot {
 		position: absolute;
 		left: 10px;
 		top: 10px;
@@ -483,7 +483,7 @@ body {
 		display: none;
 	}
 }
-.smoke-effect {
+.hardware-shot {
 	position: absolute;
 	left: 595px;
 	top: -80px;

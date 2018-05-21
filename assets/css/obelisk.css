@@ -590,21 +590,41 @@ body {
 	}
 }
 @media (min-width: 1000px) {
-	.smoke-effect {
+	.hardware-shot {
 		position: absolute;
 		left: 620px;
-		top: -40px;
+		top: 96px;
 		width: 90%;
 		z-index: -1;
 	}
 }
 
+@media (max-width: 1200px) {
+	.hardware-shot {
+		left: 521px;
+		top: 104px;
+		width: 108%;
+	}
+}
+
 @media (max-width: 1000px) {
-	.smoke-effect {
+	.hardware-shot {
+		width: 80%;
+		left: -15px;
+		position: relative;
+		top: 0px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.hardware-shot {
 		width: 80%;
 		z-index: -1;
 	}
 }
+
 @media (max-width: 768px) {
 	.counter-number {
 		font-size: 35px;
@@ -665,9 +685,6 @@ body {
 	margin-top: 20px;
 	font-family: "Karbon Light";
 	color: #7e7e7e;
-}
-.hardware-shot {
-	padding-top: 100px;
 }
 .quantity-section, .cost-section {
 	padding-top: 200px;
