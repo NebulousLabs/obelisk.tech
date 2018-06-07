@@ -12,6 +12,7 @@ mkdir release/
 cp index.html release/
 cp about.html release/
 cp colocation.html release/
+cp launchpad.html release/
 cp preorder.html release/
 cp -r assets release/
 cp -r presale-sc1/build release/presale-sc1
